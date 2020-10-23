@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>265634981535-nphruk2lv8d377fn94i6p32vo1db0p7o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.265634981535-nphruk2lv8d377fn94i6p32vo1db0p7o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCtNPtMsRGC5HCJB5rJ7pUmvXpHezwXpyE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>265634981535</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>EC.Lichess-Analyzer</string>
+	<key>PROJECT_ID</key>
+	<string>lichessanalyzer</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lichessanalyzer.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:265634981535:ios:0f0061116f80c1f71924aa</string>
+	<key>DATABASE_URL</key>
+	<string>https://lichessanalyzer.firebaseio.com</string>
+</dict>
+</plist>

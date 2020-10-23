@@ -1,0 +1,6 @@
+framework module Pods_Lichess_AnalyzerTests {
+  umbrella header "Pods-Lichess AnalyzerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

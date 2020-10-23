@@ -1,0 +1,910 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		148B2B3F4903A97101AD6DF2 /* Pods_Lichess_AnalyzerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49B074E6199E6FF53B146A00 /* Pods_Lichess_AnalyzerTests.framework */; };
+		1C6C72E82541E97400ECF2A7 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C72E62541E97400ECF2A7 /* GameVC.swift */; };
+		1C6C72E92541E97400ECF2A7 /* GameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C6C72E72541E97400ECF2A7 /* GameVC.xib */; };
+		1C6C73892542A32900ECF2A7 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C73882542A32900ECF2A7 /* BoardView.swift */; };
+		1CB3A1E82543050000C35D00 /* Openings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CB3A1E72543050000C35D00 /* Openings.json */; };
+		1CB3A1EC25431FCC00C35D00 /* StringSimilarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB3A1EB25431FCC00C35D00 /* StringSimilarity.swift */; };
+		1CB5F4AA2542B19100862ADE /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5F4A92542B19100862ADE /* PieceView.swift */; };
+		1CB5F4AE2542B1B400862ADE /* PGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5F4AD2542B1B400862ADE /* PGN.swift */; };
+		1CB5F4B22542B1B900862ADE /* Parserr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5F4B12542B1B900862ADE /* Parserr.swift */; };
+		1CBD144F25406C4300C3E8FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD144E25406C4300C3E8FE /* AppDelegate.swift */; };
+		1CBD145825406C4400C3E8FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD145725406C4400C3E8FE /* Assets.xcassets */; };
+		1CBD145B25406C4500C3E8FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD145925406C4500C3E8FE /* LaunchScreen.storyboard */; };
+		1CBD146625406C4600C3E8FE /* Lichess_AnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD146525406C4600C3E8FE /* Lichess_AnalyzerTests.swift */; };
+		1CBD147125406C4600C3E8FE /* Lichess_AnalyzerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD147025406C4600C3E8FE /* Lichess_AnalyzerUITests.swift */; };
+		1CBD148225406C8200C3E8FE /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD148125406C8200C3E8FE /* Service.swift */; };
+		1CBD149125406D0800C3E8FE /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD148F25406D0800C3E8FE /* HomeVC.swift */; };
+		1CBD149225406D0800C3E8FE /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD149025406D0800C3E8FE /* HomeVC.xib */; };
+		1CBD149A25406DB300C3E8FE /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD149925406DB300C3E8FE /* Logger.swift */; };
+		1CBD149F254073DC00C3E8FE /* GamesServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD149E254073DC00C3E8FE /* GamesServiceProvider.swift */; };
+		1CBD14A725407B5E00C3E8FE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14A625407B5E00C3E8FE /* Utils.swift */; };
+		1CBD14AC25407E2B00C3E8FE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14AB25407E2B00C3E8FE /* Model.swift */; };
+		1CBD14B22540965500C3E8FE /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14B02540965500C3E8FE /* ResultVC.swift */; };
+		1CBD14B32540965500C3E8FE /* ResultVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14B12540965500C3E8FE /* ResultVC.xib */; };
+		1CBD14BB2540A0B800C3E8FE /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14BA2540A0B800C3E8FE /* TableView.swift */; };
+		1CBD14C12540A63C00C3E8FE /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */; };
+		1CBD14C22540A63C00C3E8FE /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14C02540A63C00C3E8FE /* ResultCell.xib */; };
+		1CBD14CA25416A8E00C3E8FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14C925416A8D00C3E8FE /* GoogleService-Info.plist */; };
+		1CBD14FE2541B3BF00C3E8FE /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */; };
+		1CBD14FF2541B3BF00C3E8FE /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */; };
+		1CBD15072541B6BA00C3E8FE /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD15062541B6BA00C3E8FE /* GameModel.swift */; };
+		1CBD150D2541B88400C3E8FE /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD150B2541B88400C3E8FE /* DetailCell.swift */; };
+		1CBD150E2541B88400C3E8FE /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD150C2541B88400C3E8FE /* DetailCell.xib */; };
+		1CCA02422542ABE9001ECDFC /* SwiftChess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CBC68112542A995001912CD /* SwiftChess.framework */; };
+		1CCA02432542ABE9001ECDFC /* SwiftChess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CBC68112542A995001912CD /* SwiftChess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5646408111A44BA45772449F /* Pods_Lichess_Analyzer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7967870E218F507CAF6DEF15 /* Pods_Lichess_Analyzer.framework */; };
+		FB2BD9491E68954CB9AD134B /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4AFDE1A9AD282902EFA034 /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1CBC68102542A995001912CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CBC680B2542A995001912CD /* SwiftChess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 67A9C9DE1DE64CD200510FB8;
+			remoteInfo = SwiftChess;
+		};
+		1CBC68122542A995001912CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CBC680B2542A995001912CD /* SwiftChess.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 67A9C9E71DE64CD300510FB8;
+			remoteInfo = SwiftChessTests;
+		};
+		1CBD146225406C4500C3E8FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CBD144325406C4300C3E8FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CBD144A25406C4300C3E8FE;
+			remoteInfo = "Lichess Analyzer";
+		};
+		1CBD146D25406C4600C3E8FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CBD144325406C4300C3E8FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CBD144A25406C4300C3E8FE;
+			remoteInfo = "Lichess Analyzer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1CCA02442542ABE9001ECDFC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1CCA02432542ABE9001ECDFC /* SwiftChess.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0591D29692B82B1CC9885B11 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig"; path = "Target Support Files/Pods-Lichess Analyzer-Lichess AnalyzerUITests/Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		0A5A90CD76B2128C6C4EC7CB /* Pods-Lichess AnalyzerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess AnalyzerTests.release.xcconfig"; path = "Target Support Files/Pods-Lichess AnalyzerTests/Pods-Lichess AnalyzerTests.release.xcconfig"; sourceTree = "<group>"; };
+		19BF00F921F81CD8C45F88DD /* Pods-Lichess Analyzer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess Analyzer.debug.xcconfig"; path = "Target Support Files/Pods-Lichess Analyzer/Pods-Lichess Analyzer.debug.xcconfig"; sourceTree = "<group>"; };
+		1C6C72E62541E97400ECF2A7 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
+		1C6C72E72541E97400ECF2A7 /* GameVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameVC.xib; sourceTree = "<group>"; };
+		1C6C73882542A32900ECF2A7 /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		1CB3A1E72543050000C35D00 /* Openings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Openings.json; sourceTree = "<group>"; };
+		1CB3A1EB25431FCC00C35D00 /* StringSimilarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSimilarity.swift; sourceTree = "<group>"; };
+		1CB5F4A92542B19100862ADE /* PieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieceView.swift; path = "../../Downloads/SwiftChess-master/Example/SwiftChess/PieceView.swift"; sourceTree = "<group>"; };
+		1CB5F4AD2542B1B400862ADE /* PGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PGN.swift; path = "../../Downloads/SwiftChess-master/Example/SwiftChess/PGN.swift"; sourceTree = "<group>"; };
+		1CB5F4B12542B1B900862ADE /* Parserr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parserr.swift; path = "../../Downloads/SwiftChess-master/Example/SwiftChess/Parserr.swift"; sourceTree = "<group>"; };
+		1CBC680B2542A995001912CD /* SwiftChess.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftChess.xcodeproj; sourceTree = "<group>"; };
+		1CBD144B25406C4300C3E8FE /* Lichess Analyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lichess Analyzer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CBD144E25406C4300C3E8FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1CBD145725406C4400C3E8FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1CBD145A25406C4500C3E8FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1CBD145C25406C4500C3E8FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CBD146125406C4500C3E8FE /* Lichess AnalyzerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lichess AnalyzerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CBD146525406C4600C3E8FE /* Lichess_AnalyzerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lichess_AnalyzerTests.swift; sourceTree = "<group>"; };
+		1CBD146725406C4600C3E8FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CBD146C25406C4600C3E8FE /* Lichess AnalyzerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lichess AnalyzerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CBD147025406C4600C3E8FE /* Lichess_AnalyzerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lichess_AnalyzerUITests.swift; sourceTree = "<group>"; };
+		1CBD147225406C4600C3E8FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CBD148125406C8200C3E8FE /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		1CBD148F25406D0800C3E8FE /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		1CBD149025406D0800C3E8FE /* HomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
+		1CBD149925406DB300C3E8FE /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		1CBD149E254073DC00C3E8FE /* GamesServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesServiceProvider.swift; sourceTree = "<group>"; };
+		1CBD14A625407B5E00C3E8FE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		1CBD14AB25407E2B00C3E8FE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		1CBD14B02540965500C3E8FE /* ResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
+		1CBD14B12540965500C3E8FE /* ResultVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultVC.xib; sourceTree = "<group>"; };
+		1CBD14BA2540A0B800C3E8FE /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
+		1CBD14C02540A63C00C3E8FE /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
+		1CBD14C925416A8D00C3E8FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
+		1CBD15062541B6BA00C3E8FE /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		1CBD150B2541B88400C3E8FE /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		1CBD150C2541B88400C3E8FE /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		49B074E6199E6FF53B146A00 /* Pods_Lichess_AnalyzerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lichess_AnalyzerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A4AFDE1A9AD282902EFA034 /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BC4BE48BC651106555B281 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Lichess Analyzer-Lichess AnalyzerUITests/Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7967870E218F507CAF6DEF15 /* Pods_Lichess_Analyzer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lichess_Analyzer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6BD7F6498E30C4BC6B9EFBA /* Pods-Lichess AnalyzerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess AnalyzerTests.debug.xcconfig"; path = "Target Support Files/Pods-Lichess AnalyzerTests/Pods-Lichess AnalyzerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B5F25ADCE714544B1FB083E2 /* Pods-Lichess Analyzer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess Analyzer.release.xcconfig"; path = "Target Support Files/Pods-Lichess Analyzer/Pods-Lichess Analyzer.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1CBD144825406C4300C3E8FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5646408111A44BA45772449F /* Pods_Lichess_Analyzer.framework in Frameworks */,
+				1CCA02422542ABE9001ECDFC /* SwiftChess.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CBD145E25406C4500C3E8FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				148B2B3F4903A97101AD6DF2 /* Pods_Lichess_AnalyzerTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CBD146925406C4600C3E8FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB2BD9491E68954CB9AD134B /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1CBC67D12542A995001912CD /* SwiftChess copy */ = {
+			isa = PBXGroup;
+			children = (
+				1CBC680B2542A995001912CD /* SwiftChess.xcodeproj */,
+			);
+			path = "SwiftChess copy";
+			sourceTree = "<group>";
+		};
+		1CBC680C2542A995001912CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CBC68112542A995001912CD /* SwiftChess.framework */,
+				1CBC68132542A995001912CD /* SwiftChessTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1CBD144225406C4300C3E8FE = {
+			isa = PBXGroup;
+			children = (
+				1CBC67D12542A995001912CD /* SwiftChess copy */,
+				1CBD144D25406C4300C3E8FE /* Lichess Analyzer */,
+				1CBD146425406C4600C3E8FE /* Lichess AnalyzerTests */,
+				1CBD146F25406C4600C3E8FE /* Lichess AnalyzerUITests */,
+				1CBD144C25406C4300C3E8FE /* Products */,
+				4DE215A79A5322D0B28C3E2C /* Pods */,
+				33745560FECE31845A136750 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1CBD144C25406C4300C3E8FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CBD144B25406C4300C3E8FE /* Lichess Analyzer.app */,
+				1CBD146125406C4500C3E8FE /* Lichess AnalyzerTests.xctest */,
+				1CBD146C25406C4600C3E8FE /* Lichess AnalyzerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1CBD144D25406C4300C3E8FE /* Lichess Analyzer */ = {
+			isa = PBXGroup;
+			children = (
+				1CBD144E25406C4300C3E8FE /* AppDelegate.swift */,
+				1CBD14A625407B5E00C3E8FE /* Utils.swift */,
+				1CB3A1EB25431FCC00C35D00 /* StringSimilarity.swift */,
+				1CBD149925406DB300C3E8FE /* Logger.swift */,
+				1CBD148125406C8200C3E8FE /* Service.swift */,
+				1CBD14AB25407E2B00C3E8FE /* Model.swift */,
+				1CBD15062541B6BA00C3E8FE /* GameModel.swift */,
+				1CBD149E254073DC00C3E8FE /* GamesServiceProvider.swift */,
+				1CBD148F25406D0800C3E8FE /* HomeVC.swift */,
+				1CBD149025406D0800C3E8FE /* HomeVC.xib */,
+				1CBD14B02540965500C3E8FE /* ResultVC.swift */,
+				1CBD14B12540965500C3E8FE /* ResultVC.xib */,
+				1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */,
+				1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */,
+				1C6C72E62541E97400ECF2A7 /* GameVC.swift */,
+				1C6C72E72541E97400ECF2A7 /* GameVC.xib */,
+				1C6C73882542A32900ECF2A7 /* BoardView.swift */,
+				1CB5F4A92542B19100862ADE /* PieceView.swift */,
+				1CB5F4B12542B1B900862ADE /* Parserr.swift */,
+				1CB5F4AD2542B1B400862ADE /* PGN.swift */,
+				1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */,
+				1CBD14C02540A63C00C3E8FE /* ResultCell.xib */,
+				1CBD150B2541B88400C3E8FE /* DetailCell.swift */,
+				1CBD150C2541B88400C3E8FE /* DetailCell.xib */,
+				1CBD14BA2540A0B800C3E8FE /* TableView.swift */,
+				1CBD145725406C4400C3E8FE /* Assets.xcassets */,
+				1CBD145925406C4500C3E8FE /* LaunchScreen.storyboard */,
+				1CBD145C25406C4500C3E8FE /* Info.plist */,
+				1CBD14C925416A8D00C3E8FE /* GoogleService-Info.plist */,
+				1CB3A1E72543050000C35D00 /* Openings.json */,
+			);
+			path = "Lichess Analyzer";
+			sourceTree = "<group>";
+		};
+		1CBD146425406C4600C3E8FE /* Lichess AnalyzerTests */ = {
+			isa = PBXGroup;
+			children = (
+				1CBD146525406C4600C3E8FE /* Lichess_AnalyzerTests.swift */,
+				1CBD146725406C4600C3E8FE /* Info.plist */,
+			);
+			path = "Lichess AnalyzerTests";
+			sourceTree = "<group>";
+		};
+		1CBD146F25406C4600C3E8FE /* Lichess AnalyzerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1CBD147025406C4600C3E8FE /* Lichess_AnalyzerUITests.swift */,
+				1CBD147225406C4600C3E8FE /* Info.plist */,
+			);
+			path = "Lichess AnalyzerUITests";
+			sourceTree = "<group>";
+		};
+		33745560FECE31845A136750 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7967870E218F507CAF6DEF15 /* Pods_Lichess_Analyzer.framework */,
+				6A4AFDE1A9AD282902EFA034 /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework */,
+				49B074E6199E6FF53B146A00 /* Pods_Lichess_AnalyzerTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4DE215A79A5322D0B28C3E2C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				19BF00F921F81CD8C45F88DD /* Pods-Lichess Analyzer.debug.xcconfig */,
+				B5F25ADCE714544B1FB083E2 /* Pods-Lichess Analyzer.release.xcconfig */,
+				75BC4BE48BC651106555B281 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig */,
+				0591D29692B82B1CC9885B11 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig */,
+				A6BD7F6498E30C4BC6B9EFBA /* Pods-Lichess AnalyzerTests.debug.xcconfig */,
+				0A5A90CD76B2128C6C4EC7CB /* Pods-Lichess AnalyzerTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1CBD144A25406C4300C3E8FE /* Lichess Analyzer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CBD147525406C4600C3E8FE /* Build configuration list for PBXNativeTarget "Lichess Analyzer" */;
+			buildPhases = (
+				6DF95FF197B613CB9F43F98E /* [CP] Check Pods Manifest.lock */,
+				1CBD144725406C4300C3E8FE /* Sources */,
+				1CBD144825406C4300C3E8FE /* Frameworks */,
+				1CBD144925406C4300C3E8FE /* Resources */,
+				EE71688C60A1624D152C4110 /* [CP] Embed Pods Frameworks */,
+				1CCA02442542ABE9001ECDFC /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Lichess Analyzer";
+			productName = "Lichess Analyzer";
+			productReference = 1CBD144B25406C4300C3E8FE /* Lichess Analyzer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1CBD146025406C4500C3E8FE /* Lichess AnalyzerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CBD147825406C4600C3E8FE /* Build configuration list for PBXNativeTarget "Lichess AnalyzerTests" */;
+			buildPhases = (
+				BF88BF8688808D373C953BB2 /* [CP] Check Pods Manifest.lock */,
+				1CBD145D25406C4500C3E8FE /* Sources */,
+				1CBD145E25406C4500C3E8FE /* Frameworks */,
+				1CBD145F25406C4500C3E8FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1CBD146325406C4500C3E8FE /* PBXTargetDependency */,
+			);
+			name = "Lichess AnalyzerTests";
+			productName = "Lichess AnalyzerTests";
+			productReference = 1CBD146125406C4500C3E8FE /* Lichess AnalyzerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1CBD146B25406C4600C3E8FE /* Lichess AnalyzerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CBD147B25406C4600C3E8FE /* Build configuration list for PBXNativeTarget "Lichess AnalyzerUITests" */;
+			buildPhases = (
+				AF623AD5BC298005733EABF3 /* [CP] Check Pods Manifest.lock */,
+				1CBD146825406C4600C3E8FE /* Sources */,
+				1CBD146925406C4600C3E8FE /* Frameworks */,
+				1CBD146A25406C4600C3E8FE /* Resources */,
+				10787A0FF9906938E0135B6E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1CBD146E25406C4600C3E8FE /* PBXTargetDependency */,
+			);
+			name = "Lichess AnalyzerUITests";
+			productName = "Lichess AnalyzerUITests";
+			productReference = 1CBD146C25406C4600C3E8FE /* Lichess AnalyzerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1CBD144325406C4300C3E8FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					1CBD144A25406C4300C3E8FE = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					1CBD146025406C4500C3E8FE = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 1CBD144A25406C4300C3E8FE;
+					};
+					1CBD146B25406C4600C3E8FE = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 1CBD144A25406C4300C3E8FE;
+					};
+				};
+			};
+			buildConfigurationList = 1CBD144625406C4300C3E8FE /* Build configuration list for PBXProject "Lichess Analyzer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1CBD144225406C4300C3E8FE;
+			productRefGroup = 1CBD144C25406C4300C3E8FE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1CBC680C2542A995001912CD /* Products */;
+					ProjectRef = 1CBC680B2542A995001912CD /* SwiftChess.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1CBD144A25406C4300C3E8FE /* Lichess Analyzer */,
+				1CBD146025406C4500C3E8FE /* Lichess AnalyzerTests */,
+				1CBD146B25406C4600C3E8FE /* Lichess AnalyzerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1CBC68112542A995001912CD /* SwiftChess.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftChess.framework;
+			remoteRef = 1CBC68102542A995001912CD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1CBC68132542A995001912CD /* SwiftChessTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftChessTests.xctest;
+			remoteRef = 1CBC68122542A995001912CD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1CBD144925406C4300C3E8FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CBD145B25406C4500C3E8FE /* LaunchScreen.storyboard in Resources */,
+				1C6C72E92541E97400ECF2A7 /* GameVC.xib in Resources */,
+				1CBD14B32540965500C3E8FE /* ResultVC.xib in Resources */,
+				1CBD150E2541B88400C3E8FE /* DetailCell.xib in Resources */,
+				1CB3A1E82543050000C35D00 /* Openings.json in Resources */,
+				1CBD149225406D0800C3E8FE /* HomeVC.xib in Resources */,
+				1CBD14FF2541B3BF00C3E8FE /* DetailVC.xib in Resources */,
+				1CBD145825406C4400C3E8FE /* Assets.xcassets in Resources */,
+				1CBD14C22540A63C00C3E8FE /* ResultCell.xib in Resources */,
+				1CBD14CA25416A8E00C3E8FE /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CBD145F25406C4500C3E8FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CBD146A25406C4600C3E8FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10787A0FF9906938E0135B6E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lichess Analyzer-Lichess AnalyzerUITests/Pods-Lichess Analyzer-Lichess AnalyzerUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lichess Analyzer-Lichess AnalyzerUITests/Pods-Lichess Analyzer-Lichess AnalyzerUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lichess Analyzer-Lichess AnalyzerUITests/Pods-Lichess Analyzer-Lichess AnalyzerUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6DF95FF197B613CB9F43F98E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lichess Analyzer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF623AD5BC298005733EABF3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lichess Analyzer-Lichess AnalyzerUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF88BF8688808D373C953BB2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lichess AnalyzerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE71688C60A1624D152C4110 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lichess Analyzer/Pods-Lichess Analyzer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lichess Analyzer/Pods-Lichess Analyzer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lichess Analyzer/Pods-Lichess Analyzer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1CBD144725406C4300C3E8FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CB3A1EC25431FCC00C35D00 /* StringSimilarity.swift in Sources */,
+				1CBD14AC25407E2B00C3E8FE /* Model.swift in Sources */,
+				1CB5F4AE2542B1B400862ADE /* PGN.swift in Sources */,
+				1CBD14B22540965500C3E8FE /* ResultVC.swift in Sources */,
+				1CB5F4B22542B1B900862ADE /* Parserr.swift in Sources */,
+				1CB5F4AA2542B19100862ADE /* PieceView.swift in Sources */,
+				1CBD149125406D0800C3E8FE /* HomeVC.swift in Sources */,
+				1CBD149F254073DC00C3E8FE /* GamesServiceProvider.swift in Sources */,
+				1CBD14BB2540A0B800C3E8FE /* TableView.swift in Sources */,
+				1CBD14FE2541B3BF00C3E8FE /* DetailVC.swift in Sources */,
+				1CBD148225406C8200C3E8FE /* Service.swift in Sources */,
+				1CBD144F25406C4300C3E8FE /* AppDelegate.swift in Sources */,
+				1CBD149A25406DB300C3E8FE /* Logger.swift in Sources */,
+				1CBD14C12540A63C00C3E8FE /* ResultCell.swift in Sources */,
+				1CBD15072541B6BA00C3E8FE /* GameModel.swift in Sources */,
+				1CBD150D2541B88400C3E8FE /* DetailCell.swift in Sources */,
+				1C6C73892542A32900ECF2A7 /* BoardView.swift in Sources */,
+				1C6C72E82541E97400ECF2A7 /* GameVC.swift in Sources */,
+				1CBD14A725407B5E00C3E8FE /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CBD145D25406C4500C3E8FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CBD146625406C4600C3E8FE /* Lichess_AnalyzerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CBD146825406C4600C3E8FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CBD147125406C4600C3E8FE /* Lichess_AnalyzerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1CBD146325406C4500C3E8FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CBD144A25406C4300C3E8FE /* Lichess Analyzer */;
+			targetProxy = 1CBD146225406C4500C3E8FE /* PBXContainerItemProxy */;
+		};
+		1CBD146E25406C4600C3E8FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CBD144A25406C4300C3E8FE /* Lichess Analyzer */;
+			targetProxy = 1CBD146D25406C4600C3E8FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1CBD145925406C4500C3E8FE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CBD145A25406C4500C3E8FE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1CBD147325406C4600C3E8FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1CBD147425406C4600C3E8FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1CBD147625406C4600C3E8FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19BF00F921F81CD8C45F88DD /* Pods-Lichess Analyzer.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 738RN8C4YS;
+				INFOPLIST_FILE = "Lichess Analyzer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-Analyzer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1CBD147725406C4600C3E8FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5F25ADCE714544B1FB083E2 /* Pods-Lichess Analyzer.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 738RN8C4YS;
+				INFOPLIST_FILE = "Lichess Analyzer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-Analyzer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		1CBD147925406C4600C3E8FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6BD7F6498E30C4BC6B9EFBA /* Pods-Lichess AnalyzerTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 738RN8C4YS;
+				INFOPLIST_FILE = "Lichess AnalyzerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-AnalyzerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lichess Analyzer.app/Lichess Analyzer";
+			};
+			name = Debug;
+		};
+		1CBD147A25406C4600C3E8FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A5A90CD76B2128C6C4EC7CB /* Pods-Lichess AnalyzerTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 738RN8C4YS;
+				INFOPLIST_FILE = "Lichess AnalyzerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-AnalyzerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lichess Analyzer.app/Lichess Analyzer";
+			};
+			name = Release;
+		};
+		1CBD147C25406C4600C3E8FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75BC4BE48BC651106555B281 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 738RN8C4YS;
+				INFOPLIST_FILE = "Lichess AnalyzerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-AnalyzerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Lichess Analyzer";
+			};
+			name = Debug;
+		};
+		1CBD147D25406C4600C3E8FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0591D29692B82B1CC9885B11 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 738RN8C4YS;
+				INFOPLIST_FILE = "Lichess AnalyzerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-AnalyzerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Lichess Analyzer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1CBD144625406C4300C3E8FE /* Build configuration list for PBXProject "Lichess Analyzer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CBD147325406C4600C3E8FE /* Debug */,
+				1CBD147425406C4600C3E8FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CBD147525406C4600C3E8FE /* Build configuration list for PBXNativeTarget "Lichess Analyzer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CBD147625406C4600C3E8FE /* Debug */,
+				1CBD147725406C4600C3E8FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CBD147825406C4600C3E8FE /* Build configuration list for PBXNativeTarget "Lichess AnalyzerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CBD147925406C4600C3E8FE /* Debug */,
+				1CBD147A25406C4600C3E8FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CBD147B25406C4600C3E8FE /* Build configuration list for PBXNativeTarget "Lichess AnalyzerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CBD147C25406C4600C3E8FE /* Debug */,
+				1CBD147D25406C4600C3E8FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1CBD144325406C4300C3E8FE /* Project object */;
+}
