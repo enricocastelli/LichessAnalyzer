@@ -39,64 +39,6 @@ enum Result {
     }
 }
 
-enum KnownEco: String {
-
-    case unknown = "unknown"
-    case B00 = "B00"
-    case B01 = "B01"
-    case B50 = "B50"
-    case B30 = "B30"
-    case C50 = "C50"
-    case B10 = "B10"
-    case C00 = "C00"
-    case C41 = "C41"
-    case B12 = "B12"
-    case C40 = "C40"
-    case B06 = "B06"
-    case A05 = "A05"
-    case C63 = "C63"
-    case B29 = "B29"
-    case B20 = "B20"
-    case C02 = "C02"
-    case A00 = "A00"
-    case A43 = "A43"
-    case A48 = "A48"
-    case E73 = "E73"
-    case D01 = "D01"
-    case A36 = "A36"
-    case A28 = "A28"
-    case D30 = "D30"
-    case A45 = "A45"
-    case A29 = "A29"
-    case D36 = "D36"
-    case E70 = "E70"
-    case E10 = "E10"
-    case C11 = "C11"
-    case D35 = "D35"
-    case E22 = "E22"
-    case A11 = "A11"
-    case E33 = "E33"
-    case E20 = "E20"
-    case A35 = "A35"
-    case D46 = "D46"
-    case D00 = "D00"
-    case B14 = "B14"
-    case D45 = "D45"
-    case B08 = "B08"
-    case A20 = "A20"
-
-
-    static func fromString(_ string: String) -> KnownEco {
-        if let knownOpening = KnownEco(rawValue: string) {
-            return knownOpening
-        } else {
-            print("case \(string.uppercased().replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "'", with: "").replacingOccurrences(of: "-", with: "")) = " + "\"" + "\(string)" + "\"")
-            return .unknown
-        }
-    }
-
-}
-
 enum KnownOpening: String {
 
     case unknown = "unknown"

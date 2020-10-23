@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct OpeningTest: Codable, Equatable {
-    let id: String
-    let name: String
-    let pgn: String
-}
-
 class HomeVC: UIViewController, GamesServiceProvider {
 
     @IBOutlet weak var nameTextField: UITextField!

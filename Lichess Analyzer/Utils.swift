@@ -13,6 +13,21 @@ class UserData {
 
     var name: String = ""
     var search: (color: Color, gameType: GameType) = (Color.white, GameType.blitz)
+
+    var openings = [OpeningObject]()
+
+    func updateOpenings() {
+        if let path = Bundle.main.path(forResource: "Openings", ofType: "json")
+        {
+            if let jsonData = NSData(contentsOfFile: path) {
+                do {
+                    self.openings = try JSONDecoder().decode([OpeningObject].self, from: Data(jsonData))
+                } catch(let error) {
+                    print(error, "nope")
+                }
+            }
+        }
+    }
 }
 
 extension Int {

@@ -21,7 +21,7 @@ struct GameItem {
     let completeOpening: String
     let opening: KnownOpening
     let pgn: String?
-    let eco: KnownEco
+    let eco: String
 
     var winner: String? {
         if result == "0-1" {
@@ -64,7 +64,7 @@ extension Array where Element == GameItem {
                     toUpdateOpening.completeOpenings[index].pgn = combinePGN(toUpdateOpening.completeOpenings[index].pgn, pgn2: game.pgn ?? "")
                 } else {
                     // no opening subgroup is existing
-                    toUpdateOpening.completeOpenings.append(CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? ""))
+                    toUpdateOpening.completeOpenings.append(CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco))
                 }
                 toUpdateOpening.results.append(game.resultForPlayer())
                 openings[index] = toUpdateOpening
@@ -72,7 +72,7 @@ extension Array where Element == GameItem {
                 // no opening supergroup is existing
                 openings.append(OpeningGame(opening: game.opening,
                                             eco: game.eco,
-                                            completeOpenings: [CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "")],
+                                            completeOpenings: [CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco)],
                                             results: [game.resultForPlayer()]))
             }
         }
@@ -93,7 +93,7 @@ fileprivate extension String {
 struct OpeningGame: Equatable {
 
     var opening: KnownOpening
-    var eco: KnownEco
+    var eco: String
     var completeOpenings: [CompleteOpeningGame]
     var results: [Result]
     var points: Int {
@@ -105,7 +105,30 @@ struct CompleteOpeningGame: Equatable {
     var results: [Result]
     let completeOpening: String
     var pgn: String
+    var eco: String
     var points: Int {
         return results.map({$0.points}).reduce(0, +)
     }
+
+    var openingObject: OpeningObject? {
+        var mostSimilarOp: OpeningObject?
+        for op in UserData.shared.openings {
+            if op.id == self.eco {
+                if completeOpening.lowercased() == op.name.lowercased() || completeOpening.lowercased().contains(op.name.lowercased()) {
+                    mostSimilarOp = op
+                    break
+                }
+            }
+        }
+        let similarity = StringSimilarity.levenshtein(aStr: mostSimilarOp?.name.lowercased() ?? " ", bStr: completeOpening.lowercased())
+        guard similarity <= 10 else { return nil }
+        return mostSimilarOp
+    }
+}
+
+
+struct OpeningObject: Codable, Equatable {
+    let id: String
+    let name: String
+    let pgn: String
 }

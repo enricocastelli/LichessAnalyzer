@@ -10,6 +10,7 @@ import SwiftChess
 
 class GameVC: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var resetButton: UIButton!
 
@@ -37,6 +38,8 @@ class GameVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = opening.completeOpening
+        titleLabel.textColor = opening.openingObject == nil ? UIColor.lightGray : .black
         game = Game(firstPlayer: Human(color: .white), secondPlayer: Human(color: .black))
         game.delegate = self
         setupBoard()
@@ -63,31 +66,63 @@ class GameVC: UIViewController {
 
     private func openPGN(_ delay: Bool) {
         do {
-            let moves = try PGN(parse: opening.pgn).moves
-            var color = ChessColor.white
-            var timelapse = 0.2
-            var indexMove = 0
-            for move in moves {
-                indexMove += 1
-                guard indexMove < 8 else { return }
-                let correctMove = move.count == 2 ? "P\(move)" : move
-                let locMove = String(correctMove.dropFirst())
-                guard let grid1 = LocationPos(rawValue: locMove),
-                      let loc = grid1.location() else {
-                    return }
-                for piece in game.board.getPieces(color: color) {
-                    guard piece.type.rawValue == Piece.PieceType.from(correctMove.first!.description).rawValue else { continue }
-                    let mov = PieceMovement.pieceMovement(for: piece.type)
-                    if mov.canPieceMove(from: piece.location, to: loc, board: self.game.board) {
-                        let playerToMove: Human = color == .white ? game.whitePlayer as! Human : game.blackPlayer as! Human
-                        try playerToMove.movePiece(from: piece.location, to: loc, delay: timelapse)
-                        color = color == .white ? .black : .white
-                        timelapse += delay ? 0.4 : 0
+            let moves = try PGN(parse: opening.openingObject?.pgn ?? opening.pgn).moves
+            moves.isModernPNG() ? applyMoves(moves, delay) : adapt(moves, delay)
+        } catch (let error) {
+            print(error)
+        }
+    }
+
+    private func applyMoves(_ moves: [String], _ delay: Bool) {
+        var color = ChessColor.white
+        var timelapse = 0.2
+        var indexMove = 0
+        for move in moves {
+            indexMove += 1
+            guard indexMove < 8 else { return }
+            let correctMove = move.count == 2 ? "P\(move)" : move
+            let locMove = String(correctMove.dropFirst())
+            guard let grid1 = LocationPos(rawValue: locMove),
+                  let loc = grid1.location() else {
+                return }
+            for piece in game.board.getPieces(color: color) {
+                guard piece.type.rawValue == Piece.PieceType.from(correctMove.first!.description).rawValue else { continue }
+                let mov = PieceMovement.pieceMovement(for: piece.type)
+                if mov.canPieceMove(from: piece.location, to: loc, board: self.game.board) {
+                    let playerToMove: Human = color == .white ? game.whitePlayer as! Human : game.blackPlayer as! Human
+                    do {
+                    try playerToMove.movePiece(from: piece.location, to: loc, delay: timelapse)
+                    color = color == .white ? .black : .white
+                    timelapse += delay ? 0.4 : 0
+                    } catch(let error) {
+                        print(error)
                     }
                 }
             }
-        } catch (let error) {
-            print(error)
+        }
+    }
+
+    private func adapt(_ moves: [String], _ delay: Bool) {
+        var color = ChessColor.white
+        var timelapse = 0.2
+        for move in moves {
+            guard move.count == 4 else { return }
+            let characters = Array(move)
+            let from = characters[0].description + characters[1].description
+            let to = characters[2].description + characters[3].description
+            guard let grid1 = LocationPos(rawValue: from),
+                  let loc1 = grid1.location(),
+                  let grid2 = LocationPos(rawValue: to),
+                  let loc2 = grid2.location()else {
+                return }
+            let playerToMove: Human = color == .white ? game.whitePlayer as! Human : game.blackPlayer as! Human
+            do {
+            try playerToMove.movePiece(from: loc1, to: loc2, delay: timelapse)
+            color = color == .white ? .black : .white
+            timelapse += delay ? 0.4 : 0
+            } catch(let error) {
+                print(error)
+            }
         }
     }
 

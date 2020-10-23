@@ -60,33 +60,6 @@ class DetailVC: UIViewController {
 
     func itemSelected(_ item: CompleteOpeningGame) {
         self.navigationController?.pushViewController(GameVC(item), animated: true)
-        let tests = extract()
-        var mostSimilarOp = OpeningTest(id: "", name: "", pgn: "")
-        var mostSimilarRecord = 99
-        for op in tests {
-            if op.id == opening.eco.rawValue {
-                let similarity = StringSimilarity.levenshtein(aStr: op.name, bStr: item.completeOpening)
-                if similarity <= mostSimilarRecord {
-                    mostSimilarOp = op
-                    mostSimilarRecord = similarity
-                }
-            }
-        }
-        print(mostSimilarOp)
-    }
-
-    func extract() -> [OpeningTest] {
-        if let path = Bundle.main.path(forResource: "Openings", ofType: "json")
-        {
-            if let jsonData = NSData(contentsOfFile: path) {
-                do {
-                    return try JSONDecoder().decode([OpeningTest].self, from: Data(jsonData))
-                } catch(let error) {
-                    print(error, "nope")
-                }
-            }
-        }
-        return []
     }
 
     func hideMenu() {

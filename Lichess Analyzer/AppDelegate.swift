@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav.isNavigationBarHidden = true
         window?.rootViewController = nav
         FirebaseApp.configure()
+        UserData.shared.updateOpenings()
         return true
     }
 
