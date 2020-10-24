@@ -141,6 +141,8 @@ enum KnownOpening: String {
     case ware_defense = "Ware Defense"
     case london_system = "London System"
     case tarrasch_defense = "Tarrasch Defense"
+    case latvian_gambit = "Latvian Gambit"
+    case kings_knight_opening = "King's Knight Opening"
 
 
     static func fromString(_ string: String) -> KnownOpening {

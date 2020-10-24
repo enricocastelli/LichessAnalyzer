@@ -111,18 +111,16 @@ struct CompleteOpeningGame: Equatable {
     }
 
     var openingObject: OpeningObject? {
-        var mostSimilarOp: OpeningObject?
+        var mostSimilar: OpeningObject?
         for op in UserData.shared.openings {
-            if op.id == self.eco {
-                if completeOpening.lowercased() == op.name.lowercased() || completeOpening.lowercased().contains(op.name.lowercased()) {
-                    mostSimilarOp = op
-                    break
-                }
+            guard op.id == self.eco else { continue }
+            if op.name.lowercased() == self.completeOpening.lowercased() {
+                return op
+            } else if completeOpening.lowercased() == op.name.lowercased() || completeOpening.lowercased().contains(op.name.lowercased()) {
+                mostSimilar = op
             }
         }
-        let similarity = StringSimilarity.levenshtein(aStr: mostSimilarOp?.name.lowercased() ?? " ", bStr: completeOpening.lowercased())
-        guard similarity <= 10 else { return nil }
-        return mostSimilarOp
+        return mostSimilar
     }
 }
 

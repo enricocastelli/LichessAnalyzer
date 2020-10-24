@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeVC: UIViewController, GamesServiceProvider {
+class HomeVC: UIViewController, GamesServiceProvider, UITextFieldDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var whiteButton: UIButton!
@@ -20,10 +20,10 @@ class HomeVC: UIViewController, GamesServiceProvider {
     @IBOutlet weak var progressView: UIProgressView!
 
 
-    var maxNums = [10, 50, 100, 500, 1000]
+    var maxNums = [50, 100, 500, 1000, 2000]
     var color = Color.white
     var gameType = GameType.all
-    var maxNum: Int? = 10
+    var maxNum: Int? = 50
     var username: String {
         return nameTextField.text ?? ""
     }
@@ -35,8 +35,11 @@ class HomeVC: UIViewController, GamesServiceProvider {
         blackButton.layer.borderColor = UIColor.black.cgColor
         setColorSelected(color)
         setGameTypeControl()
+
         // test
         nameTextField.text = "santapolenta"
+        nameTextField.delegate = self
+        nameTextField.returnKeyType = .go
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -110,13 +113,18 @@ class HomeVC: UIViewController, GamesServiceProvider {
 
     private func getTimeProgress() -> Double {
         switch maxNum {
-        case 10: return 0.1
         case 50: return 0.5
         case 100: return 1
         case 500: return 1.8
-        case 1000: return 2.5
-        default: return 1
+        case 1000: return 2.0
+        case 2000: return 3.0
+        default: return 2
         }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
@@ -132,11 +140,11 @@ extension HomeVC: UIPickerViewDelegate, UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch row {
-        case 0: return "10"
-        case 1: return "50"
-        case 2: return "100"
-        case 3: return "500"
-        case 4: return "1000"
+        case 0: return "50"
+        case 1: return "100"
+        case 2: return "500"
+        case 3: return "1000"
+        case 4: return "2000"
         default: return "All"
         }
     }

@@ -22,6 +22,12 @@ class UserData {
             if let jsonData = NSData(contentsOfFile: path) {
                 do {
                     self.openings = try JSONDecoder().decode([OpeningObject].self, from: Data(jsonData))
+                    self.openings.sort { (o1, o2) -> Bool in
+                        return o1.pgn.count < o2.pgn.count
+                    }
+                    self.openings.sort { (o1, o2) -> Bool in
+                        return o1.id < o2.id
+                    }
                 } catch(let error) {
                     print(error, "nope")
                 }
@@ -185,3 +191,14 @@ extension UIView {
     }
 }
 
+extension UILabel {
+
+    func changeText(_ string: String) {
+        UIView.transition(with: self,
+                          duration: 0.25,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+                            self?.text = string
+                          }, completion: nil)
+    }
+}

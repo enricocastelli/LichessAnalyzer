@@ -27,6 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-
+    // remove gameOpening/complete opening models
+    // quiz/game in loading screen
+    // color filters in result screen
+    // known openings should be basic openings with explanation
+    // change progress bar
+    // search specific set of moves
 }
 
