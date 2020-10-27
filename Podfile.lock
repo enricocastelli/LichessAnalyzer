@@ -319,11 +319,13 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - OAuthSwift (2.1.0)
   - PromisesObjC (1.2.9)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - FirebaseFirestore
+  - OAuthSwift
 
 SPEC REPOS:
   trunk:
@@ -343,6 +345,7 @@ SPEC REPOS:
     - gRPC-Core
     - leveldb-library
     - nanopb
+    - OAuthSwift
     - PromisesObjC
 
 SPEC CHECKSUMS:
@@ -362,8 +365,9 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  OAuthSwift: ab1675598273e04355e0282459c328e65c9ddacd
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: a9c0c22deae4aaa80451eb1c91be3e92ca5c8af4
+PODFILE CHECKSUM: 0eef8676441808a271836ecc1f1faaf35292dfb1
 
 COCOAPODS: 1.9.3

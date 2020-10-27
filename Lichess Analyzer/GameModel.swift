@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GameItem {
+struct GameItem: Encodable, Decodable {
 
     let event: GameType
     let site: String
@@ -34,8 +34,9 @@ struct GameItem {
 
     func resultForPlayer() -> Result {
         if winner == nil { return .draw }
-        return winner == UserData.shared.name ? .win : .lose
+        return winner == UserData.shared.searchName ? .win : .lose
     }
+
 }
 
 extension Array where Element == GameItem {
@@ -77,6 +78,20 @@ extension Array where Element == GameItem {
             }
         }
         return openings
+    }
+
+    func mostCommonOpenings() -> [String: Int] {
+        var sameOpeningList = [String: Int]()
+        for game in self {
+            guard let pgn = game.pgn, let moves = try? PGN.init(parse: pgn), moves.moves.count > 6 else { return ["":0] }
+            let movs = moves.moves[0] + moves.moves[2] + moves.moves[4] + moves.moves[6]
+            if (sameOpeningList[movs] != nil) {
+                sameOpeningList[movs]! += 1
+            } else {
+                sameOpeningList[movs] = 1
+            }
+        }
+        return sameOpeningList
     }
 
     private func combinePGN(_ pgn1: String, pgn2: String) -> String {

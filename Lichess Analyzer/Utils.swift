@@ -7,34 +7,6 @@
 
 import UIKit
 
-class UserData {
-
-    static let shared = UserData()
-
-    var name: String = ""
-    var search: (color: Color, gameType: GameType) = (Color.white, GameType.blitz)
-
-    var openings = [OpeningObject]()
-
-    func updateOpenings() {
-        if let path = Bundle.main.path(forResource: "Openings", ofType: "json")
-        {
-            if let jsonData = NSData(contentsOfFile: path) {
-                do {
-                    self.openings = try JSONDecoder().decode([OpeningObject].self, from: Data(jsonData))
-                    self.openings.sort { (o1, o2) -> Bool in
-                        return o1.pgn.count < o2.pgn.count
-                    }
-                    self.openings.sort { (o1, o2) -> Bool in
-                        return o1.id < o2.id
-                    }
-                } catch(let error) {
-                    print(error, "nope")
-                }
-            }
-        }
-    }
-}
 
 extension Int {
 
@@ -44,11 +16,23 @@ extension Int {
 
     func percentage(of: Int) -> Double {
         guard self > 0 else { return 0 }
-        return ((self.double/of.double)*100).rounded(toPlaces: 2)
+        return ((self.double/of.double)*100).rounded(toPlaces: 1)
     }
 
     func percentageInt(of: Int) -> Int {
         return Int(((self.double/of.double)*100))
+    }
+
+    func secondsToMinutesSecondsString() -> String {
+        let (m, s) = secondsToMinutesSeconds()
+        let secondString = s == 1 ? "1 Second" : "\(s) Seconds"
+        return self < 60 ?
+            secondString :
+            "\(m) Min: \(secondString)"
+    }
+
+    func secondsToMinutesSeconds() -> (Int, Int) {
+        return ((self % 3600) / 60, (self % 3600) % 60)
     }
 }
 
@@ -69,8 +53,8 @@ extension Double {
 
 extension NSMutableAttributedString {
     var fontSize:CGFloat { return 14 }
-    var boldFont:UIFont { return UIFont(name: "AvenirNext-Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) }
-    var normalFont:UIFont { return UIFont(name: "AvenirNext-Regular", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)}
+    var boldFont:UIFont { return Font.with(.medium, Int(fontSize)) }
+    var normalFont:UIFont { return Font.with(.light, Int(fontSize)) }
 
     func bold(_ value:String) -> NSMutableAttributedString {
 
@@ -126,9 +110,9 @@ extension UIColor {
         case let x where x < 20: return UIColor(hex: "DA2418")
         case let x where x < 30: return UIColor(hex: "DA5C18")
         case let x where x < 40: return UIColor(hex: "DA8B18")
-        case let x where x < 50: return UIColor(hex: "646464")
-        case let x where x < 60: return UIColor(hex: "6C7B98")
-        case let x where x < 70: return UIColor(hex: "637F5F")
+        case let x where x < 50: return UIColor(hex: "D6B218")
+        case let x where x < 60: return UIColor(hex: "BAB231")
+        case let x where x < 70: return UIColor(hex: "7F8935")
         case let x where x < 80: return UIColor(hex: "568D58")
         case let x where x < 90: return UIColor(hex: "56AB59")
         default: return UIColor(hex: "15900A")
@@ -202,3 +186,59 @@ extension UILabel {
                           }, completion: nil)
     }
 }
+
+extension String {
+
+    func slice(from: String, to: String) -> String? {
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo]).replacingOccurrences(of: "\"", with: "")
+            }
+        }
+    }
+}
+
+extension BinaryInteger {
+    var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
+}
+
+extension FloatingPoint {
+    var degreesToRadians: Self { self * .pi / 180 }
+    var radiansToDegrees: Self { self * 180 / .pi }
+}
+
+
+extension Date {
+
+    var day: Int {
+        return Calendar.current.component(.day, from: self)
+    }
+
+    var month: Int {
+        return Calendar.current.component(.month, from: self)
+    }
+
+    var year: Int {
+        return Calendar.current.component(.year, from: self)
+    }
+
+    var millisecondsSince1970:Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    }
+
+    func toString(_ format: String = "dd-MM-yyyy") -> String? {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = format
+        return dateFormat.string(from: self)
+    }
+}
+
+extension String {
+
+    func toDate(_ format: String = "dd-MM-yyyy") -> Date? {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = format
+        return dateFormat.date(from: self)
+    }
+}
+

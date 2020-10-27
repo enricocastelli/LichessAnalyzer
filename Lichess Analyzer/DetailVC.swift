@@ -24,6 +24,9 @@ class DetailVC: UIViewController {
             dataSource.onDidSelectItem = { [weak self] item in
                 self?.itemSelected(item)
             }
+            let rView = ResultView(wins: opening.results.filter({$0 == .win}).count, loss: opening.results.filter({$0 == .lose}).count, draw: opening.results.filter({$0 == .draw}).count)
+            rView.frame = CGRect(x: 0, y: 0, width: 200, height: 300)
+            tableView.tableHeaderView = rView
         }
     }
 
@@ -38,7 +41,9 @@ class DetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.titleLabel.text = opening.opening.rawValue
+        titleLabel.text = opening.opening.rawValue
+        sort(UserData.shared.preferredSorting)
+        filterLabel.text = UserData.shared.preferredSorting.desc()
     }
 
     func sort(_ sorting: GamesSorting) {
@@ -82,21 +87,24 @@ class DetailVC: UIViewController {
         hideMenu()
         sort(.mostPlayed)
         tableView.reloadData()
-        filterLabel.text = "Most played"
+        UserData.shared.preferredSorting = .mostPlayed
+        filterLabel.text = UserData.shared.preferredSorting.desc()
     }
 
     @IBAction func sortStrongest() {
         hideMenu()
         sort(.strongest)
         tableView.reloadData()
-        filterLabel.text = "Strongest"
+        UserData.shared.preferredSorting = .strongest
+        filterLabel.text = UserData.shared.preferredSorting.desc()
     }
 
     @IBAction func sortWeakest() {
         hideMenu()
         sort(.weakest)
         tableView.reloadData()
-        filterLabel.text = "Weakest"
+        UserData.shared.preferredSorting = .weakest
+        filterLabel.text = UserData.shared.preferredSorting.desc()
     }
 
     @IBAction func back() {

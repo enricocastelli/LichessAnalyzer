@@ -9,6 +9,7 @@ target 'Lichess Analyzer' do
 
 pod 'Firebase/Analytics'
 pod 'FirebaseFirestore'
+pod 'OAuthSwift'
 
   target 'Lichess AnalyzerTests' do
     inherit! :search_paths

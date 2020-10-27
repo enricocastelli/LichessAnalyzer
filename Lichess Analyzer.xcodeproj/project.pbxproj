@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		148B2B3F4903A97101AD6DF2 /* Pods_Lichess_AnalyzerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49B074E6199E6FF53B146A00 /* Pods_Lichess_AnalyzerTests.framework */; };
+		1C40FDD72546FB5500D51585 /* CircleAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C40FDD62546FB5500D51585 /* CircleAnimatedView.swift */; };
+		1C40FDDE25471A8B00D51585 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C40FDDC25471A8A00D51585 /* ResultView.swift */; };
+		1C40FDE325471AF400D51585 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C40FDE225471AF400D51585 /* NibView.swift */; };
+		1C40FDE925471C2100D51585 /* ResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C40FDE825471C2100D51585 /* ResultView.xib */; };
+		1C40FDFA25481E3500D51585 /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C40FDF825481E3500D51585 /* FilterVC.swift */; };
+		1C40FDFB25481E3500D51585 /* FilterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C40FDF925481E3500D51585 /* FilterVC.xib */; };
 		1C6C72E82541E97400ECF2A7 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C72E62541E97400ECF2A7 /* GameVC.swift */; };
 		1C6C72E92541E97400ECF2A7 /* GameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C6C72E72541E97400ECF2A7 /* GameVC.xib */; };
 		1C6C73892542A32900ECF2A7 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C73882542A32900ECF2A7 /* BoardView.swift */; };
@@ -24,7 +30,7 @@
 		1CBD149125406D0800C3E8FE /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD148F25406D0800C3E8FE /* HomeVC.swift */; };
 		1CBD149225406D0800C3E8FE /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD149025406D0800C3E8FE /* HomeVC.xib */; };
 		1CBD149A25406DB300C3E8FE /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD149925406DB300C3E8FE /* Logger.swift */; };
-		1CBD149F254073DC00C3E8FE /* GamesServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD149E254073DC00C3E8FE /* GamesServiceProvider.swift */; };
+		1CBD149F254073DC00C3E8FE /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD149E254073DC00C3E8FE /* ServiceProvider.swift */; };
 		1CBD14A725407B5E00C3E8FE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14A625407B5E00C3E8FE /* Utils.swift */; };
 		1CBD14AC25407E2B00C3E8FE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14AB25407E2B00C3E8FE /* Model.swift */; };
 		1CBD14B22540965500C3E8FE /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14B02540965500C3E8FE /* ResultVC.swift */; };
@@ -32,7 +38,6 @@
 		1CBD14BB2540A0B800C3E8FE /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14BA2540A0B800C3E8FE /* TableView.swift */; };
 		1CBD14C12540A63C00C3E8FE /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */; };
 		1CBD14C22540A63C00C3E8FE /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14C02540A63C00C3E8FE /* ResultCell.xib */; };
-		1CBD14CA25416A8E00C3E8FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14C925416A8D00C3E8FE /* GoogleService-Info.plist */; };
 		1CBD14FE2541B3BF00C3E8FE /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */; };
 		1CBD14FF2541B3BF00C3E8FE /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */; };
 		1CBD15072541B6BA00C3E8FE /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD15062541B6BA00C3E8FE /* GameModel.swift */; };
@@ -40,6 +45,21 @@
 		1CBD150E2541B88400C3E8FE /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD150C2541B88400C3E8FE /* DetailCell.xib */; };
 		1CCA02422542ABE9001ECDFC /* SwiftChess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CBC68112542A995001912CD /* SwiftChess.framework */; };
 		1CCA02432542ABE9001ECDFC /* SwiftChess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CBC68112542A995001912CD /* SwiftChess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1CD6A8772546A9A400AE3722 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6A8752546A9A400AE3722 /* WelcomeVC.swift */; };
+		1CD6A8782546A9A400AE3722 /* WelcomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8762546A9A400AE3722 /* WelcomeVC.xib */; };
+		1CD6A8882546AE0C00AE3722 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8822546AE0C00AE3722 /* Lato-Italic.ttf */; };
+		1CD6A8892546AE0C00AE3722 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8832546AE0C00AE3722 /* Lato-Thin.ttf */; };
+		1CD6A88A2546AE0C00AE3722 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8842546AE0C00AE3722 /* Lato-Bold.ttf */; };
+		1CD6A88B2546AE0C00AE3722 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8852546AE0C00AE3722 /* Lato-Hairline.ttf */; };
+		1CD6A88C2546AE0C00AE3722 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8862546AE0C00AE3722 /* Lato-Light.ttf */; };
+		1CD6A88D2546AE0C00AE3722 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8872546AE0C00AE3722 /* Lato-Medium.ttf */; };
+		1CD6A8912546AE2500AE3722 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6A8902546AE2500AE3722 /* Fonts.swift */; };
+		1CD6A8952546AE6F00AE3722 /* TextPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6A8942546AE6F00AE3722 /* TextPresenter.swift */; };
+		1CD90EF325449E6E00956AB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CD90EF225449E6E00956AB5 /* GoogleService-Info.plist */; };
+		1CD90EFF2544A8A500956AB5 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD90EFE2544A8A500956AB5 /* Auth.swift */; };
+		1CD90F042546051000956AB5 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD90F032546051000956AB5 /* AccountModel.swift */; };
+		1CD90F082546080200956AB5 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD90F072546080200956AB5 /* UserData.swift */; };
+		1CD90F0C2546082200956AB5 /* StoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD90F0B2546082200956AB5 /* StoreProvider.swift */; };
 		5646408111A44BA45772449F /* Pods_Lichess_Analyzer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7967870E218F507CAF6DEF15 /* Pods_Lichess_Analyzer.framework */; };
 		FB2BD9491E68954CB9AD134B /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4AFDE1A9AD282902EFA034 /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework */; };
 /* End PBXBuildFile section */
@@ -93,6 +113,12 @@
 		0591D29692B82B1CC9885B11 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig"; path = "Target Support Files/Pods-Lichess Analyzer-Lichess AnalyzerUITests/Pods-Lichess Analyzer-Lichess AnalyzerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0A5A90CD76B2128C6C4EC7CB /* Pods-Lichess AnalyzerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess AnalyzerTests.release.xcconfig"; path = "Target Support Files/Pods-Lichess AnalyzerTests/Pods-Lichess AnalyzerTests.release.xcconfig"; sourceTree = "<group>"; };
 		19BF00F921F81CD8C45F88DD /* Pods-Lichess Analyzer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess Analyzer.debug.xcconfig"; path = "Target Support Files/Pods-Lichess Analyzer/Pods-Lichess Analyzer.debug.xcconfig"; sourceTree = "<group>"; };
+		1C40FDD62546FB5500D51585 /* CircleAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimatedView.swift; sourceTree = "<group>"; };
+		1C40FDDC25471A8A00D51585 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		1C40FDE225471AF400D51585 /* NibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
+		1C40FDE825471C2100D51585 /* ResultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultView.xib; sourceTree = "<group>"; };
+		1C40FDF825481E3500D51585 /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
+		1C40FDF925481E3500D51585 /* FilterVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterVC.xib; sourceTree = "<group>"; };
 		1C6C72E62541E97400ECF2A7 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		1C6C72E72541E97400ECF2A7 /* GameVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameVC.xib; sourceTree = "<group>"; };
 		1C6C73882542A32900ECF2A7 /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
@@ -116,7 +142,7 @@
 		1CBD148F25406D0800C3E8FE /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		1CBD149025406D0800C3E8FE /* HomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
 		1CBD149925406DB300C3E8FE /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		1CBD149E254073DC00C3E8FE /* GamesServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesServiceProvider.swift; sourceTree = "<group>"; };
+		1CBD149E254073DC00C3E8FE /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		1CBD14A625407B5E00C3E8FE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		1CBD14AB25407E2B00C3E8FE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		1CBD14B02540965500C3E8FE /* ResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
@@ -124,12 +150,27 @@
 		1CBD14BA2540A0B800C3E8FE /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
 		1CBD14C02540A63C00C3E8FE /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
-		1CBD14C925416A8D00C3E8FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
 		1CBD15062541B6BA00C3E8FE /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		1CBD150B2541B88400C3E8FE /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		1CBD150C2541B88400C3E8FE /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		1CD6A8752546A9A400AE3722 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		1CD6A8762546A9A400AE3722 /* WelcomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeVC.xib; sourceTree = "<group>"; };
+		1CD6A8822546AE0C00AE3722 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		1CD6A8832546AE0C00AE3722 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
+		1CD6A8842546AE0C00AE3722 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		1CD6A8852546AE0C00AE3722 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		1CD6A8862546AE0C00AE3722 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		1CD6A8872546AE0C00AE3722 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
+		1CD6A8902546AE2500AE3722 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		1CD6A8942546AE6F00AE3722 /* TextPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPresenter.swift; sourceTree = "<group>"; };
+		1CD90EC52544636F00956AB5 /* Lichess Analyzer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lichess Analyzer.entitlements"; sourceTree = "<group>"; };
+		1CD90EF225449E6E00956AB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1CD90EFE2544A8A500956AB5 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		1CD90F032546051000956AB5 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		1CD90F072546080200956AB5 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		1CD90F0B2546082200956AB5 /* StoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProvider.swift; sourceTree = "<group>"; };
 		49B074E6199E6FF53B146A00 /* Pods_Lichess_AnalyzerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lichess_AnalyzerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A4AFDE1A9AD282902EFA034 /* Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lichess_Analyzer_Lichess_AnalyzerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BC4BE48BC651106555B281 /* Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Lichess Analyzer-Lichess AnalyzerUITests/Pods-Lichess Analyzer-Lichess AnalyzerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +228,7 @@
 		1CBD144225406C4300C3E8FE = {
 			isa = PBXGroup;
 			children = (
+				1CD6A8812546AE0C00AE3722 /* Fonts */,
 				1CBC67D12542A995001912CD /* SwiftChess copy */,
 				1CBD144D25406C4300C3E8FE /* Lichess Analyzer */,
 				1CBD146425406C4600C3E8FE /* Lichess AnalyzerTests */,
@@ -210,17 +252,31 @@
 		1CBD144D25406C4300C3E8FE /* Lichess Analyzer */ = {
 			isa = PBXGroup;
 			children = (
+				1CD90EC52544636F00956AB5 /* Lichess Analyzer.entitlements */,
 				1CBD144E25406C4300C3E8FE /* AppDelegate.swift */,
 				1CBD14A625407B5E00C3E8FE /* Utils.swift */,
+				1CD90EFE2544A8A500956AB5 /* Auth.swift */,
+				1CD6A8902546AE2500AE3722 /* Fonts.swift */,
 				1CBD149925406DB300C3E8FE /* Logger.swift */,
+				1CD6A8942546AE6F00AE3722 /* TextPresenter.swift */,
 				1CBD148125406C8200C3E8FE /* Service.swift */,
+				1C40FDD62546FB5500D51585 /* CircleAnimatedView.swift */,
+				1CD90F072546080200956AB5 /* UserData.swift */,
+				1CD90F0B2546082200956AB5 /* StoreProvider.swift */,
 				1CBD14AB25407E2B00C3E8FE /* Model.swift */,
+				1CD90F032546051000956AB5 /* AccountModel.swift */,
 				1CBD15062541B6BA00C3E8FE /* GameModel.swift */,
-				1CBD149E254073DC00C3E8FE /* GamesServiceProvider.swift */,
+				1CBD149E254073DC00C3E8FE /* ServiceProvider.swift */,
+				1CD6A8752546A9A400AE3722 /* WelcomeVC.swift */,
+				1CD6A8762546A9A400AE3722 /* WelcomeVC.xib */,
 				1CBD148F25406D0800C3E8FE /* HomeVC.swift */,
 				1CBD149025406D0800C3E8FE /* HomeVC.xib */,
+				1C40FDF825481E3500D51585 /* FilterVC.swift */,
+				1C40FDF925481E3500D51585 /* FilterVC.xib */,
 				1CBD14B02540965500C3E8FE /* ResultVC.swift */,
 				1CBD14B12540965500C3E8FE /* ResultVC.xib */,
+				1C40FDDC25471A8A00D51585 /* ResultView.swift */,
+				1C40FDE825471C2100D51585 /* ResultView.xib */,
 				1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */,
 				1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */,
 				1C6C72E62541E97400ECF2A7 /* GameVC.swift */,
@@ -230,6 +286,7 @@
 				1CB5F4B12542B1B900862ADE /* Parserr.swift */,
 				1CB5F4AD2542B1B400862ADE /* PGN.swift */,
 				1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */,
+				1C40FDE225471AF400D51585 /* NibView.swift */,
 				1CBD14C02540A63C00C3E8FE /* ResultCell.xib */,
 				1CBD150B2541B88400C3E8FE /* DetailCell.swift */,
 				1CBD150C2541B88400C3E8FE /* DetailCell.xib */,
@@ -237,7 +294,7 @@
 				1CBD145725406C4400C3E8FE /* Assets.xcassets */,
 				1CBD145925406C4500C3E8FE /* LaunchScreen.storyboard */,
 				1CBD145C25406C4500C3E8FE /* Info.plist */,
-				1CBD14C925416A8D00C3E8FE /* GoogleService-Info.plist */,
+				1CD90EF225449E6E00956AB5 /* GoogleService-Info.plist */,
 				1CB3A1E72543050000C35D00 /* Openings.json */,
 			);
 			path = "Lichess Analyzer";
@@ -259,6 +316,19 @@
 				1CBD147225406C4600C3E8FE /* Info.plist */,
 			);
 			path = "Lichess AnalyzerUITests";
+			sourceTree = "<group>";
+		};
+		1CD6A8812546AE0C00AE3722 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1CD6A8822546AE0C00AE3722 /* Lato-Italic.ttf */,
+				1CD6A8832546AE0C00AE3722 /* Lato-Thin.ttf */,
+				1CD6A8842546AE0C00AE3722 /* Lato-Bold.ttf */,
+				1CD6A8852546AE0C00AE3722 /* Lato-Hairline.ttf */,
+				1CD6A8862546AE0C00AE3722 /* Lato-Light.ttf */,
+				1CD6A8872546AE0C00AE3722 /* Lato-Medium.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		33745560FECE31845A136750 /* Frameworks */ = {
@@ -419,13 +489,22 @@
 				1CBD145B25406C4500C3E8FE /* LaunchScreen.storyboard in Resources */,
 				1C6C72E92541E97400ECF2A7 /* GameVC.xib in Resources */,
 				1CBD14B32540965500C3E8FE /* ResultVC.xib in Resources */,
+				1CD6A8782546A9A400AE3722 /* WelcomeVC.xib in Resources */,
 				1CBD150E2541B88400C3E8FE /* DetailCell.xib in Resources */,
 				1CB3A1E82543050000C35D00 /* Openings.json in Resources */,
 				1CBD149225406D0800C3E8FE /* HomeVC.xib in Resources */,
+				1CD6A88A2546AE0C00AE3722 /* Lato-Bold.ttf in Resources */,
 				1CBD14FF2541B3BF00C3E8FE /* DetailVC.xib in Resources */,
+				1C40FDE925471C2100D51585 /* ResultView.xib in Resources */,
+				1CD90EF325449E6E00956AB5 /* GoogleService-Info.plist in Resources */,
 				1CBD145825406C4400C3E8FE /* Assets.xcassets in Resources */,
+				1CD6A88B2546AE0C00AE3722 /* Lato-Hairline.ttf in Resources */,
+				1C40FDFB25481E3500D51585 /* FilterVC.xib in Resources */,
+				1CD6A88D2546AE0C00AE3722 /* Lato-Medium.ttf in Resources */,
+				1CD6A8882546AE0C00AE3722 /* Lato-Italic.ttf in Resources */,
 				1CBD14C22540A63C00C3E8FE /* ResultCell.xib in Resources */,
-				1CBD14CA25416A8E00C3E8FE /* GoogleService-Info.plist in Resources */,
+				1CD6A8892546AE0C00AE3722 /* Lato-Thin.ttf in Resources */,
+				1CD6A88C2546AE0C00AE3722 /* Lato-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,18 +634,29 @@
 			files = (
 				1CBD14AC25407E2B00C3E8FE /* Model.swift in Sources */,
 				1CB5F4AE2542B1B400862ADE /* PGN.swift in Sources */,
+				1C40FDDE25471A8B00D51585 /* ResultView.swift in Sources */,
 				1CBD14B22540965500C3E8FE /* ResultVC.swift in Sources */,
+				1C40FDD72546FB5500D51585 /* CircleAnimatedView.swift in Sources */,
 				1CB5F4B22542B1B900862ADE /* Parserr.swift in Sources */,
 				1CB5F4AA2542B19100862ADE /* PieceView.swift in Sources */,
+				1CD90EFF2544A8A500956AB5 /* Auth.swift in Sources */,
 				1CBD149125406D0800C3E8FE /* HomeVC.swift in Sources */,
-				1CBD149F254073DC00C3E8FE /* GamesServiceProvider.swift in Sources */,
+				1CD6A8772546A9A400AE3722 /* WelcomeVC.swift in Sources */,
+				1CBD149F254073DC00C3E8FE /* ServiceProvider.swift in Sources */,
 				1CBD14BB2540A0B800C3E8FE /* TableView.swift in Sources */,
+				1CD90F082546080200956AB5 /* UserData.swift in Sources */,
 				1CBD14FE2541B3BF00C3E8FE /* DetailVC.swift in Sources */,
 				1CBD148225406C8200C3E8FE /* Service.swift in Sources */,
 				1CBD144F25406C4300C3E8FE /* AppDelegate.swift in Sources */,
 				1CBD149A25406DB300C3E8FE /* Logger.swift in Sources */,
 				1CBD14C12540A63C00C3E8FE /* ResultCell.swift in Sources */,
+				1CD6A8912546AE2500AE3722 /* Fonts.swift in Sources */,
+				1C40FDFA25481E3500D51585 /* FilterVC.swift in Sources */,
 				1CBD15072541B6BA00C3E8FE /* GameModel.swift in Sources */,
+				1C40FDE325471AF400D51585 /* NibView.swift in Sources */,
+				1CD6A8952546AE6F00AE3722 /* TextPresenter.swift in Sources */,
+				1CD90F0C2546082200956AB5 /* StoreProvider.swift in Sources */,
+				1CD90F042546051000956AB5 /* AccountModel.swift in Sources */,
 				1CBD150D2541B88400C3E8FE /* DetailCell.swift in Sources */,
 				1C6C73892542A32900ECF2A7 /* BoardView.swift in Sources */,
 				1C6C72E82541E97400ECF2A7 /* GameVC.swift in Sources */,
@@ -739,14 +829,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Lichess Analyzer/Lichess Analyzer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 738RN8C4YS;
+				DEVELOPMENT_TEAM = L4BGB43YX2;
 				INFOPLIST_FILE = "Lichess Analyzer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-Analyzer";
+				PRODUCT_BUNDLE_IDENTIFIER = EC.LichessAnalyzer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -759,14 +850,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Lichess Analyzer/Lichess Analyzer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 738RN8C4YS;
+				DEVELOPMENT_TEAM = L4BGB43YX2;
 				INFOPLIST_FILE = "Lichess Analyzer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "EC.Lichess-Analyzer";
+				PRODUCT_BUNDLE_IDENTIFIER = EC.LichessAnalyzer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

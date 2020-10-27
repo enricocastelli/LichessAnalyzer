@@ -8,36 +8,20 @@
 import Foundation
 import UIKit
 
-open class TableViewCell<T>: UITableViewCell {
-    open func configure(_ item: T) {
+ class TableViewCell<T>: UITableViewCell {
+     func configure(_ item: T) {
         selectionStyle = .none
     }
-
 }
 
-
-open class SectionData<T: Equatable>: Equatable {
-    public let title: String?
-    public let items: [T]
-
-    public init(title: String?, items: [T]) {
-        self.title = title
-        self.items = items
-    }
-
-    public static func == (lhs: SectionData<T>, rhs: SectionData<T>) -> Bool {
-        return lhs.title == rhs.title && lhs.items == rhs.items
-    }
-}
-
-open class TableViewDataSource<T: Equatable, Cell: TableViewCell<T>>: NSObject, UITableViewDataSource, UITableViewDelegate {
+class TableViewDataSource<T: Equatable, Cell: TableViewCell<T>>: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     private let cellResourceResolver: ((T) -> ReuseIdentifier<Cell>)
     private let resourceId: String
-    open var onDidSelectItem: ((T) -> Void)?
-    open var onConfigureCell: ((Cell, T) -> Void)?
+    var onDidSelectItem: ((T) -> Void)?
+    var onConfigureCell: ((Cell, T) -> Void)?
 
-    weak open var tableView: UITableView? = nil {
+    weak  var tableView: UITableView? = nil {
         didSet {
             tableView?.dataSource = self
             tableView?.delegate = self
@@ -45,37 +29,47 @@ open class TableViewDataSource<T: Equatable, Cell: TableViewCell<T>>: NSObject, 
         }
     }
 
+     var headerView: UIView? {
+        get {
+            return tableView?.tableHeaderView
+        }
+        set {
+            tableView?.tableHeaderView = newValue
+            tableView?.resizeTableHeaderView()
+        }
+    }
+
     var items: [T] = []
 
-    open var selectedItem: T? {
+     var selectedItem: T? {
         guard let selectedIndex = tableView?.indexPathForSelectedRow else { return nil }
         return item(at: selectedIndex)
     }
 
-    public init(cellResourceId: ReuseIdentifier<Cell>) {
+    init(cellResourceId: ReuseIdentifier<Cell>) {
         self.cellResourceResolver = { _ in cellResourceId }
         self.resourceId = cellResourceId.identifier.description
     }
 
-    open func setSelectedItem(_ item: T?, animated: Bool) {
+     func setSelectedItem(_ item: T?, animated: Bool) {
         tableView?.selectRow(at: (item != nil ?  index(of: item!) : nil), animated: animated, scrollPosition: .none)
     }
 
-    open func scrollToItem(_ item: T, animated: Bool) {
+     func scrollToItem(_ item: T, animated: Bool) {
         guard let index = index(of: item) else { return }
         tableView?.scrollToRow(at: index, at: .middle, animated: animated)
     }
 
     // MARK: - UITableViewDataSource
-    public func numberOfSections(in tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let item = self.item(at: indexPath) else { return UITableViewCell() }
         let cellResourceId = cellResourceResolver(item)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellResourceId.identifier, for: indexPath) as! Cell
@@ -84,18 +78,26 @@ open class TableViewDataSource<T: Equatable, Cell: TableViewCell<T>>: NSObject, 
         return cell
     }
 
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let onDidSelectItem = onDidSelectItem, let item = self.item(at: indexPath) {
             onDidSelectItem(item)
         }
     }
 
-    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return headerView
     }
 }
 
-public extension TableViewDataSource {
+ extension TableViewDataSource {
 
     func item(at index: IndexPath) -> T? {
         guard index.row < items.count && index.row >= 0 else { return nil }
@@ -112,18 +114,18 @@ public extension TableViewDataSource {
 
 
 /// Reuse identifier protocol
-public protocol ReuseIdentifierType: IdentifierType {
+ protocol ReuseIdentifierType: IdentifierType {
   /// Type of this reuseable
   associatedtype ReusableType
 }
 
 /// Reuse identifier
-public struct ReuseIdentifier<Reusable>: ReuseIdentifierType {
+ struct ReuseIdentifier<Reusable>: ReuseIdentifierType {
   /// Type of this reuseable
-  public typealias ReusableType = Reusable
+   typealias ReusableType = Reusable
 
   /// String identifier of this reusable
-  public let identifier: String
+   let identifier: String
 
   /**
    Create a new ReuseIdentifier based on the string identifier
@@ -132,20 +134,37 @@ public struct ReuseIdentifier<Reusable>: ReuseIdentifierType {
 
    - returns: A new ReuseIdentifier
   */
-  public init(identifier: String) {
+   init(identifier: String) {
     self.identifier = identifier
   }
 }
 
 /// Base protocol for all identifiers
-public protocol IdentifierType: CustomStringConvertible {
+ protocol IdentifierType: CustomStringConvertible {
   /// Identifier string
   var identifier: String { get }
 }
 
 extension IdentifierType {
   /// CustomStringConvertible implementation, returns the identifier
-  public var description: String {
+   var description: String {
     return identifier
   }
+}
+
+ extension UITableView {
+
+    func resizeTableHeaderView() {
+        guard let headerView = self.tableHeaderView else { return }
+        var size = headerView.systemLayoutSizeFitting(CGSize(width: self.bounds.width, height: UIView.layoutFittingCompressedSize.height))
+        size.width = self.bounds.width
+        if headerView.frame.size != size {
+            headerView.frame.size = size
+            headerView.setNeedsLayout()
+            headerView.layoutIfNeeded()
+            self.tableHeaderView = nil
+            self.tableHeaderView = headerView
+            self.layoutIfNeeded()
+        }
+    }
 }

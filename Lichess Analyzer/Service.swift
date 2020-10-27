@@ -50,15 +50,20 @@ extension BaseNetworkProvider {
         task.resume()
     }
 
-    func createRequest(_ method: Verb, _ urlString: String, _ params: [String: String]? = nil) throws -> URLRequest {
-        var request = URLRequest(url: try createURL(urlString, params),
-                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: TimeInterval(60))
-        request.httpMethod = method.rawValue
-        request.httpShouldHandleCookies = true
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        HTTPCookieStorage.shared.cookieAcceptPolicy = .always
-        return request
+    func createRequest(_ method: Verb, _ urlString: String, _ params: [String: String]? = nil) -> URLRequest {
+        do {
+            var request = URLRequest(url: try createURL(urlString, params),
+                                     cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                     timeoutInterval: TimeInterval(Double.infinity))
+            request.httpMethod = method.rawValue
+            request.httpShouldHandleCookies = true
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("Bearer \(UserData.shared.token)", forHTTPHeaderField: "Authorization")
+            HTTPCookieStorage.shared.cookieAcceptPolicy = .always
+            return request
+        } catch {
+            fatalError()
+        }
     }
 
     func createURL(_ urlString: String, _ params: [String: String]? = nil) throws -> URL{
@@ -77,11 +82,6 @@ extension BaseNetworkProvider {
         }
         return result
     }
-
-    func createAuthorizationString(_ method: Verb, _ url: URL) -> String {
-        return ""
-    }
-
 
     private func isValidResponse(_ response: URLResponse?) -> Bool {
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { return false }

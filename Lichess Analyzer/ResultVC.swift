@@ -14,13 +14,6 @@ class ResultVC: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-
-    @IBOutlet weak var winLabel: UILabel!
-    @IBOutlet weak var loseLabel: UILabel!
-    @IBOutlet weak var drawLabel: UILabel!
-    @IBOutlet weak var winPercentageLabel: UILabel!
-    @IBOutlet weak var losePercentageLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var filterLabel: UILabel!
 
@@ -34,6 +27,9 @@ class ResultVC: UIViewController {
             dataSource.onDidSelectItem = { [weak self] (item) in
                 self?.navigationController?.pushViewController(DetailVC(item), animated: true)
             }
+            let rView = ResultView(wins: games.wins(), loss: games.lost(), draw: games.draw())
+            rView.frame = CGRect(x: 0, y: 0, width: 200, height: 300)
+            tableView.tableHeaderView = rView
         }
     }
 
@@ -49,27 +45,18 @@ class ResultVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sort(.mostPlayed)
+        sort(UserData.shared.preferredSorting)
+        filterLabel.text = UserData.shared.preferredSorting.desc()
         setLabels()
+        let most = games.mostCommonOpenings()
+        for (k,v) in (Array(most).sorted {$0.1 > $1.1}) {
+            print("\(k):\(v)")
+        }
     }
 
     private func setLabels() {
-        titleLabel.text = UserData.shared.name
-        subtitleLabel.attributedText = NSMutableAttributedString()
-            .normal("Using ")
-            .bold(UserData.shared.search.color.rawValue)
-            .normal(" in ")
-            .bold(UserData.shared.search.gameType.rawValue)
-            .normal(" games")
-        winLabel.text = games.wins().description
-        loseLabel.text = games.lost().description
-        drawLabel.text = games.draw().description
-        let winPercentage = games.wins().percentage(of: games.count)
-        winPercentageLabel.text = winPercentage.description  + "%"
-        losePercentageLabel.text = games.lost().percentage(of:games.count).description + "%"
-        let _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (_) in
-            self.progressView.setProgress(Float(winPercentage/100), animated: true)
-        }
+        titleLabel.text = UserData.shared.searchName
+        subtitleLabel.attributedText = UserData.shared.search.attrString
     }
 
     func sort(_ sorting: GamesSorting) {
@@ -109,21 +96,24 @@ class ResultVC: UIViewController {
         hideMenu()
         sort(.mostPlayed)
         tableView.reloadData()
-        filterLabel.text = "Most played"
+        filterLabel.text = UserData.shared.preferredSorting.desc()
+        UserData.shared.preferredSorting = .mostPlayed
     }
 
     @IBAction func sortStrongest() {
         hideMenu()
         sort(.strongest)
         tableView.reloadData()
-        filterLabel.text = "Strongest"
+        UserData.shared.preferredSorting = .strongest
+        filterLabel.text = UserData.shared.preferredSorting.desc()
     }
 
     @IBAction func sortWeakest() {
         hideMenu()
         sort(.weakest)
         tableView.reloadData()
-        filterLabel.text = "Weakest"
+        UserData.shared.preferredSorting = .weakest
+        filterLabel.text = UserData.shared.preferredSorting.desc()
     }
 
     @IBAction func back() {

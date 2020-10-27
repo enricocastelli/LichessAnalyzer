@@ -7,19 +7,17 @@
 
 import UIKit
 import Firebase
+import OAuthSwift
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var clientID = "T0qPkzZHRnGRvhPe"
-    var secret = "mclxfoRvA59n4U8AFOowMV09Z4GXcE3w"
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let home = HomeVC()
-        let nav = UINavigationController(rootViewController: home)
+        let nav = UINavigationController(rootViewController: WelcomeVC())
         nav.isNavigationBarHidden = true
         window?.rootViewController = nav
         FirebaseApp.configure()
@@ -27,11 +25,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard let url = userActivity.webpageURL else { return true }
+        handleDeepLinkUrl(url)
+        return true
+    }
+
+    func handleDeepLinkUrl(_ url: URL) {
+        OAuthSwift.handle(url: url)
+    }
+
     // remove gameOpening/complete opening models
     // quiz/game in loading screen
-    // color filters in result screen
+    // filters in result screen
     // known openings should be basic openings with explanation
-    // change progress bar
     // search specific set of moves
+    // download all games and store them, then next times update from a specific date
 }
 
