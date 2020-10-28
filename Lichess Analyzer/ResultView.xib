@@ -53,7 +53,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kX3-tl-zvZ">
-                    <rect key="frame" x="334" y="16" width="43.5" height="28"/>
+                    <rect key="frame" x="334" y="0.0" width="43.5" height="44"/>
                     <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bRN-rs-21d">
                             <rect key="frame" x="546" y="0.0" width="149" height="20"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUA-ac-Ry1">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUA-ac-Ry1">
                                     <rect key="frame" x="0.0" y="0.0" width="47" height="20"/>
                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,7 +111,7 @@
                 <constraint firstItem="HVo-eZ-6jy" firstAttribute="top" secondItem="bUv-9l-Pgp" secondAttribute="bottom" constant="20" id="AdD-Ja-hoM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sJO-R8-f7S" secondAttribute="trailing" constant="16" id="FBV-bc-Mne"/>
                 <constraint firstItem="Rqb-cv-g61" firstAttribute="top" secondItem="HVo-eZ-6jy" secondAttribute="bottom" constant="16" id="KP0-7G-Yom"/>
-                <constraint firstItem="kX3-tl-zvZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="Kc6-r5-O8B"/>
+                <constraint firstItem="kX3-tl-zvZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Kc6-r5-O8B"/>
                 <constraint firstItem="bUv-9l-Pgp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-8" id="Kuj-tR-cjF"/>
                 <constraint firstAttribute="bottom" secondItem="Rqb-cv-g61" secondAttribute="bottom" id="Mm0-gz-kAS"/>
                 <constraint firstItem="bUv-9l-Pgp" firstAttribute="top" secondItem="kX3-tl-zvZ" secondAttribute="bottom" constant="20" id="OPw-Ak-ylT"/>

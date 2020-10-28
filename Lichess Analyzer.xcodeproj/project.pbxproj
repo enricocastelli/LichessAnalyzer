@@ -17,6 +17,7 @@
 		1C6C72E82541E97400ECF2A7 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C72E62541E97400ECF2A7 /* GameVC.swift */; };
 		1C6C72E92541E97400ECF2A7 /* GameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C6C72E72541E97400ECF2A7 /* GameVC.xib */; };
 		1C6C73892542A32900ECF2A7 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C73882542A32900ECF2A7 /* BoardView.swift */; };
+		1CA7832E25489E3D0024ED46 /* KnownOpenings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CA7832D25489E3D0024ED46 /* KnownOpenings.json */; };
 		1CB3A1E82543050000C35D00 /* Openings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CB3A1E72543050000C35D00 /* Openings.json */; };
 		1CB5F4AA2542B19100862ADE /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5F4A92542B19100862ADE /* PieceView.swift */; };
 		1CB5F4AE2542B1B400862ADE /* PGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5F4AD2542B1B400862ADE /* PGN.swift */; };
@@ -122,6 +123,7 @@
 		1C6C72E62541E97400ECF2A7 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		1C6C72E72541E97400ECF2A7 /* GameVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameVC.xib; sourceTree = "<group>"; };
 		1C6C73882542A32900ECF2A7 /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		1CA7832D25489E3D0024ED46 /* KnownOpenings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KnownOpenings.json; sourceTree = "<group>"; };
 		1CB3A1E72543050000C35D00 /* Openings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Openings.json; sourceTree = "<group>"; };
 		1CB5F4A92542B19100862ADE /* PieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieceView.swift; path = "../../Downloads/SwiftChess-master/Example/SwiftChess/PieceView.swift"; sourceTree = "<group>"; };
 		1CB5F4AD2542B1B400862ADE /* PGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PGN.swift; path = "../../Downloads/SwiftChess-master/Example/SwiftChess/PGN.swift"; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				1CBD145C25406C4500C3E8FE /* Info.plist */,
 				1CD90EF225449E6E00956AB5 /* GoogleService-Info.plist */,
 				1CB3A1E72543050000C35D00 /* Openings.json */,
+				1CA7832D25489E3D0024ED46 /* KnownOpenings.json */,
 			);
 			path = "Lichess Analyzer";
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				1CD6A8882546AE0C00AE3722 /* Lato-Italic.ttf in Resources */,
 				1CBD14C22540A63C00C3E8FE /* ResultCell.xib in Resources */,
 				1CD6A8892546AE0C00AE3722 /* Lato-Thin.ttf in Resources */,
+				1CA7832E25489E3D0024ED46 /* KnownOpenings.json in Resources */,
 				1CD6A88C2546AE0C00AE3722 /* Lato-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

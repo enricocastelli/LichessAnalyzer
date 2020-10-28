@@ -28,7 +28,7 @@ class ResultVC: UIViewController {
                 self?.navigationController?.pushViewController(DetailVC(item), animated: true)
             }
             let rView = ResultView(wins: games.wins(), loss: games.lost(), draw: games.draw())
-            rView.frame = CGRect(x: 0, y: 0, width: 200, height: 300)
+            rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
             tableView.tableHeaderView = rView
         }
     }
@@ -48,10 +48,10 @@ class ResultVC: UIViewController {
         sort(UserData.shared.preferredSorting)
         filterLabel.text = UserData.shared.preferredSorting.desc()
         setLabels()
-        let most = games.mostCommonOpenings()
-        for (k,v) in (Array(most).sorted {$0.1 > $1.1}) {
-            print("\(k):\(v)")
-        }
+//        let most = games.mostCommonOpenings()
+//        for (k,v) in (Array(most).sorted {$0.1 > $1.1}) {
+//            print("\(k):\(v)")
+//        }
     }
 
     private func setLabels() {

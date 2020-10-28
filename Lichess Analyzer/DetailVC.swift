@@ -25,7 +25,7 @@ class DetailVC: UIViewController {
                 self?.itemSelected(item)
             }
             let rView = ResultView(wins: opening.results.filter({$0 == .win}).count, loss: opening.results.filter({$0 == .lose}).count, draw: opening.results.filter({$0 == .draw}).count)
-            rView.frame = CGRect(x: 0, y: 0, width: 200, height: 300)
+            rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
             tableView.tableHeaderView = rView
         }
     }
@@ -41,7 +41,7 @@ class DetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = opening.opening.rawValue
+        titleLabel.text = opening.opening.name
         sort(UserData.shared.preferredSorting)
         filterLabel.text = UserData.shared.preferredSorting.desc()
     }

@@ -79,12 +79,12 @@ extension StoreProvider {
     }
 
 
-    func storeGames(_ games: [GameItem]) {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(games), forKey:"gamesBullet")
+    func storeGames(_ games: [GameItem], searchItem: SearchItem) {
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(games), forKey: searchItem.string)
     }
 
-    func getGames() -> [GameItem]? {
-        if let data = UserDefaults.standard.value(forKey:"gamesBullet") as? Data {
+    func getGames(searchItem: SearchItem) -> [GameItem]? {
+        if let data = UserDefaults.standard.value(forKey: searchItem.string) as? Data {
             return try? PropertyListDecoder().decode([GameItem].self, from: data)
         }
         return nil

@@ -77,7 +77,6 @@ extension ServiceProvider {
                     blackElo: Int(string.slice(from: "[BlackElo ", to: "]") ?? ""),
                     termination: termination,
                     completeOpening: string.slice(from: "[Opening ", to: "]") ?? "",
-                    opening: KnownOpening.fromString(string.slice(from: "[Opening ", to: "]") ?? ""),
                     pgn: string.slice(from: "1. ", to: string.last!.description),
                     eco: string.slice(from: "[ECO ", to: "]") ?? "")
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import WebKit
 
 class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvider, TextPresenter {
 
@@ -14,7 +15,9 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var frameContainerView: UIView!
     @IBOutlet weak var filterLabel: UILabel!
+
 
     var gameTypeControl: UISegmentedControl!
 
@@ -44,14 +47,19 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     }
 
     @IBAction func analyze() {
-        showLoading()
-        callInProgress = true
-        getGames() { (games) in
-            self.callInProgress = false
-            guard let games = games else { return }
+        if let games = getGames(searchItem: UserData.shared.search) {
             self.navigationController?.pushViewController(ResultVC(games), animated: true)
-        } failure: { (error) in
-            self.loadingView.alpha = 0
+        } else {
+            showLoading()
+            callInProgress = true
+            getGames() { (games) in
+                self.callInProgress = false
+                guard let games = games else { return }
+                self.storeGames(games, searchItem: UserData.shared.search)
+                self.navigationController?.pushViewController(ResultVC(games), animated: true)
+            } failure: { (error) in
+                self.loadingView.alpha = 0
+            }
         }
     }
 
@@ -64,6 +72,9 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
         UIView.animate(withDuration: 0.3) {
             self.loadingView.alpha = 1
         }
+        let sf = WKWebView(frame: frameContainerView.frame)
+        sf.load(URLRequest(url: URL(string: "https://lichess.org/tv/frame")!))
+        self.frameContainerView.addContentView(sf)
         let hasProgress = getTimeProgress() != nil
         let _ = Timer.scheduledTimer(withTimeInterval: getTimeProgress() ?? 0.1, repeats: true) { (timer) in
             guard self.callInProgress else {

@@ -1,0 +1,295 @@
+[{
+        "id": "A00",
+        "name": "Amar Opening",
+        "pgn": "g1h3"
+    }, {
+        "id": "A00",
+        "name": "Anderssen Opening",
+        "pgn": "a2a3"
+    }, {
+        "id": "A00",
+        "name": "Clemenz Opening",
+        "pgn": "h2h3"
+    }, {
+        "id": "A00",
+        "name": "Gedult's Opening",
+        "pgn": "f2f3"
+    }, {
+        "id": "A00",
+        "name": "Grob Opening",
+        "pgn": "g2g4"
+    }, {
+        "id": "A00",
+        "name": "Hungarian Opening",
+        "pgn": "g2g3"
+    }, {
+        "id": "A00",
+        "name": "Kadas Opening",
+        "pgn": "h2h4"
+    }, {
+        "id": "A00",
+        "name": "Mieses Opening",
+        "pgn": "d2d3"
+    }, {
+        "id": "A00",
+        "name": "Polish Opening",
+        "pgn": "b2b4"
+    }, {
+        "id": "A00",
+        "name": "Saragossa Opening",
+        "pgn": "c2c3"
+    }, {
+        "id": "A00",
+        "name": "Sodium Attack",
+        "pgn": "b1a3"
+    }, {
+        "id": "A00",
+        "name": "Van Geet Opening",
+        "pgn": "b1c3"
+    }, {
+        "id": "A00",
+        "name": "Van't Kruijs Opening",
+        "pgn": "e2e3"
+    }, {
+        "id": "A00",
+        "name": "Ware Opening",
+        "pgn": "a2a4"
+    }, {
+        "id": "A00",
+        "name": "Lasker Simul Special",
+        "pgn": "g2g3 h7h5"
+    }, {
+        "id": "A00",
+        "name": "Crab Opening",
+        "pgn": "a2a4 e7e5 h2h4"
+    }, {
+        "id": "A00",
+        "name": "Global Opening",
+        "pgn": "h2h3 e7e5 a2a3"
+    }, {
+        "id": "A00",
+        "name": "Valencia Opening",
+        "pgn": "d2d3 e7e5 b1d2"
+    }, {
+        "id": "A01",
+        "name": "Nimzo-Larsen Attack",
+        "pgn": "b2b3"
+    }, {
+        "id": "A02",
+        "name": "Bird Opening",
+        "pgn": "f2f4"
+    }, {
+        "id": "A04",
+        "name": "Réti Opening",
+        "pgn": "g1f3"
+    }, {
+        "id": "A04",
+        "name": "Zukertort Opening",
+        "pgn": "g1f3"
+    }, {
+        "id": "A07",
+        "name": "King's Indian Attack",
+        "pgn": "g1f3 d7d5 g2g3"
+    }, {
+        "id": "A10",
+        "name": "English Opening",
+        "pgn": "c2c4"
+    }, {
+        "id": "A15",
+        "name": "English Orangutan",
+        "pgn": "c2c4 g8f6 b2b4"
+    }, {
+        "id": "A40",
+        "name": "Queen's Pawn",
+        "pgn": "d2d4"
+    }, {
+        "id": "A40",
+        "name": "Australian Defense",
+        "pgn": "d2d4 b8a6"
+    }, {
+        "id": "A40",
+        "name": "English Defense",
+        "pgn": "d2d4 b7b6"
+    }, {
+        "id": "A40",
+        "name": "Englund Gambit",
+        "pgn": "d2d4 e7e5"
+    }, {
+        "id": "A40",
+        "name": "Horwitz Defense",
+        "pgn": "d2d4 e7e6"
+    }, {
+        "id": "A40",
+        "name": "Mikenas Defense",
+        "pgn": "d2d4 b8c6"
+    }, {
+        "id": "A40",
+        "name": "Modern Defense",
+        "pgn": "d2d4 g7g6"
+    }, {
+        "id": "A40",
+        "name": "Polish Defense",
+        "pgn": "d2d4 b7b5"
+    }, {
+        "id": "A41",
+        "name": "Old Indian Defense",
+        "pgn": "d2d4 d7d6 c2c4"
+    }, {
+        "id": "A43",
+        "name": "Old Benoni Defense",
+        "pgn": "d2d4 c7c5"
+    }, {
+        "id": "A45",
+        "name": "Indian Game",
+        "pgn": "d2d4 g8f6"
+    }, {
+        "id": "A45",
+        "name": "Bronstein Gambit",
+        "pgn": "d2d4 g8f6 g2g4"
+    }, {
+        "id": "A45",
+        "name": "Canard Opening",
+        "pgn": "d2d4 g8f6 f2f4"
+    }, {
+        "id": "A45",
+        "name": "Paleface Attack",
+        "pgn": "d2d4 g8f6 f2f3"
+    }, {
+        "id": "A45",
+        "name": "Trompowsky Attack",
+        "pgn": "d2d4 g8f6 c1g5"
+    }, {
+        "id": "A80",
+        "name": "Dutch Defense",
+        "pgn": "d2d4 f7f5"
+    }, {
+        "id": "B00",
+        "name": "King's Pawn",
+        "pgn": "e2e4"
+    }, {
+        "id": "B00",
+        "name": "Barnes Defense",
+        "pgn": "e2e4 f7f6"
+    }, {
+        "id": "B00",
+        "name": "Borg Defense",
+        "pgn": "e2e4 g7g5"
+    }, {
+        "id": "B00",
+        "name": "Carr Defense",
+        "pgn": "e2e4 h7h6"
+    }, {
+        "id": "B00",
+        "name": "Duras Gambit",
+        "pgn": "e2e4 f7f5"
+    }, {
+        "id": "B00",
+        "name": "Goldsmith Defense",
+        "pgn": "e2e4 h7h5"
+    }, {
+        "id": "B00",
+        "name": "Hippopotamus Defense",
+        "pgn": "e2e4 g8h6"
+    }, {
+        "id": "B00",
+        "name": "Lemming Defense",
+        "pgn": "e2e4 b8a6"
+    }, {
+        "id": "B00",
+        "name": "Nimzowitsch Defense",
+        "pgn": "e2e4 b8c6"
+    }, {
+        "id": "B00",
+        "name": "Owen Defense",
+        "pgn": "e2e4 b7b6"
+    }, {
+        "id": "B00",
+        "name": "Pirc Defense",
+        "pgn": "e2e4 d7d6"
+    }, {
+        "id": "B00",
+        "name": "St. George Defense",
+        "pgn": "e2e4 a7a6"
+    }, {
+        "id": "B00",
+        "name": "Ware Defense",
+        "pgn": "e2e4 a7a5"
+    }, {
+        "id": "B01",
+        "name": "Scandinavian Defense",
+        "pgn": "e2e4 d7d5"
+    }, {
+        "id": "B02",
+        "name": "Alekhine Defense",
+        "pgn": "e2e4 g8f6"
+    }, {
+        "id": "B06",
+        "name": "Modern Defense",
+        "pgn": "e2e4 g7g6"
+    }, {
+        "id": "B10",
+        "name": "Caro-Kann Defense",
+        "pgn": "e2e4 c7c6"
+    }, {
+        "id": "B20",
+        "name": "Sicilian Defense",
+        "pgn": "e2e4 c7c5"
+    }, {
+        "id": "C00",
+        "name": "French Defense",
+        "pgn": "e2e4 e7e6"
+    }, {
+        "id": "C20",
+        "name": "Bongcloud Attack",
+        "pgn": "e2e4 e7e5 e1e2"
+    }, {
+        "id": "C20",
+        "name": "Center Game",
+        "pgn": "e2e4 e7e5 d2d4"
+    }, {
+        "id": "C20",
+        "name": "Portuguese Opening",
+        "pgn": "e2e4 e7e5 f1b5"
+    }, {
+        "id": "C23",
+        "name": "Bishop's Opening",
+        "pgn": "e2e4 e7e5 f1c4"
+    }, {
+        "id": "C25",
+        "name": "Vienna Game",
+        "pgn": "e2e4 e7e5 b1c3"
+    }, {
+        "id": "C30",
+        "name": "King's Gambit",
+        "pgn": "e2e4 e7e5 f2f4"
+    }, {
+        "id" : "C40","name" : "Elephant Gambit","pgn" : "e2e4 e7e5 g1f3 d7d5"
+    }, {
+        "id": "C40",
+        "name": "King's Knight Opening",
+        "pgn": "e2e4 e7e5 g1f3"
+    }, {
+        "id" : "C41","name" : "Philidor Defense","pgn" : "e2e4 e7e5 g1f3 d7d6"
+    }, {
+        "id" : "C50",
+        "name" : "Italian Game",
+        "pgn" : "e2e4 e7e5 g1f3 b8c6 f1c4"
+    }, { "id" : "C50","name" : "Giuoco Piano","pgn" : "e2e4 e7e5 g1f3 b8c6 f1c4 f8c5" },
+    {
+        "id" : "C60",
+        "name" : "Ruy Lopez",
+        "pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5"
+    }, {
+        "id": "D00",
+        "name": "Amazon Attack",
+        "pgn": "d2d4 d7d5 d1d3"
+    }, {
+        "id": "D00",
+        "name": "Blackmar Gambit",
+        "pgn": "d2d4 d7d5 e2e4"
+    }, {
+        "id": "D06",
+        "name": "Queen's Gambit",
+        "pgn": "d2d4 d7d5 c2c4"
+    }
+]

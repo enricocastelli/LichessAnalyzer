@@ -41,11 +41,6 @@
     {
         "id": "A00",
         "name": "Barnes Opening: Gedult Gambit",
-        "pgn": "f2f3 d7d5 e2e4 g7g6 d2d4 d5e4 c2c3"
-    },
-    {
-        "id": "A00",
-        "name": "Barnes Opening: Gedult Gambit",
         "pgn": "f2f3 f7f5 e2e4 f5e4 b1c3"
     },
     {
@@ -317,16 +312,6 @@
         "id": "A00",
         "name": "Kadas Opening: Kadas Gambit",
         "pgn": "h2h4 c7c5 b2b4"
-    },
-    {
-        "id": "A00",
-        "name": "Kadas Opening: Kadas Gambit",
-        "pgn": "h2h4 d7d5 d2d4 c7c5 g1f3 c5d4 c2c3"
-    },
-    {
-        "id": "A00",
-        "name": "Kadas Opening: Kadas Gambit",
-        "pgn": "h2h4 e7e5 d2d4 e5d4 c2c3"
     },
     {
         "id": "A00",
@@ -766,22 +751,7 @@
     {
         "id": "A01",
         "name": "Nimzo-Larsen Attack: Modern Variation",
-        "pgn": "b2b3 e7e5 c1b2 b8c6 e2e3"
-    },
-    {
-        "id": "A01",
-        "name": "Nimzo-Larsen Attack: Modern Variation",
-        "pgn": "b2b3 e7e5 c1b2 b8c6"
-    },
-    {
-        "id": "A01",
-        "name": "Nimzo-Larsen Attack: Modern Variation",
         "pgn": "b2b3 e7e5"
-    },
-    {
-        "id": "A01",
-        "name": "Nimzo-Larsen Attack: Modern Variation",
-        "pgn": "b2b3 e7e5 c1b2"
     },
     {
         "id": "A01",
@@ -881,11 +851,6 @@
     {
         "id": "A02",
         "name": "Bird Opening",
-        "pgn": "f2f4 g8f6"
-    },
-    {
-        "id": "A02",
-        "name": "Bird Opening",
         "pgn": "f2f4"
     },
     {
@@ -937,11 +902,6 @@
         "id": "A03",
         "name": "Bird Opening: Thomas Gambit",
         "pgn": "f2f4 d7d5 b2b3 g8f6 c1b2 d5d4 g1f3 c7c5 e2e3"
-    },
-    {
-        "id": "A03",
-        "name": "Bird Opening: Williams Gambit",
-        "pgn": "f2f4 d7d5 e2e4 d5e4 b1c3 g8f6 d1e2"
     },
     {
         "id": "A03",
@@ -1171,11 +1131,6 @@
     {
         "id": "A06",
         "name": "Nimzo-Larsen Attack: Norfolk Gambit",
-        "pgn": "g1f3 d7d5 b2b3 g8f6 c1b2 c7c5 e2e4"
-    },
-    {
-        "id": "A06",
-        "name": "Nimzo-Larsen Attack: Norfolk Gambit",
         "pgn": "g1f3 d7d5 b2b3 c7c5 e2e4"
     },
     {
@@ -1236,11 +1191,6 @@
     {
         "id": "A07",
         "name": "King's Indian Attack: Keres Variation",
-        "pgn": "g1f3 d7d5 g2g3 c8g4 f1g2 b8d7"
-    },
-    {
-        "id": "A07",
-        "name": "King's Indian Attack: Keres Variation",
         "pgn": "g1f3 d7d5 g2g3 c8g4"
     },
     {
@@ -1272,11 +1222,6 @@
         "id": "A08",
         "name": "King's Indian Attack: French Variation",
         "pgn": "g1f3 d7d5 g2g3 c7c5 f1g2 b8c6"
-    },
-    {
-        "id": "A08",
-        "name": "King's Indian Attack: Sicilian Variation",
-        "pgn": "e2e4 e7e6 d2d3 d7d5 b1d2 g8f6 g1f3 c7c5 g2g3 b8c6 f1g2 f8e7 e1g1 e8g8 f1e1"
     },
     {
         "id": "A08",
@@ -1451,16 +1396,6 @@
     {
         "id": "A12",
         "name": "Réti Opening: Anglo-Slav Variation, Bogoljubov Variation",
-        "pgn": "g1f3 d7d5 c2c4 c7c6 b2b3 c8g4"
-    },
-    {
-        "id": "A12",
-        "name": "Réti Opening: Anglo-Slav Variation, Bogoljubov Variation",
-        "pgn": "g1f3 g8f6 c2c4 c7c6 b2b3 d7d5 c1b2"
-    },
-    {
-        "id": "A12",
-        "name": "Réti Opening: Anglo-Slav Variation, Bogoljubov Variation",
         "pgn": "g1f3 d7d5 c2c4 c7c6 b2b3"
     },
     {
@@ -1496,11 +1431,6 @@
     {
         "id": "A13",
         "name": "English Opening: Agincourt Defense, Catalan Defense",
-        "pgn": "g1f3 d7d5 c2c4 e7e6 g2g3 b7b6 f1g2 c8b7 e1g1"
-    },
-    {
-        "id": "A13",
-        "name": "English Opening: Agincourt Defense, Catalan Defense",
         "pgn": "g1f3 d7d5 c2c4 e7e6 g2g3 c7c5"
     },
     {
@@ -1512,16 +1442,6 @@
         "id": "A13",
         "name": "English Opening: Agincourt Defense, Kurajica Defense",
         "pgn": "g1f3 d7d5 c2c4 e7e6 g2g3 c7c6"
-    },
-    {
-        "id": "A13",
-        "name": "English Opening: Agincourt Defense",
-        "pgn": "c2c4 e7e6 g1f3 d7d5"
-    },
-    {
-        "id": "A13",
-        "name": "English Opening: Agincourt Defense",
-        "pgn": "c2c4 e7e6 g1f3"
     },
     {
         "id": "A13",
@@ -1601,11 +1521,6 @@
     {
         "id": "A15",
         "name": "English Opening: Anglo-Indian Defense, Queen's Indian Formation",
-        "pgn": "g1f3 g8f6 c2c4 e7e6 g2g3 b7b6 f1g2 c8b7"
-    },
-    {
-        "id": "A15",
-        "name": "English Opening: Anglo-Indian Defense, Queen's Indian Formation",
         "pgn": "g1f3 g8f6 c2c4 b7b6"
     },
     {
@@ -1656,16 +1571,6 @@
     {
         "id": "A16",
         "name": "English Opening: Anglo-Indian Defense, Anglo-Grünfeld Variation",
-        "pgn": "c2c4 g8f6 b1c3 d7d5 c4d5 f6d5 g2g3 g7g6 f1g2 d5b6"
-    },
-    {
-        "id": "A16",
-        "name": "English Opening: Anglo-Indian Defense, Anglo-Grünfeld Variation",
-        "pgn": "c2c4 g8f6 b1c3 d7d5 c4d5 f6d5 g2g3 g7g6 f1g2 d5c3"
-    },
-    {
-        "id": "A16",
-        "name": "English Opening: Anglo-Indian Defense, Anglo-Grünfeld Variation",
         "pgn": "c2c4 g8f6 b1c3 d7d5 c4d5 f6d5 g1f3"
     },
     {
@@ -1697,16 +1602,6 @@
         "id": "A17",
         "name": "English Opening: Anglo-Indian Defense, Zvjaginsev-Krasenkow Attack",
         "pgn": "c2c4 g8f6 b1c3 e7e6 g1f3 f8b4 g2g4"
-    },
-    {
-        "id": "A18",
-        "name": "English Opening: Mikenas-Carls Variation",
-        "pgn": "c2c4 g8f6 b1c3 e7e6 e2e4 b8c6"
-    },
-    {
-        "id": "A18",
-        "name": "English Opening: Mikenas-Carls Variation",
-        "pgn": "c2c4 g8f6 b1c3 e7e6 e2e4 d7d5 e4e5"
     },
     {
         "id": "A18",
@@ -1826,11 +1721,6 @@
     {
         "id": "A25",
         "name": "English Opening: Closed, Taimanov Variation",
-        "pgn": "c2c4 e7e5 b1c3 b8c6 g2g3 g7g6 f1g2 f8g7 e2e3 d7d6 g1e2 g8h6"
-    },
-    {
-        "id": "A25",
-        "name": "English Opening: Closed, Taimanov Variation",
         "pgn": "c2c4 e7e5 b1c3 b8c6 g2g3 g7g6 a1b1 g8h6 f1g2 f8g7"
     },
     {
@@ -1896,22 +1786,7 @@
     {
         "id": "A28",
         "name": "English Opening: King's English Variation, Four Knights Variation, Quiet Line",
-        "pgn": "c2c4 e7e5 b1c3 g8f6 g1f3 b8c6 e2e3 f8b4 d1c2 b4c3"
-    },
-    {
-        "id": "A28",
-        "name": "English Opening: King's English Variation, Four Knights Variation, Quiet Line",
         "pgn": "c2c4 e7e5 b1c3 g8f6 g1f3 b8c6 e2e3"
-    },
-    {
-        "id": "A28",
-        "name": "English Opening: King's English Variation, Four Knights Variation, Quiet Line",
-        "pgn": "c2c4 e7e5 b1c3 g8f6 g1f3 b8c6 e2e3 f8b4 d1c2 e8g8 c3d5 f8e8 c2f5"
-    },
-    {
-        "id": "A28",
-        "name": "English Opening: King's English Variation, Four Knights Variation",
-        "pgn": "c2c4 e7e5 b1c3 g8f6 g1f3 b8c6 d2d4 e5d4 f3d4 f8b4 c1g5 h7h6 g5h4 b4c3 b2c3 c6e5"
     },
     {
         "id": "A28",
@@ -2112,11 +1987,6 @@
         "id": "A40",
         "name": "English Defense: Poli Gambit",
         "pgn": "d2d4 e7e6 c2c4 b7b6 e2e4 c8b7 f2f3 f7f5 e4f5 g8h6"
-    },
-    {
-        "id": "A40",
-        "name": "English Defense",
-        "pgn": "d2d4 e7e6 c2c4 b7b6"
     },
     {
         "id": "A40",
@@ -2480,11 +2350,6 @@
     },
     {
         "id": "A43",
-        "name": "Benoni Defense: Zilbermints-Benoni Gambit",
-        "pgn": "d2d4 c7c5 g1f3 c5d4 b2b4"
-    },
-    {
-        "id": "A43",
         "name": "Benoni Defense: Zilbermints-Benoni Gambit, Tamarkin Countergambit",
         "pgn": "d2d4 c7c5 g1f3 c5d4 b2b4 e7e5"
     },
@@ -2507,11 +2372,6 @@
         "id": "A43",
         "name": "Old Benoni Defense",
         "pgn": "d2d4 c7c5"
-    },
-    {
-        "id": "A43",
-        "name": "Old Benoni Defense",
-        "pgn": "d2d4 c7c5 d4d5"
     },
     {
         "id": "A43",
@@ -2657,11 +2517,6 @@
         "id": "A45",
         "name": "Trompowsky Attack: Edge Variation, Hergert Gambit",
         "pgn": "d2d4 g8f6 c1g5 f6e4 g5h4 d7d5 f2f3 e4f6 b1c3 c8f5 e2e4"
-    },
-    {
-        "id": "A45",
-        "name": "Trompowsky Attack: Edge Variation, Hergert Gambit",
-        "pgn": "d2d4 g8f6 c1g5 f6e4 g5h4 c7c6 b1d2 d8a5 c2c3 e4d2 d1d2 d7d5 e2e4"
     },
     {
         "id": "A45",
@@ -3117,11 +2972,6 @@
         "id": "A59",
         "name": "Benko Gambit Accepted: King Walk Variation",
         "pgn": "d2d4 g8f6 c2c4 c7c5 d4d5 b7b5 c4b5 a7a6 b5a6 g7g6 b1c3 c8a6 g1f3 d7d6 e2e4 a6f1 e1f1 f8g7 g2g3 e8g8 f1g2"
-    },
-    {
-        "id": "A59",
-        "name": "Benko Gambit Accepted: Yugoslav",
-        "pgn": "d2d4 g8f6 c2c4 c7c5 d4d5 b7b5 c4b5 a7a6 b5a6 g7g6 b1c3 c8a6 e2e4 a6f1 e1f1 d7d6 g1e2"
     },
     {
         "id": "A59",
@@ -3621,7 +3471,6 @@
     { "id" : "B00","name" : "Goldsmith Defense: Picklepuss Defense","pgn" : "e2e4 h7h5 d2d4 g8f6" } ,
     { "id" : "B00","name" : "Goldsmith Defense","pgn" : "e2e4 h7h5" } ,
     { "id" : "B00","name" : "Guatemala Defense","pgn" : "e2e4 b7b6 d2d4 c8a6" } ,
-    { "id" : "B00","name" : "Hippopotamus Defense","pgn" : "e2e4 g8h6 d2d4 g7g6 c2c4 f7f6" } ,
     { "id" : "B00","name" : "Hippopotamus Defense","pgn" : "e2e4 g8h6" } ,
     { "id" : "B00","name" : "King's Pawn Game: Nimzowitsch Defense","pgn" : "e2e4 b8c6 d2d4" } ,
     { "id" : "B00","name" : "King's Pawn Game: Nimzowitsch Defense, Wheeler Gambit","pgn" : "e2e4 b8c6 b2b4 c6b4 c2c3 b4c6 d2d4" } ,
@@ -3678,8 +3527,6 @@
     { "id" : "B00","name" : "Owen Defense: Smith Gambit","pgn" : "e2e4 b7b6 d2d4 c8b7 g1f3" } ,
     { "id" : "B00","name" : "Owen Defense: Unicorn Variation","pgn" : "e2e4 f7f6 d2d4 b7b6 c2c4 c8b7" } ,
     { "id" : "B00","name" : "Owen Defense: Wind Gambit","pgn" : "e2e4 b7b6 d2d4 c8b7 f2f3 e7e5" } ,
-    { "id" : "B00","name" : "Pirc Defense","pgn" : "e2e4 d7d6 d2d4 g8f6" } ,
-    { "id" : "B00","name" : "Pirc Defense","pgn" : "e2e4 d7d6 d2d4" } ,
     { "id" : "B00","name" : "Pirc Defense","pgn" : "e2e4 d7d6" } ,
     { "id" : "B00","name" : "Pirc Defense: Roscher Gambit","pgn" : "e2e4 d7d6 d2d4 g8f6 g1f3" } ,
     { "id" : "B00","name" : "Rat Defense: Antal Defense","pgn" : "e2e4 d7d6 d2d4 b8d7" } ,
@@ -3725,7 +3572,6 @@
     { "id" : "B01","name" : "Scandinavian Defense: Richter Variation","pgn" : "e2e4 d7d5 e4d5 g8f6 d2d4 g7g6" } ,
     { "id" : "B01","name" : "Scandinavian Defense: Richter Variation","pgn" : "e2e4 d7d5 e4d5 g8f6 d2d4 f6d5 g1f3 g7g6" } ,
     { "id" : "B01","name" : "Scandinavian Defense","pgn" : "e2e4 d7d5" } ,
-    { "id" : "B01","name" : "Scandinavian Defense","pgn" : "e2e4 d7d5 b2b3" } ,
     { "id" : "B01","name" : "Scandinavian Defense: Schiller-Pytel Variation, Modern Variation","pgn" : "e2e4 d7d5 e4d5 d8d5 b1c3 d5d6 d2d4 g8f6 f1c4 c7c6 g1e2 c8f5 c1f4 d6b4" } ,
     { "id" : "B01","name" : "Scandinavian Defense: Schiller-Pytel Variation","pgn" : "e2e4 d7d5 e4d5 d8d5 b1c3 d5d6 d2d4 c7c6" } ,
     { "id" : "B01","name" : "Scandinavian Defense: Zilbermints Gambit","pgn" : "e2e4 d7d5 b2b4" } ,
@@ -3848,7 +3694,6 @@
     { "id" : "B07","name" : "Pirc Defense: Chinese Variation","pgn" : "e2e4 d7d6 d2d4 g8f6 b1c3 g7g6 f1e2 f8g7 g2g4" } ,
     { "id" : "B07","name" : "Pirc Defense: Classical Variation","pgn" : "e2e4 d7d6 d2d4 g8f6 b1c3 g7g6 f1e2" } ,
     { "id" : "B07","name" : "Pirc Defense: Kholmov System","pgn" : "e2e4 d7d6 d2d4 g8f6 b1c3 g7g6 f1c4" } ,
-    { "id" : "B07","name" : "Pirc Defense","pgn" : "e2e4 d7d6 d2d4 g8f6 b1c3 g7g6" } ,
     { "id" : "B07","name" : "Pirc Defense","pgn" : "e2e4 d7d6 d2d4 g8f6 b1c3" } ,
     { "id" : "B07","name" : "Pirc Defense: Sveshnikov System","pgn" : "e2e4 d7d6 d2d4 g8f6 b1c3 g7g6 g2g3" } ,
     { "id" : "B08","name" : "Pirc Defense: Classical Variation, Quiet System, Chigorin Line","pgn" : "e2e4 d7d6 d2d4 g8f6 b1c3 g7g6 g1f3 f8g7 f1e2 e8g8 e1g1 b8c6" } ,
@@ -4920,9 +4765,6 @@
     { "id" : "C41","name" : "Philidor Defense: Philidor Countergambit","pgn" : "e2e4 e7e5 g1f3 d7d6 d2d4 f7f5" } ,
     { "id" : "C41","name" : "Philidor Defense: Philidor Countergambit, Zukertort Variation","pgn" : "e2e4 e7e5 g1f3 d7d6 d2d4 f7f5 b1c3" } ,
     { "id" : "C41","name" : "Philidor Defense: Philidor Gambit","pgn" : "e2e4 e7e5 g1f3 d7d6 d2d4 c8d7" } ,
-    { "id" : "C41","name" : "Philidor Defense","pgn" : "e2e4 e7e5 g1f3 d7d6 f1c4 f8e7" } ,
-    { "id" : "C41","name" : "Philidor Defense","pgn" : "e2e4 e7e5 g1f3 d7d6 f1c4" } ,
-    { "id" : "C41","name" : "Philidor Defense","pgn" : "e2e4 e7e5 g1f3 d7d6 d2d4" } ,
     { "id" : "C41","name" : "Philidor Defense","pgn" : "e2e4 e7e5 g1f3 d7d6" } ,
     { "id" : "C41","name" : "Philidor Defense: Steinitz Variation","pgn" : "e2e4 e7e5 g1f3 d7d6 f1c4 f8e7 c2c3" } ,
     { "id" : "C42","name" : "Petrov's Defense","pgn" : "e2e4 e7e5 g1f3 g8f6 f3e5 d7d6" } ,
@@ -5277,7 +5119,6 @@
     { "id" : "C60","name" : "Ruy Lopez: Lucena Variation","pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5 f8e7" } ,
     { "id" : "C60","name" : "Ruy Lopez: Nürnberg Variation","pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5 f7f6" } ,
     { "id" : "C60","name" : "Ruy Lopez: Pollock Defense","pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5 c6a5" } ,
-    { "id" : "C60","name" : "Ruy Lopez","pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5 a7a6" } ,
     { "id" : "C60","name" : "Ruy Lopez","pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5" } ,
     { "id" : "C60","name" : "Ruy Lopez: Retreat Variation","pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5 c6b8" } ,
     { "id" : "C60","name" : "Ruy Lopez: Rotary-Albany Gambit","pgn" : "e2e4 e7e5 g1f3 b8c6 f1b5 b7b6" } ,

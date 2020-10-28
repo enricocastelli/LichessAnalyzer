@@ -18,7 +18,7 @@ class ResultCell: TableViewCell<OpeningGame> {
 
     override func configure(_ item: OpeningGame) {
         super.configure(item)
-        openLabel.text = item.opening.rawValue
+        openLabel.text = item.opening.name
         let winPercentage = item.results.filter({$0 == .win}).count.percentageInt(of: item.results.count)
         percentageLabel.text = winPercentage.description + "%"
         countLabel.text = item.results.count.description

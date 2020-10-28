@@ -36,8 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         OAuthSwift.handle(url: url)
     }
 
-    // remove gameOpening/complete opening models
-    // quiz/game in loading screen
+    // remove gameOpening/complete opening models ?
     // filters in result screen
     // known openings should be basic openings with explanation
     // search specific set of moves

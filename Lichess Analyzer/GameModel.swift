@@ -19,7 +19,9 @@ struct GameItem: Encodable, Decodable {
     let blackElo: Int?
     let termination: String
     let completeOpening: String
-    let opening: KnownOpening
+    var opening: KnownOpening {
+        return KnownOpening.fromItem(self)
+    }
     let pgn: String?
     let eco: String
 
@@ -115,6 +117,29 @@ struct OpeningGame: Equatable {
         return results.map({$0.points}).reduce(0, +)
     }
 }
+
+typealias KnownOpening = OpeningObject
+
+extension KnownOpening {
+
+    static func fromItem(_ item: GameItem) -> KnownOpening {
+        let unknown = KnownOpening(id: item.eco, name: "Other", pgn: item.pgn ?? "")
+        let names = UserData.shared.knownOpenings.filter({item.completeOpening.contains($0.name)})
+        if !names.isEmpty {
+            return names.first!
+        }
+        guard let pgn = item.pgn else { return unknown}
+        let pgns = UserData.shared.knownOpenings.filter({ PGN.comparePGN($0.pgn, pgn) }).first ??
+            UserData.shared.knownOpenings.filter({ PGN.similar($0.pgn, pgn) }).first
+        if pgns == nil {
+            Logger.warning(item.completeOpening)
+        }
+        return pgns ?? unknown
+    }
+
+
+}
+
 
 struct CompleteOpeningGame: Equatable {
     var results: [Result]

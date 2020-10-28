@@ -16,6 +16,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC" customModule="Lichess_Analyzer" customModuleProvider="target">
             <connections>
                 <outlet property="filterLabel" destination="Yjj-Vw-qTu" id="ONB-B6-wvA"/>
+                <outlet property="frameContainerView" destination="jad-JX-D8f" id="2vX-sZ-xxY"/>
                 <outlet property="loadingView" destination="4Xe-el-rUH" id="5og-pt-0He"/>
                 <outlet property="progressView" destination="e2T-eO-G7v" id="Nhn-3N-Rks"/>
                 <outlet property="textContainerView" destination="00v-fY-6b9" id="lep-ZW-bhw"/>
@@ -32,13 +33,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yjj-Vw-qTu">
-                            <rect key="frame" x="20" y="752.5" width="314" height="40"/>
+                            <rect key="frame" x="20" y="728.5" width="314" height="64"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ajx-ac-QJk">
-                            <rect key="frame" x="354" y="752.5" width="40" height="40"/>
+                            <rect key="frame" x="354" y="740.5" width="40" height="40"/>
                             <color key="backgroundColor" red="0.25997966610000001" green="0.4452857449" blue="0.61745505140000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="FlB-we-BkB"/>
@@ -93,7 +94,7 @@
                         <constraint firstAttribute="trailing" secondItem="00v-fY-6b9" secondAttribute="trailing" constant="16" id="1eK-2e-SXa"/>
                         <constraint firstItem="Ajx-ac-QJk" firstAttribute="leading" secondItem="Yjj-Vw-qTu" secondAttribute="trailing" constant="20" id="3Rb-N2-R90"/>
                         <constraint firstItem="roH-sf-dxn" firstAttribute="leading" secondItem="Auj-Yd-D3D" secondAttribute="leading" id="6hM-rf-NUO"/>
-                        <constraint firstItem="1R6-Sf-526" firstAttribute="top" secondItem="Ajx-ac-QJk" secondAttribute="bottom" constant="20" id="966-Ii-IEs"/>
+                        <constraint firstItem="1R6-Sf-526" firstAttribute="top" secondItem="Ajx-ac-QJk" secondAttribute="bottom" constant="32" id="966-Ii-IEs"/>
                         <constraint firstAttribute="trailing" secondItem="Ajx-ac-QJk" secondAttribute="trailing" constant="20" id="BfR-0V-0O1"/>
                         <constraint firstAttribute="trailing" secondItem="1R6-Sf-526" secondAttribute="trailing" constant="16" id="N9h-Hq-fXJ"/>
                         <constraint firstAttribute="trailing" secondItem="roH-sf-dxn" secondAttribute="trailing" id="OfD-8k-OHn"/>
@@ -114,6 +115,21 @@
                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lLQ-vG-VIn">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jad-JX-D8f">
+                                        <rect key="frame" x="20" y="241" width="374" height="414"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jad-JX-D8f" secondAttribute="height" multiplier="400:444" constant="1" id="Pm4-Rd-mzv"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="jad-JX-D8f" firstAttribute="leading" secondItem="lLQ-vG-VIn" secondAttribute="leading" constant="20" id="HxA-9h-nd0"/>
+                                    <constraint firstItem="jad-JX-D8f" firstAttribute="centerY" secondItem="lLQ-vG-VIn" secondAttribute="centerY" id="gGO-lS-l6v"/>
+                                    <constraint firstItem="jad-JX-D8f" firstAttribute="centerX" secondItem="lLQ-vG-VIn" secondAttribute="centerX" id="jeN-1U-Fq8"/>
+                                    <constraint firstAttribute="trailing" secondItem="jad-JX-D8f" secondAttribute="trailing" constant="20" id="p9N-8D-kTC"/>
+                                </constraints>
                             </view>
                             <blurEffect style="regular"/>
                         </visualEffectView>

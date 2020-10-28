@@ -29,6 +29,7 @@ class UserData: StoreProvider {
     }
     var token = ""
     var openings = [OpeningObject]()
+    var knownOpenings = [KnownOpening]()
     var account: Account? 
 
     func isLoggedIn() -> Bool {
@@ -36,6 +37,7 @@ class UserData: StoreProvider {
     }
 
     func updateOpenings() {
+        updateKnownOpenings()
         if let path = Bundle.main.path(forResource: "Openings", ofType: "json")
         {
             if let jsonData = NSData(contentsOfFile: path) {
@@ -47,12 +49,34 @@ class UserData: StoreProvider {
                     self.openings.sort { (o1, o2) -> Bool in
                         return o1.id < o2.id
                     }
+//                    var duplicate = [String: String]()
+//                    for open in openings {
+//                        if duplicate[open.name] == open.id {
+//                            print(open.name)
+//                        } else {
+//                            duplicate[open.name] = open.id
+//                        }
+//                    }
                 } catch(let error) {
                     print(error, "nope")
                 }
             }
         }
     }
+
+    func updateKnownOpenings() {
+        if let path = Bundle.main.path(forResource: "KnownOpenings", ofType: "json")
+        {
+            if let jsonData = NSData(contentsOfFile: path) {
+                do {
+                    self.knownOpenings = try JSONDecoder().decode([OpeningObject].self, from: Data(jsonData))
+                } catch(let error) {
+                    print(error, "nope")
+                }
+            }
+        }
+    }
+
 
     func estimatedDownloadTime() -> Double? {
         guard let max = search.max else { return nil }
