@@ -64,31 +64,38 @@ extension Array where Element == GameItem {
         return filter({$0.resultForPlayer() == .draw}).count
     }
 
+    var points: Int {
+        return map({$0.resultForPlayer().points}).reduce(0, +)
+    }
+
     func mapToOpening() -> [OpeningGame] {
-        var openings = [OpeningGame]()
-        for game in self {
-            if let index = openings.firstIndex(where: {$0.opening == game.opening}) {
-                // a opening supergroup is existing
-                var toUpdateOpening = openings[index]
-                if let index = toUpdateOpening.completeOpenings.firstIndex(where: {$0.completeOpening == game.completeOpening}) {
-                    // a opening subgroup is existing
-                    toUpdateOpening.completeOpenings[index].results.append(game.resultForPlayer())
-                    toUpdateOpening.completeOpenings[index].pgn = combinePGN(toUpdateOpening.completeOpenings[index].pgn, pgn2: game.pgn ?? "")
-                } else {
-                    // no opening subgroup is existing
-                    toUpdateOpening.completeOpenings.append(CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco))
-                }
-                toUpdateOpening.results.append(game.resultForPlayer())
-                openings[index] = toUpdateOpening
-            } else {
-                // no opening supergroup is existing
-                openings.append(OpeningGame(opening: game.opening,
-                                            eco: game.eco,
-                                            completeOpenings: [CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco)],
-                                            results: [game.resultForPlayer()]))
-            }
-        }
-        return openings
+//        let opening = Dictionary(grouping: self, by: { $0.opening })
+//
+//        var openings = [OpeningGame]()
+//        for game in self {
+//            if let index = openings.firstIndex(where: {$0.opening == game.opening}) {
+//                // a opening supergroup is existing
+//                var toUpdateOpening = openings[index]
+//                if let index = toUpdateOpening.completeOpenings.firstIndex(where: {$0.completeOpening == game.completeOpening}) {
+//                    // a opening subgroup is existing
+//                    toUpdateOpening.completeOpenings[index].results.append(game.resultForPlayer())
+//                    toUpdateOpening.completeOpenings[index].pgn = combinePGN(toUpdateOpening.completeOpenings[index].pgn, pgn2: game.pgn ?? "")
+//                } else {
+//                    // no opening subgroup is existing
+//                    toUpdateOpening.completeOpenings.append(CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco))
+//                }
+//                toUpdateOpening.results.append(game.resultForPlayer())
+//                openings[index] = toUpdateOpening
+//            } else {
+//                // no opening supergroup is existing
+//                openings.append(OpeningGame(opening: game.opening,
+//                                            eco: game.eco,
+//                                            completeOpenings: [CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco)],
+//                                            results: [game.resultForPlayer()]))
+//            }
+//        }
+//        return openings
+        return []
     }
 
     func mostCommonOpenings() -> [String: Int] {
@@ -174,7 +181,7 @@ struct CompleteOpeningGame: Equatable {
 }
 
 
-struct OpeningObject: Codable, Equatable {
+struct OpeningObject: Codable, Equatable, Hashable {
     let id: String
     let name: String
     let pgn: String

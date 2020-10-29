@@ -10,27 +10,27 @@ import UIKit
 class ResultVC: UIViewController {
 
     var games: [GameItem] = []
-    var openings: [OpeningGame] {
-        return games.mapToOpening()
-    }
+    var source = [KnownOpening: [GameItem]]()
+    var sections: [KnownOpening] = []
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var filterLabel: UILabel!
-
-    let dataSource = TableViewDataSource(cellResourceId: ResultCell.identifier)
+//
+//    dataSource.tableView = tableView
+//    let dic = Dictionary(grouping: games, by: { $0.opening })
+//    dataSource.sections = dic
+//    dataSource.onDidSelectItem = { [weak self] (item) in
+//        self?.navigationController?.pushViewController(DetailVC(item), animated: true)
+//    }
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            dataSource.tableView = tableView
-            dataSource.items = openings
-            dataSource.onDidSelectItem = { [weak self] (item) in
-                self?.navigationController?.pushViewController(DetailVC(item), animated: true)
-            }
             let rView = ResultView()
             rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
             tableView.tableHeaderView = rView
+            tableView.register(UINib(nibName: ResultCell.identifier, bundle: nil), forCellReuseIdentifier: ResultCell.identifier)
         }
     }
 
@@ -38,7 +38,7 @@ class ResultVC: UIViewController {
         super.viewDidLoad()
         filterLabel.text = UserData.shared.preferredSorting.desc()
         setLabels()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateGames), name: .NewGames, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateGames), name: .NewGames, object: nil)
     }
 
     deinit {
@@ -48,18 +48,31 @@ class ResultVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadingView.alpha = 0
-        if games != UserData.shared.games {
-            games = UserData.shared.games
+//        if games != UserData.shared.games {
+//            games = UserData.shared.games
             reloadData()
-        }
+//        }
     }
 
+    var start: CFAbsoluteTime!
+
     private func reloadData() {
-//        sort(UserData.shared.preferredSorting)
-        dataSource.items = openings
+        start = CFAbsoluteTimeGetCurrent()
+//        games = UserData.shared.games
+        games = Array(UserData.shared.games.prefix(1000))
+
+        print("🍏 passing games \(CFAbsoluteTimeGetCurrent() - start)")
+        start = CFAbsoluteTimeGetCurrent()
+        source = Dictionary(grouping: games, by: { $0.opening })
+        print("🍏 mapping games \(CFAbsoluteTimeGetCurrent() - start)")
+        start = CFAbsoluteTimeGetCurrent()
+        sort(UserData.shared.preferredSorting)
+        print("🍏 sorting games \(CFAbsoluteTimeGetCurrent() - start)")
+        start = CFAbsoluteTimeGetCurrent()
         tableView.reloadData()
-        (tableView.tableHeaderView as? ResultView)?.update(wins: games.wins(), loss: games.lost(), draw: games.draw())
+        (tableView.tableHeaderView as? ResultView)?.update(wins: UserData.shared.games.wins(), loss: UserData.shared.games.lost(), draw: UserData.shared.games.draw())
         setLabels()
+        print("🍏 reloading \(CFAbsoluteTimeGetCurrent() - start)")
     }
 
     private func setLabels() {
@@ -72,31 +85,25 @@ class ResultVC: UIViewController {
     }
 
     func sort(_ sorting: GamesSorting) {
-        var sortedOpenings = openings
         switch sorting {
         case .mostPlayed:
-            sortedOpenings.sort(by: {$0.results.count > $1.results.count})
+            sections = source.sortedKeysByValue { $0.count > $1.count }
         case .strongest:
-            sortedOpenings.sort { (g1, g2) -> Bool in
-                return g1.points > g2.points
-            }
+            sections = source.sortedKeysByValue { $0.points > $1.points }
         case .weakest:
-            sortedOpenings.sort { (g1, g2) -> Bool in
-                return g2.points > g1.points
-            }
+            sections = source.sortedKeysByValue { $0.points < $1.points }
+
         }
-        dataSource.items = sortedOpenings
     }
 
-    @objc func updateGames() {
-        self.games = UserData.shared.games
-        showLoading() {
-            if self.tableView != nil {
-                self.reloadData()
-                self.hideLoading()
-            }
-        }
-    }
+//    @objc func updateGames() {
+//        showLoading() {
+//            if self.tableView != nil {
+//                self.reloadData()
+//                self.hideLoading()
+//            }
+//        }
+//    }
 
     func showLoading(_ completion: @escaping() -> ()) {
         UIView.animate(withDuration: 0.3) {
@@ -154,5 +161,20 @@ class ResultVC: UIViewController {
 
     @IBAction func back() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension ResultVC: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
+        let section = sections[indexPath.row]
+        let games = source[sections[indexPath.row]]
+        cell.configure((section, games))
+        return cell
     }
 }

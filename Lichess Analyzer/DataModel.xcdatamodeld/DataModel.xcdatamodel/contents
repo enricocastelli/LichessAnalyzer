@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="OpeningTest" representedClassName="OpeningTest" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="opening" optional="YES" attributeType="String"/>
+        <relationship name="savedGames" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedGame"/>
+    </entity>
     <entity name="SavedGame" representedClassName="SavedGame" syncable="YES" codeGenerationType="class">
         <attribute name="black" optional="YES" attributeType="String"/>
         <attribute name="completeOpening" optional="YES" attributeType="String"/>
@@ -20,6 +24,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="SavedGame" positionX="-63" positionY="-18" width="128" height="178"/>
+        <element name="SavedGame" positionX="185.1640625" positionY="100.41796875" width="128" height="178"/>
+        <element name="OpeningTest" positionX="-63" positionY="54" width="128" height="73"/>
     </elements>
 </model>

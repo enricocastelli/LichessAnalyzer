@@ -9,7 +9,7 @@ import UIKit
 
 enum Style {
     case hairline, thin, light, medium, bold
-
+    
     var name: String {
         switch self {
         case .hairline: return "Lato-Hairline"

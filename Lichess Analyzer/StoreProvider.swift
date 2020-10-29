@@ -92,7 +92,9 @@ extension StoreProvider {
                     failure: @escaping (Error) -> ()) {
         let context = getContext()
         context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        
+        let source = Testest(grouping: games, by: { $0.opening })
+
+
         do {
             let _ = games.map({ do { try $0.toCoreData(context: context)
             } catch let error {
@@ -102,6 +104,21 @@ extension StoreProvider {
             try context.save()
             success()
         } catch let error as NSError {
+            Logger.error(error)
+            failure(error)
+        }
+    }
+
+    func storeTest(_ games: [GameItem], success: @escaping () -> (),
+                   failure: @escaping (Error) -> ()) {
+        let context = getContext()
+        context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        let source = Testest(grouping: games, by: { $0.opening })
+        do {
+            try source.toCoreData(context: context)
+            try context.save()
+            success()
+        } catch let error  {
             Logger.error(error)
             failure(error)
         }
@@ -148,6 +165,14 @@ extension StoreProvider {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
+}
+
+typealias Testest = [KnownOpening: [GameItem]]
+
+extension Testest: StructDecoder {
+
+    static var EntityName: String = "OpeningTest"
+
 }
 
 extension NSManagedObject {

@@ -64,12 +64,16 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     @IBAction func analyze() {
         showLoading()
         getStoredGames { (games) in
-            print("🐴 got \(games.count) stored games")
-            UserData.shared.games = games
-            self.storeLastDate(games.last?.date ?? "")
-            self.getAll(since: games.last?.date.toDate("yyyy-MM-dd'H'HH-mmm-ss")?.addingTimeInterval(1), until: nil) {
-                self.openResult()
-            }
+//            print("🐴 got \(games.count) stored games")
+//            UserData.shared.games = games
+//            self.storeLastDate(games.last?.date ?? "")
+//            self.getAll(since: games.last?.date.toDate("yyyy-MM-dd'H'HH-mmm-ss")?.addingTimeInterval(1), until: nil) {
+//                self.openResult()
+//            }
+            self.storeTest(Array(games.prefix(100))) {
+                print("yay")
+            } failure: { _ in  }
+
         } failure: { (error) in
             print("🐴 no stored games found")
             self.showLoading()
