@@ -14,9 +14,9 @@ class GameVC: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var resetButton: UIButton!
 
+    let opening: OpeningObject
     var boardView: BoardView!
 
-    let opening: CompleteOpeningGame
     var pieceViews = [PieceView]()
     var game: Game!
     var selectedIndex: Int? {
@@ -27,7 +27,7 @@ class GameVC: UIViewController {
 
     var hasMadeInitialAppearance = false
 
-    init(_ opening: CompleteOpeningGame) {
+    init(_ opening: OpeningObject) {
         self.opening = opening
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,8 +38,7 @@ class GameVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = opening.completeOpening
-        titleLabel.textColor = opening.openingObject == nil ? UIColor.lightGray : .black
+        titleLabel.text = opening.name
         game = Game(firstPlayer: Human(color: .white), secondPlayer: Human(color: .black))
         game.delegate = self
         setupBoard()
@@ -66,7 +65,7 @@ class GameVC: UIViewController {
 
     private func openPGN(_ delay: Bool) {
         do {
-            let moves = try PGN(parse: opening.openingObject?.pgn ?? opening.pgn).moves
+            let moves = try PGN(parse: opening.pgn).moves
             moves.isModernPNG() ? applyMoves(moves, delay) : adapt(moves, delay)
         } catch (let error) {
             print(error)

@@ -4856,7 +4856,6 @@
     { "id" : "C44","name" : "Scotch Game: Lolli Variation","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4 c6d4" } ,
     { "id" : "C44","name" : "Scotch Game: Napoleon Gambit","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4 c6d4 f3d4 e5d4 f1c4" } ,
     { "id" : "C44","name" : "Scotch Game","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4" } ,
-    { "id" : "C44","name" : "Scotch Game","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4 e5d4" } ,
     { "id" : "C44","name" : "Scotch Game: Relfsson Gambit","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4 e5d4 f1b5" } ,
     { "id" : "C44","name" : "Scotch Game: Scotch Gambit, Advance Variation","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4 e5d4 f1c4 g8f6 e4e5" } ,
     { "id" : "C44","name" : "Scotch Game: Scotch Gambit, Cochrane-Anderssen Variation","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4 e5d4 f1c4 f8c5 e1g1 d7d6 c2c3 c8g4" } ,

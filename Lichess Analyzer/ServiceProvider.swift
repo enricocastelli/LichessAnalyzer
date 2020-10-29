@@ -71,6 +71,7 @@ extension ServiceProvider {
               let white = string.slice(from: "[White ", to: "]"),
               let black = string.slice(from: "[Black ", to: "]"),
               let result = string.slice(from: "[Result ", to: "]"),
+              let openingString = string.slice(from: "[Opening ", to: "]"),
               let termination = string.slice(from: "[Termination ", to: "]") else { return nil }
         return GameItem(event: event,
 //                    site: site,
@@ -81,7 +82,7 @@ extension ServiceProvider {
 //                    whiteElo: Int(string.slice(from: "[WhiteElo ", to: "]") ?? ""),
 //                    blackElo: Int(string.slice(from: "[BlackElo ", to: "]") ?? ""),
                     termination: termination,
-                    completeOpening: string.slice(from: "[Opening ", to: "]") ?? "",
+                    openingString: openingString,
                     pgn: string.slice(from: "1. ", to: string.last!.description),
                     eco: string.slice(from: "[ECO ", to: "]") ?? "")
     }

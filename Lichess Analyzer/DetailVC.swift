@@ -7,32 +7,39 @@
 
 import UIKit
 
+struct DetailItem {
+
+    let opening: KnownOpening
+    let win: Int
+    let loss: Int
+    let draw: Int
+}
+
 class DetailVC: UIViewController {
 
-    let opening: OpeningGame
+    var source = [CompleteOpening: [GameItem]]()
+    var sections: [CompleteOpening] = []
+    let item: DetailItem
+
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var filterLabel: UILabel!
 
-    let dataSource = TableViewDataSource(cellResourceId: DetailCell.identifier)
-
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            dataSource.tableView = tableView
-            dataSource.items = opening.completeOpenings
-            dataSource.onDidSelectItem = { [weak self] item in
-                self?.itemSelected(item)
-            }
             let rView = ResultView()
-            rView.update(wins: opening.results.filter({$0 == .win}).count, loss: opening.results.filter({$0 == .lose}).count, draw: opening.results.filter({$0 == .draw}).count)
             rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
             tableView.tableHeaderView = rView
+            rView.update(wins: item.win, loss: item.loss, draw: item.draw)
+            tableView.register(UINib(nibName: ResultCell.identifier, bundle: nil), forCellReuseIdentifier: ResultCell.identifier)
         }
     }
 
-    init(_ opening: OpeningGame) {
-        self.opening = opening
+    init(_ opening: [CompleteOpening: [GameItem]], item: DetailItem) {
+        self.source = opening
+        self.item = item
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -42,30 +49,23 @@ class DetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = opening.opening.name
+        titleLabel.text = item.opening.name
+        subtitleLabel.text = (item.win + item.loss + item.draw).description + " Games"
         sort(UserData.shared.preferredSorting)
         filterLabel.text = UserData.shared.preferredSorting.desc()
+        sort(UserData.shared.preferredSorting)
+        tableView.reloadData()
     }
 
     func sort(_ sorting: GamesSorting) {
-        var sortedOpenings = opening.completeOpenings
         switch sorting {
         case .mostPlayed:
-            sortedOpenings.sort(by: {$0.results.count > $1.results.count})
+            sections = source.sortedKeysByValue { $0.count > $1.count }
         case .strongest:
-            sortedOpenings.sort { (g1, g2) -> Bool in
-                return g1.points > g2.points
-            }
+            sections = source.sortedKeysByValue { $0.points > $1.points }
         case .weakest:
-            sortedOpenings.sort { (g1, g2) -> Bool in
-                return g2.points > g1.points
-            }
+            sections = source.sortedKeysByValue { $0.points < $1.points }
         }
-        dataSource.items = sortedOpenings
-    }
-
-    func itemSelected(_ item: CompleteOpeningGame) {
-        self.navigationController?.pushViewController(GameVC(item), animated: true)
     }
 
     func hideMenu() {
@@ -112,4 +112,23 @@ class DetailVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+}
+
+extension DetailVC: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.identifier, for: indexPath) as! ResultCell
+        let section = sections[indexPath.row]
+        let games = source[sections[indexPath.row]]
+        cell.configure((section, games))
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(GameVC(sections[indexPath.row]), animated: true)
+    }
 }

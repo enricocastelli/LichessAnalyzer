@@ -226,7 +226,9 @@
         "id": "B06",
         "name": "Modern Defense",
         "pgn": "e2e4 g7g6"
-    }, {
+    },
+    { "id" : "B06","name" : "Robatsch (Modern) Defense","pgn" : "e2e4 g7g6 d2d4 f8g7" } ,
+    {
         "id": "B10",
         "name": "Caro-Kann Defense",
         "pgn": "e2e4 c7c6"
@@ -268,9 +270,14 @@
         "id": "C40",
         "name": "King's Knight Opening",
         "pgn": "e2e4 e7e5 g1f3"
-    }, {
+    },
+    { "id" : "C40","name" : "Latvian Gambit","pgn" : "e2e4 e7e5 g1f3 f7f5" } ,
+    {
         "id" : "C41","name" : "Philidor Defense","pgn" : "e2e4 e7e5 g1f3 d7d6"
-    }, {
+    },
+    { "id" : "C44","name" : "Scotch Game","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4" } ,
+    { "id" : "C46","name" : "Four Knights Game","pgn" : "e2e4 e7e5 g1f3 b8c6 b1c3 g8f6" }
+    , {
         "id" : "C50",
         "name" : "Italian Game",
         "pgn" : "e2e4 e7e5 g1f3 b8c6 f1c4"

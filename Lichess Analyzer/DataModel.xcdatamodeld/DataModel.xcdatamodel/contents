@@ -6,10 +6,10 @@
     </entity>
     <entity name="SavedGame" representedClassName="SavedGame" syncable="YES" codeGenerationType="class">
         <attribute name="black" optional="YES" attributeType="String"/>
-        <attribute name="completeOpening" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="eco" optional="YES" attributeType="String"/>
         <attribute name="event" optional="YES" attributeType="String"/>
+        <attribute name="openingString" optional="YES" attributeType="String"/>
         <attribute name="pgn" optional="YES" attributeType="String"/>
         <attribute name="result" optional="YES" attributeType="String"/>
         <attribute name="termination" optional="YES" attributeType="String"/>
@@ -24,7 +24,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="SavedGame" positionX="185.1640625" positionY="100.41796875" width="128" height="178"/>
         <element name="OpeningTest" positionX="-63" positionY="54" width="128" height="73"/>
+        <element name="SavedGame" positionX="185.1640625" positionY="100.41796875" width="128" height="178"/>
     </elements>
 </model>

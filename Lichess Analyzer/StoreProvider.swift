@@ -92,7 +92,7 @@ extension StoreProvider {
                     failure: @escaping (Error) -> ()) {
         let context = getContext()
         context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        let source = Testest(grouping: games, by: { $0.opening })
+//        let source = Testest(grouping: games, by: { $0.opening })
 
 
         do {
@@ -104,21 +104,6 @@ extension StoreProvider {
             try context.save()
             success()
         } catch let error as NSError {
-            Logger.error(error)
-            failure(error)
-        }
-    }
-
-    func storeTest(_ games: [GameItem], success: @escaping () -> (),
-                   failure: @escaping (Error) -> ()) {
-        let context = getContext()
-        context.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        let source = Testest(grouping: games, by: { $0.opening })
-        do {
-            try source.toCoreData(context: context)
-            try context.save()
-            success()
-        } catch let error  {
             Logger.error(error)
             failure(error)
         }
@@ -167,7 +152,7 @@ extension StoreProvider {
     }
 }
 
-typealias Testest = [KnownOpening: [GameItem]]
+typealias Testest = [String: [GameItem]]
 
 extension Testest: StructDecoder {
 
@@ -184,7 +169,7 @@ extension NSManagedObject {
                         black: value(forKey: "black") as? String ?? "",
                         result: value(forKey: "result") as? String ?? "",
                         termination: value(forKey: "termination")  as? String ?? "",
-                        completeOpening: value(forKey: "completeOpening") as? String ?? "",
+                        openingString: value(forKey: "openingString") as? String ?? "",
                         pgn: value(forKey: "pgn") as? String ?? "",
                         eco: value(forKey: "eco") as? String ?? "")
     }

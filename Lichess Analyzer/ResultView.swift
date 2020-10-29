@@ -9,8 +9,6 @@ import UIKit
 
 class ResultView: NibView {
 
-    static let identifier: ReuseIdentifier<ResultView> = ReuseIdentifier(identifier: "ResultView")
-
     @IBOutlet weak var drawLabel: UILabel!
     @IBOutlet weak var winLabel: UILabel!
     @IBOutlet weak var lossLabel: UILabel!
@@ -21,7 +19,6 @@ class ResultView: NibView {
     var wins: Int = 0
     var loss: Int = 0
     var draw: Int = 0
-
 
     func update(wins: Int, loss: Int, draw: Int) {
         self.wins = wins

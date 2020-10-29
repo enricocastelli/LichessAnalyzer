@@ -20,7 +20,7 @@ struct GameItem: Encodable, Decodable, StructDecoder, Equatable {
 //    let whiteElo: Int?
 //    let blackElo: Int?
     let termination: String
-    let completeOpening: String
+    let openingString: String
     let pgn: String?
     let eco: String
 
@@ -29,6 +29,9 @@ struct GameItem: Encodable, Decodable, StructDecoder, Equatable {
     }
     var opening: KnownOpening {
         return KnownOpening.fromItem(self)
+    }
+    var completeOpening: CompleteOpening {
+        return CompleteOpening.create(self)
     }
     var winner: String? {
         if result == "0-1" {
@@ -68,36 +71,6 @@ extension Array where Element == GameItem {
         return map({$0.resultForPlayer().points}).reduce(0, +)
     }
 
-    func mapToOpening() -> [OpeningGame] {
-//        let opening = Dictionary(grouping: self, by: { $0.opening })
-//
-//        var openings = [OpeningGame]()
-//        for game in self {
-//            if let index = openings.firstIndex(where: {$0.opening == game.opening}) {
-//                // a opening supergroup is existing
-//                var toUpdateOpening = openings[index]
-//                if let index = toUpdateOpening.completeOpenings.firstIndex(where: {$0.completeOpening == game.completeOpening}) {
-//                    // a opening subgroup is existing
-//                    toUpdateOpening.completeOpenings[index].results.append(game.resultForPlayer())
-//                    toUpdateOpening.completeOpenings[index].pgn = combinePGN(toUpdateOpening.completeOpenings[index].pgn, pgn2: game.pgn ?? "")
-//                } else {
-//                    // no opening subgroup is existing
-//                    toUpdateOpening.completeOpenings.append(CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco))
-//                }
-//                toUpdateOpening.results.append(game.resultForPlayer())
-//                openings[index] = toUpdateOpening
-//            } else {
-//                // no opening supergroup is existing
-//                openings.append(OpeningGame(opening: game.opening,
-//                                            eco: game.eco,
-//                                            completeOpenings: [CompleteOpeningGame(results: [game.resultForPlayer()], completeOpening: game.completeOpening, pgn: game.pgn ?? "", eco: game.eco)],
-//                                            results: [game.resultForPlayer()]))
-//            }
-//        }
-//        return openings
-        return []
-    }
-
     func mostCommonOpenings() -> [String: Int] {
         var sameOpeningList = [String: Int]()
         for game in self {
@@ -123,60 +96,25 @@ fileprivate extension String {
    }
 }
 
-struct OpeningGame: Equatable {
-
-    var opening: KnownOpening
-    var eco: String
-    var completeOpenings: [CompleteOpeningGame]
-    var results: [Result]
-    var points: Int {
-        return results.map({$0.points}).reduce(0, +)
-    }
-}
-
 typealias KnownOpening = OpeningObject
 
 extension KnownOpening {
 
     static func fromItem(_ item: GameItem) -> KnownOpening {
-        let unknown = KnownOpening(id: item.eco, name: "Other", pgn: item.pgn ?? "")
-        let names = UserData.shared.knownOpenings.filter({item.completeOpening.contains($0.name)})
-        if !names.isEmpty {
-            return names.first!
-        }
-        guard let pgn = item.pgn else { return unknown}
-        let pgns = UserData.shared.knownOpenings.filter({ PGN.comparePGN($0.pgn, pgn) }).first ??
-            UserData.shared.knownOpenings.filter({ PGN.similar($0.pgn, pgn) }).first
-        if pgns == nil {
-            Logger.warning(item.completeOpening)
-        }
-        return pgns ?? unknown
+        let unknown = KnownOpening(id: "", name: "Other", pgn: "")
+        let names = UserData.shared.knownOpenings.filter({item.openingString.contains($0.name)})
+        return names.first ?? unknown
     }
-
-
 }
 
+typealias CompleteOpening = OpeningObject
 
-struct CompleteOpeningGame: Equatable {
-    var results: [Result]
-    let completeOpening: String
-    var pgn: String
-    var eco: String
-    var points: Int {
-        return results.map({$0.points}).reduce(0, +)
-    }
+extension CompleteOpening {
 
-    var openingObject: OpeningObject? {
-        var mostSimilar: OpeningObject?
-        for op in UserData.shared.openings {
-            guard op.id == self.eco else { continue }
-            if op.name.lowercased() == self.completeOpening.lowercased() {
-                return op
-            } else if completeOpening.lowercased() == op.name.lowercased() || completeOpening.lowercased().contains(op.name.lowercased()) {
-                mostSimilar = op
-            }
-        }
-        return mostSimilar
+    static func create(_ item: GameItem) -> CompleteOpening {
+        let unknown = CompleteOpening(id: "", name: "Unknown", pgn: "")
+        guard let openings = UserData.shared.openings[item.eco] else { return unknown }
+        return openings.filter({$0.name.lowercased() == item.openingString.lowercased()}).first ?? unknown
     }
 }
 

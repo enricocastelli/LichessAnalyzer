@@ -17,13 +17,6 @@ class ResultVC: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var filterLabel: UILabel!
-//
-//    dataSource.tableView = tableView
-//    let dic = Dictionary(grouping: games, by: { $0.opening })
-//    dataSource.sections = dic
-//    dataSource.onDidSelectItem = { [weak self] (item) in
-//        self?.navigationController?.pushViewController(DetailVC(item), animated: true)
-//    }
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -38,7 +31,7 @@ class ResultVC: UIViewController {
         super.viewDidLoad()
         filterLabel.text = UserData.shared.preferredSorting.desc()
         setLabels()
-//        NotificationCenter.default.addObserver(self, selector: #selector(updateGames), name: .NewGames, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGames), name: .NewGames, object: nil)
     }
 
     deinit {
@@ -48,31 +41,23 @@ class ResultVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadingView.alpha = 0
-//        if games != UserData.shared.games {
-//            games = UserData.shared.games
+        if games != UserData.shared.games {
+            games = UserData.shared.games
             reloadData()
-//        }
+        }
     }
 
     var start: CFAbsoluteTime!
 
     private func reloadData() {
         start = CFAbsoluteTimeGetCurrent()
-//        games = UserData.shared.games
-        games = Array(UserData.shared.games.prefix(1000))
-
-        print("🍏 passing games \(CFAbsoluteTimeGetCurrent() - start)")
-        start = CFAbsoluteTimeGetCurrent()
+        games = UserData.shared.games
         source = Dictionary(grouping: games, by: { $0.opening })
-        print("🍏 mapping games \(CFAbsoluteTimeGetCurrent() - start)")
-        start = CFAbsoluteTimeGetCurrent()
         sort(UserData.shared.preferredSorting)
-        print("🍏 sorting games \(CFAbsoluteTimeGetCurrent() - start)")
-        start = CFAbsoluteTimeGetCurrent()
         tableView.reloadData()
         (tableView.tableHeaderView as? ResultView)?.update(wins: UserData.shared.games.wins(), loss: UserData.shared.games.lost(), draw: UserData.shared.games.draw())
         setLabels()
-        print("🍏 reloading \(CFAbsoluteTimeGetCurrent() - start)")
+        print("🍏 total time \(CFAbsoluteTimeGetCurrent() - start)")
     }
 
     private func setLabels() {
@@ -92,18 +77,17 @@ class ResultVC: UIViewController {
             sections = source.sortedKeysByValue { $0.points > $1.points }
         case .weakest:
             sections = source.sortedKeysByValue { $0.points < $1.points }
-
         }
     }
 
-//    @objc func updateGames() {
-//        showLoading() {
-//            if self.tableView != nil {
-//                self.reloadData()
-//                self.hideLoading()
-//            }
-//        }
-//    }
+    @objc func updateGames() {
+        showLoading() {
+            if self.tableView != nil {
+                self.reloadData()
+                self.hideLoading()
+            }
+        }
+    }
 
     func showLoading(_ completion: @escaping() -> ()) {
         UIView.animate(withDuration: 0.3) {
@@ -177,4 +161,16 @@ extension ResultVC: UITableViewDataSource, UITableViewDelegate {
         cell.configure((section, games))
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = sections[indexPath.row]
+        guard let games = source[section] else { return }
+        let detailItem = DetailItem(opening: section,
+                                    win: games.wins(),
+                                    loss: games.lost(),
+                                    draw: games.draw())
+        let source = Dictionary(grouping: games, by: { $0.completeOpening })
+        self.navigationController?.pushViewController(DetailVC(source, item: detailItem), animated: true)
+    }
 }
+

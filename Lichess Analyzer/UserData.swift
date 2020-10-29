@@ -22,8 +22,8 @@ class UserData: StoreProvider {
         }
     }
     var token = ""
-    var openings = [OpeningObject]()
-    var knownOpenings = [KnownOpening]()
+    var openings = [String: [OpeningObject]]()
+    var knownOpenings = [OpeningObject]()
     var account: Account?
     var games: [GameItem] = [] {
         didSet {
@@ -37,17 +37,20 @@ class UserData: StoreProvider {
 
     func updateOpenings() {
         updateKnownOpenings()
+        Clock.start()
         if let path = Bundle.main.path(forResource: "Openings", ofType: "json")
         {
             if let jsonData = NSData(contentsOfFile: path) {
                 do {
-                    self.openings = try JSONDecoder().decode([OpeningObject].self, from: Data(jsonData))
-                    self.openings.sort { (o1, o2) -> Bool in
+                    var openings = try JSONDecoder().decode([OpeningObject].self, from: Data(jsonData))
+                    openings.sort { (o1, o2) -> Bool in
                         return o1.pgn.count < o2.pgn.count
                     }
-                    self.openings.sort { (o1, o2) -> Bool in
+                    openings.sort { (o1, o2) -> Bool in
                         return o1.id < o2.id
                     }
+                    self.openings = Dictionary(grouping: openings, by: { $0.id })
+
 //                    var duplicate = [String: String]()
 //                    for open in openings {
 //                        if duplicate[open.name] == open.id {
@@ -56,6 +59,7 @@ class UserData: StoreProvider {
 //                            duplicate[open.name] = open.id
 //                        }
 //                    }
+                    Clock.stop()
                 } catch(let error) {
                     print(error, "nope")
                 }

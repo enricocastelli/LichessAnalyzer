@@ -284,3 +284,17 @@ extension Dictionary {
             }
     }
 }
+
+class Clock {
+
+    private static var startO = CFAbsoluteTimeGetCurrent()
+
+
+    static func start() {
+        startO = CFAbsoluteTimeGetCurrent()
+    }
+
+    static func stop() {
+        print("🍏 total time \(CFAbsoluteTimeGetCurrent() - startO)")
+    }
+}
