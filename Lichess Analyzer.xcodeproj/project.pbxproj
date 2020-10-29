@@ -40,7 +40,6 @@
 		1CBD14C12540A63C00C3E8FE /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */; };
 		1CBD14C22540A63C00C3E8FE /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14C02540A63C00C3E8FE /* ResultCell.xib */; };
 		1CBD14FE2541B3BF00C3E8FE /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */; };
-		1CBD14FF2541B3BF00C3E8FE /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */; };
 		1CBD15072541B6BA00C3E8FE /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD15062541B6BA00C3E8FE /* GameModel.swift */; };
 		1CBD150D2541B88400C3E8FE /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD150B2541B88400C3E8FE /* DetailCell.swift */; };
 		1CBD150E2541B88400C3E8FE /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD150C2541B88400C3E8FE /* DetailCell.xib */; };
@@ -154,7 +153,6 @@
 		1CBD14BF2540A63C00C3E8FE /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
 		1CBD14C02540A63C00C3E8FE /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
 		1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
-		1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
 		1CBD15062541B6BA00C3E8FE /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		1CBD150B2541B88400C3E8FE /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		1CBD150C2541B88400C3E8FE /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				1C40FDDC25471A8A00D51585 /* ResultView.swift */,
 				1C40FDE825471C2100D51585 /* ResultView.xib */,
 				1CBD14FC2541B3BE00C3E8FE /* DetailVC.swift */,
-				1CBD14FD2541B3BE00C3E8FE /* DetailVC.xib */,
 				1C6C72E62541E97400ECF2A7 /* GameVC.swift */,
 				1C6C72E72541E97400ECF2A7 /* GameVC.xib */,
 				1C6C73882542A32900ECF2A7 /* BoardView.swift */,
@@ -500,7 +497,6 @@
 				1CB3A1E82543050000C35D00 /* Openings.json in Resources */,
 				1CBD149225406D0800C3E8FE /* HomeVC.xib in Resources */,
 				1CD6A88A2546AE0C00AE3722 /* Lato-Bold.ttf in Resources */,
-				1CBD14FF2541B3BF00C3E8FE /* DetailVC.xib in Resources */,
 				1C40FDE925471C2100D51585 /* ResultView.xib in Resources */,
 				1CD90EF325449E6E00956AB5 /* GoogleService-Info.plist in Resources */,
 				1CBD145825406C4400C3E8FE /* Assets.xcassets in Resources */,

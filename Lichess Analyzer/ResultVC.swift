@@ -20,10 +20,7 @@ class ResultVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            let rView = ResultView()
-            rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
-            tableView.tableHeaderView = rView
-            tableView.register(UINib(nibName: ResultCell.identifier, bundle: nil), forCellReuseIdentifier: ResultCell.identifier)
+            setTableView()
         }
     }
 
@@ -31,6 +28,10 @@ class ResultVC: UIViewController {
         super.viewDidLoad()
         filterLabel.text = UserData.shared.preferredSorting.desc()
         setLabels()
+        addObserver()
+    }
+
+    func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateGames), name: .NewGames, object: nil)
     }
 
@@ -40,6 +41,10 @@ class ResultVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLoad()
+    }
+
+    private func setLoad(){
         loadingView.alpha = 0
         if games != UserData.shared.games {
             games = UserData.shared.games
@@ -47,20 +52,25 @@ class ResultVC: UIViewController {
         }
     }
 
-    var start: CFAbsoluteTime!
+    func setTableView() {
+        let rView = ResultView()
+        rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
+        tableView.tableHeaderView = rView
+        tableView.register(UINib(nibName: ResultCell.identifier, bundle: nil), forCellReuseIdentifier: ResultCell.identifier)
+    }
 
-    private func reloadData() {
-        start = CFAbsoluteTimeGetCurrent()
+    func reloadData() {
+        Clock.start()
         games = UserData.shared.games
         source = Dictionary(grouping: games, by: { $0.opening })
         sort(UserData.shared.preferredSorting)
         tableView.reloadData()
         (tableView.tableHeaderView as? ResultView)?.update(wins: UserData.shared.games.wins(), loss: UserData.shared.games.lost(), draw: UserData.shared.games.draw())
         setLabels()
-        print("🍏 total time \(CFAbsoluteTimeGetCurrent() - start)")
+        Clock.stop()
     }
 
-    private func setLabels() {
+    func setLabels() {
         titleLabel.text = UserData.shared.searchName
         subtitleLabel.attributedText = NSMutableAttributedString()
             .normal("using ")
@@ -80,7 +90,7 @@ class ResultVC: UIViewController {
         }
     }
 
-    @objc func updateGames() {
+    @objc private func updateGames() {
         showLoading() {
             if self.tableView != nil {
                 self.reloadData()
