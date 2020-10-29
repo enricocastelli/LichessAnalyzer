@@ -14,87 +14,110 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     @IBOutlet weak var visibleView: UIView!
     @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var frameContainerView: UIView!
-    @IBOutlet weak var filterLabel: UILabel!
-
+    @IBOutlet weak var controlContainerView: UIView!
+    @IBOutlet weak var allLabel: UILabel!
 
     var gameTypeControl: UISegmentedControl!
-
-
-    var maxNums = [100, 500]
     var gameTypes: [GameType] = [.bullet, .blitz, .rapid, .all]
-    var color = Color.white
-    var gameType = GameType.all
-    var maxNum: Int = 50
-
-    var callInProgress = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingView.isHidden = false
         addText("Hello \(UserData.shared.account?.username ?? "Stranger")", delay: 0.4, duration: 0.8, position: CGPoint(x: 40, y: 16), lineWidth: 1, font: Font.with(.hairline, 32), color: UIColor.darkGray.withAlphaComponent(0.8), inView: textContainerView)
+        setGameTypeControl()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadingView.alpha = callInProgress ? 1 : 0
-        updatelabel()
+        loadingView.alpha = 0
     }
 
-    private func updatelabel() {
-        filterLabel.attributedText = UserData.shared.search.attrString
+    private func setGameTypeControl() {
+        guard let account = UserData.shared.account else { return }
+        gameTypes = account.perfsAvailable()
+        gameTypeControl = UISegmentedControl(items: gameTypes.map({$0.rawValue.uppercased()}))
+        controlContainerView.addContentView(gameTypeControl)
+        gameTypeControl.addTarget(self, action: #selector(selectedType), for: .valueChanged)
+        guard let index = gameTypes.firstIndex(of: UserData.shared.search.gameType) else { return }
+        gameTypeControl.selectedSegmentIndex = index
+        UserData.shared.search.gameType = gameTypes[gameTypeControl.selectedSegmentIndex]
+        updateLabel()
+        let font = [NSAttributedString.Key.font : Font.with(Style.light, 18)]
+        gameTypeControl.setTitleTextAttributes(font, for: .normal)
+    }
+
+    func updateLabel() {
+        guard let gamesNuber = UserData.shared.account?.numberOfGamesForType(UserData.shared.search.gameType) else { return }
+        allLabel.changeText("\(gamesNuber.description) GAMES")
+    }
+
+    @objc func selectedType() {
+        if gameTypeControl.selectedSegmentIndex == 2 {
+            deleteGames {
+                print("🐴 deleted")
+            } failure: { (_) in}
+        }
+        UserData.shared.search.gameType = gameTypes[gameTypeControl.selectedSegmentIndex]
+        updateLabel()
     }
 
     @IBAction func analyze() {
-        if let games = getGames(searchItem: UserData.shared.search) {
-            self.navigationController?.pushViewController(ResultVC(games), animated: true)
-        } else {
-            showLoading()
-            callInProgress = true
-            getGames() { (games) in
-                self.callInProgress = false
-                guard let games = games else { return }
-                self.storeGames(games, searchItem: UserData.shared.search)
-                self.navigationController?.pushViewController(ResultVC(games), animated: true)
-            } failure: { (error) in
-                self.loadingView.alpha = 0
+        showLoading()
+        getStoredGames { (games) in
+            print("🐴 got \(games.count) stored games")
+            UserData.shared.games = games
+            self.storeLastDate(games.last?.date ?? "")
+            self.getAll(since: games.last?.date.toDate("yyyy-MM-dd'H'HH-mmm-ss")?.addingTimeInterval(1), until: nil) {
+                self.openResult()
             }
+        } failure: { (error) in
+            print("🐴 no stored games found")
+            self.showLoading()
+            self.getExample {}
         }
     }
 
-    private func getTimeProgress() -> Double? {
-        guard let estim = UserData.shared.estimatedDownloadTime() else { return nil }
-        return estim/8
+    private func getAll(since: Date?, until: Date?, completion: @escaping () -> ()) {
+        print("🐴 getting games from \(since) to \(until)")
+        self.getGames(nil, sinceDate: since?.millisecondsSince1970, untilDate: until?.millisecondsSince1970) { (games) in
+            guard let games = games, !games.isEmpty else {
+                print("🐴 no new games")
+                completion()
+                return }
+            print("🐴 received \(games.count) games")
+            UserData.shared.games.append(contentsOf: games)
+            print("🐴 now userdata has \(UserData.shared.games.count) games")
+            self.storeGames(games) {
+                NotificationCenter.default.post(Notification(name: .CallFinished))
+                completion()
+            } failure: { (err) in }
+        } failure: { (error) in }
     }
 
+    private func getExample(_ completion: @escaping () -> ()) {
+        let _ = FloatingButtonController()
+        self.getGames(100) { (games) in
+            guard let games = games else { return }
+            UserData.shared.games = games
+            print("🐴 now userdata has \(games.count) games")
+            self.openResult()
+            self.getAll(since: nil, until: nil) {}
+            completion()
+        } failure: { (error) in
+            self.loadingView.alpha = 0
+        }
+    }
+
+    private func openResult() {
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(ResultVC(), animated: true)
+        }
+    }
+    
     private func showLoading() {
         UIView.animate(withDuration: 0.3) {
             self.loadingView.alpha = 1
         }
-        let sf = WKWebView(frame: frameContainerView.frame)
-        sf.load(URLRequest(url: URL(string: "https://lichess.org/tv/frame")!))
-        self.frameContainerView.addContentView(sf)
-        let hasProgress = getTimeProgress() != nil
-        let _ = Timer.scheduledTimer(withTimeInterval: getTimeProgress() ?? 0.1, repeats: true) { (timer) in
-            guard self.callInProgress else {
-                timer.invalidate()
-                self.progressView.progress = 0.05
-                return
-            }
-            if self.progressView.progress > 0.95 {
-                self.progressView.progress = hasProgress ? 0.95 : 0
-            } else {
-                self.progressView.progress += 0.1
-            }
-        }
-    }
-
-    @IBAction func filterTapped() {
-        let filter = FilterVC()
-        filter.onSelect = updatelabel
-        filter.modalPresentationStyle = .overCurrentContext
-        self.present(filter, animated: true, completion: nil)
     }
 }
 

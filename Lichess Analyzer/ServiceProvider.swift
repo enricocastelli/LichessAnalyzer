@@ -15,14 +15,17 @@ fileprivate let accountURL = "https://lichess.org/api/account"
 
 extension ServiceProvider {
 
-    func getGames(success: @escaping ([GameItem]?) -> (),
+    func getGames(_ max: Int?,
+                    sinceDate: Int? = nil,
+                    untilDate: Int? = nil,
+                  success: @escaping ([GameItem]?) -> (),
                   failure: @escaping (Error) -> ()) {
         let urlString = baseURL + UserData.shared.searchName
-        let params = ["max": UserData.shared.search.max?.description ?? "",
-                      "since": UserData.shared.search.since?.date()?.millisecondsSince1970.description ?? "",
-                      "color": UserData.shared.search.color.rawValue,
+        let params = ["max": max?.description ?? "",
+                      "until": untilDate?.description ?? "",
+                      "since": sinceDate?.description ?? "",
                       "perfType": UserData.shared.search.gameType.rawValue,
-                      "rated": UserData.shared.search.rated.description,
+                      "rated": "true",
                       "opening": "true"]
         let request = createRequest(.get, urlString, params)
         basicCall(request) { (data) in
@@ -52,29 +55,31 @@ extension ServiceProvider {
         var arr = string.components(separatedBy: "[Ev")
         arr.removeFirst()
         let games = arr.map({mapString($0)}).compactMap({$0})
-        if UserData.shared.search.nonExpired {
-            return games.filter({!$0.termination.contains("Time forfeit") })
-        } else {
-            return games
-        }
+        //        if UserData.shared.search.nonExpired {
+//        return games.filter({!$0.termination.contains("Time forfeit") })
+//    } else {
+//        return games
+//    }
+        return games
     }
 
     func mapString(_ string: String) -> GameItem? {
         guard let event = string.slice(from: "ent ", to: "]"),
-              let site = string.slice(from: "[Site ", to: "]"),
-              let date = string.slice(from: "[Date ", to: "]"),
+//              let site = string.slice(from: "[Site ", to: "]"),
+              let date = string.slice(from: "[UTCDate ", to: "]"),
+              let time = string.slice(from: "[UTCTime ", to: "]"),
               let white = string.slice(from: "[White ", to: "]"),
               let black = string.slice(from: "[Black ", to: "]"),
               let result = string.slice(from: "[Result ", to: "]"),
               let termination = string.slice(from: "[Termination ", to: "]") else { return nil }
-        return GameItem(event: GameType.extract(event),
-                    site: site,
-                    date: date,
+        return GameItem(event: event,
+//                    site: site,
+                    date: date + "H" + time,
                     white: white,
                     black: black,
                     result: result,
-                    whiteElo: Int(string.slice(from: "[WhiteElo ", to: "]") ?? ""),
-                    blackElo: Int(string.slice(from: "[BlackElo ", to: "]") ?? ""),
+//                    whiteElo: Int(string.slice(from: "[WhiteElo ", to: "]") ?? ""),
+//                    blackElo: Int(string.slice(from: "[BlackElo ", to: "]") ?? ""),
                     termination: termination,
                     completeOpening: string.slice(from: "[Opening ", to: "]") ?? "",
                     pgn: string.slice(from: "1. ", to: string.last!.description),

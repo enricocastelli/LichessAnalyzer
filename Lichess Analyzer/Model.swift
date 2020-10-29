@@ -74,32 +74,8 @@ enum Timing: String, Decodable, Encodable {
 }
 
 struct SearchItem: Encodable, Decodable {
-    var max: Int?,
-        since: Timing?,
-        searchName: String?,
-        color: Color,
-        rated: Bool,
-        nonExpired: Bool,
+    var searchName: String?,
         gameType: GameType
-
-    var attrString: NSMutableAttributedString {
-        let max = UserData.shared.search.max
-        return NSMutableAttributedString()
-        .bold(UserData.shared.search.rated ? "Rated games " : "Every game ")
-        .normal("using ")
-        .bold(UserData.shared.search.color.desc())
-        .normal(" in ")
-        .bold(UserData.shared.search.gameType.rawValue)
-        .normal(" type games, ")
-        .normal(max == nil ? "" : "last ")
-        .bold(max == nil ? "" : max!.description)
-        .normal(max == nil ? "" : " ")
-        .bold(UserData.shared.search.since?.desc() ?? "")
-    }
-
-    var string: String {
-        return "max:\(max?.description)&since:\(since?.desc())&searchName:\(searchName)&color:\(color.rawValue)&rated:\(rated)&nonExpired:\(nonExpired)&gameType:\(gameType.rawValue)"
-    }
 }
 
 enum GamesSorting: String {

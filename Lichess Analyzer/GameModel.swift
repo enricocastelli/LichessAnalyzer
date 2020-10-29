@@ -7,24 +7,29 @@
 
 import Foundation
 
-struct GameItem: Encodable, Decodable {
+struct GameItem: Encodable, Decodable, StructDecoder, Equatable {
 
-    let event: GameType
-    let site: String
+    static var EntityName = "SavedGame"
+
+    let event: String
+//    let site: String
     let date: String
     let white: String
     let black: String
     let result: String
-    let whiteElo: Int?
-    let blackElo: Int?
+//    let whiteElo: Int?
+//    let blackElo: Int?
     let termination: String
     let completeOpening: String
-    var opening: KnownOpening {
-        return KnownOpening.fromItem(self)
-    }
     let pgn: String?
     let eco: String
 
+    var gameType: GameType {
+        return GameType.extract(event)
+    }
+    var opening: KnownOpening {
+        return KnownOpening.fromItem(self)
+    }
     var winner: String? {
         if result == "0-1" {
             return black
@@ -32,6 +37,10 @@ struct GameItem: Encodable, Decodable {
             return white
         }
         return nil
+    }
+
+    var validDate: Date {
+        return date.toDate("yyyy-MM-dd'H'HH-mmm-ss") ?? Date()
     }
 
     func resultForPlayer() -> Result {

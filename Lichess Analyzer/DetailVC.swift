@@ -24,7 +24,8 @@ class DetailVC: UIViewController {
             dataSource.onDidSelectItem = { [weak self] item in
                 self?.itemSelected(item)
             }
-            let rView = ResultView(wins: opening.results.filter({$0 == .win}).count, loss: opening.results.filter({$0 == .lose}).count, draw: opening.results.filter({$0 == .draw}).count)
+            let rView = ResultView()
+            rView.update(wins: opening.results.filter({$0 == .win}).count, loss: opening.results.filter({$0 == .lose}).count, draw: opening.results.filter({$0 == .draw}).count)
             rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
             tableView.tableHeaderView = rView
         }

@@ -18,6 +18,7 @@
 		1C6C72E92541E97400ECF2A7 /* GameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C6C72E72541E97400ECF2A7 /* GameVC.xib */; };
 		1C6C73892542A32900ECF2A7 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6C73882542A32900ECF2A7 /* BoardView.swift */; };
 		1CA7832E25489E3D0024ED46 /* KnownOpenings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CA7832D25489E3D0024ED46 /* KnownOpenings.json */; };
+		1CA783382549B6B80024ED46 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CA783362549B6B70024ED46 /* DataModel.xcdatamodeld */; };
 		1CB3A1E82543050000C35D00 /* Openings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CB3A1E72543050000C35D00 /* Openings.json */; };
 		1CB5F4AA2542B19100862ADE /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5F4A92542B19100862ADE /* PieceView.swift */; };
 		1CB5F4AE2542B1B400862ADE /* PGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5F4AD2542B1B400862ADE /* PGN.swift */; };
@@ -44,6 +45,7 @@
 		1CBD15072541B6BA00C3E8FE /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD15062541B6BA00C3E8FE /* GameModel.swift */; };
 		1CBD150D2541B88400C3E8FE /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD150B2541B88400C3E8FE /* DetailCell.swift */; };
 		1CBD150E2541B88400C3E8FE /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBD150C2541B88400C3E8FE /* DetailCell.xib */; };
+		1CC8E5FF2549D4DE00A33B52 /* FloatingProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC8E5FE2549D4DE00A33B52 /* FloatingProgress.swift */; };
 		1CCA02422542ABE9001ECDFC /* SwiftChess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CBC68112542A995001912CD /* SwiftChess.framework */; };
 		1CCA02432542ABE9001ECDFC /* SwiftChess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CBC68112542A995001912CD /* SwiftChess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1CD6A8772546A9A400AE3722 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6A8752546A9A400AE3722 /* WelcomeVC.swift */; };
@@ -124,6 +126,7 @@
 		1C6C72E72541E97400ECF2A7 /* GameVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameVC.xib; sourceTree = "<group>"; };
 		1C6C73882542A32900ECF2A7 /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		1CA7832D25489E3D0024ED46 /* KnownOpenings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KnownOpenings.json; sourceTree = "<group>"; };
+		1CA783372549B6B70024ED46 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		1CB3A1E72543050000C35D00 /* Openings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Openings.json; sourceTree = "<group>"; };
 		1CB5F4A92542B19100862ADE /* PieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieceView.swift; path = "../../Downloads/SwiftChess-master/Example/SwiftChess/PieceView.swift"; sourceTree = "<group>"; };
 		1CB5F4AD2542B1B400862ADE /* PGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PGN.swift; path = "../../Downloads/SwiftChess-master/Example/SwiftChess/PGN.swift"; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		1CBD15062541B6BA00C3E8FE /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		1CBD150B2541B88400C3E8FE /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		1CBD150C2541B88400C3E8FE /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		1CC8E5FE2549D4DE00A33B52 /* FloatingProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingProgress.swift; sourceTree = "<group>"; };
 		1CD6A8752546A9A400AE3722 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		1CD6A8762546A9A400AE3722 /* WelcomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeVC.xib; sourceTree = "<group>"; };
 		1CD6A8822546AE0C00AE3722 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				1CD90EC52544636F00956AB5 /* Lichess Analyzer.entitlements */,
+				1CA783362549B6B70024ED46 /* DataModel.xcdatamodeld */,
 				1CBD144E25406C4300C3E8FE /* AppDelegate.swift */,
 				1CBD14A625407B5E00C3E8FE /* Utils.swift */,
 				1CD90EFE2544A8A500956AB5 /* Auth.swift */,
@@ -262,6 +267,7 @@
 				1CBD149925406DB300C3E8FE /* Logger.swift */,
 				1CD6A8942546AE6F00AE3722 /* TextPresenter.swift */,
 				1CBD148125406C8200C3E8FE /* Service.swift */,
+				1CC8E5FE2549D4DE00A33B52 /* FloatingProgress.swift */,
 				1C40FDD62546FB5500D51585 /* CircleAnimatedView.swift */,
 				1CD90F072546080200956AB5 /* UserData.swift */,
 				1CD90F0B2546082200956AB5 /* StoreProvider.swift */,
@@ -657,11 +663,13 @@
 				1CD6A8912546AE2500AE3722 /* Fonts.swift in Sources */,
 				1C40FDFA25481E3500D51585 /* FilterVC.swift in Sources */,
 				1CBD15072541B6BA00C3E8FE /* GameModel.swift in Sources */,
+				1CA783382549B6B80024ED46 /* DataModel.xcdatamodeld in Sources */,
 				1C40FDE325471AF400D51585 /* NibView.swift in Sources */,
 				1CD6A8952546AE6F00AE3722 /* TextPresenter.swift in Sources */,
 				1CD90F0C2546082200956AB5 /* StoreProvider.swift in Sources */,
 				1CD90F042546051000956AB5 /* AccountModel.swift in Sources */,
 				1CBD150D2541B88400C3E8FE /* DetailCell.swift in Sources */,
+				1CC8E5FF2549D4DE00A33B52 /* FloatingProgress.swift in Sources */,
 				1C6C73892542A32900ECF2A7 /* BoardView.swift in Sources */,
 				1C6C72E82541E97400ECF2A7 /* GameVC.swift in Sources */,
 				1CBD14A725407B5E00C3E8FE /* Utils.swift in Sources */,
@@ -997,6 +1005,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1CA783362549B6B70024ED46 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1CA783372549B6B70024ED46 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 1CA783372549B6B70024ED46 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1CBD144325406C4300C3E8FE /* Project object */;
 }

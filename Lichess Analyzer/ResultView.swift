@@ -16,23 +16,32 @@ class ResultView: NibView {
     @IBOutlet weak var lossLabel: UILabel!
     @IBOutlet weak var winPercentageLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
+    var circleView: CircleAnimatedView?
 
-    let wins: Int, loss: Int, draw: Int
+    var wins: Int = 0
+    var loss: Int = 0
+    var draw: Int = 0
 
-    init(wins: Int, loss: Int, draw: Int) {
+
+    func update(wins: Int, loss: Int, draw: Int) {
         self.wins = wins
         self.loss = loss
         self.draw = draw
-        super.init(frame: .zero)
+        circleView?.removeFromSuperview()
+        setView()
     }
 
     override func nibSetup() {
         super.nibSetup()
+        setView()
+    }
+
+    private func setView() {
         let totalGames = wins + loss + draw
-        let circleView = CircleAnimatedView(wins: wins.percentage(of: totalGames)/100, loss: loss.percentage(of: totalGames)/100, draw: draw.percentage(of: totalGames)/100)
-        self.containerView.addContentView(circleView)
+        circleView = CircleAnimatedView(wins: wins.percentage(of: totalGames)/100, loss: loss.percentage(of: totalGames)/100, draw: draw.percentage(of: totalGames)/100)
+        self.containerView.addContentView(circleView!)
         preanimate()
-        circleView.animate(0.5)
+        circleView?.animate(0.5)
         UIView.animateKeyframes(withDuration: 0.5, delay: 1, options: []) {
             self.animateLabels()
         }
@@ -62,10 +71,6 @@ class ResultView: NibView {
         winLabel.transform = CGAffineTransform.identity
         lossLabel.transform = CGAffineTransform.identity
         winPercentageLabel.transform = CGAffineTransform.identity
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
 }

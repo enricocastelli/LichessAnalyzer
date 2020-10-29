@@ -9,14 +9,15 @@ import UIKit
 
 class ResultVC: UIViewController {
 
-    let games: [GameItem]
-    let openings: [OpeningGame]
+    var games: [GameItem] = []
+    var openings: [OpeningGame] {
+        return games.mapToOpening()
+    }
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var filterView: UIView!
+    @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var filterLabel: UILabel!
-
 
     let dataSource = TableViewDataSource(cellResourceId: ResultCell.identifier)
 
@@ -27,36 +28,47 @@ class ResultVC: UIViewController {
             dataSource.onDidSelectItem = { [weak self] (item) in
                 self?.navigationController?.pushViewController(DetailVC(item), animated: true)
             }
-            let rView = ResultView(wins: games.wins(), loss: games.lost(), draw: games.draw())
+            let rView = ResultView()
             rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
             tableView.tableHeaderView = rView
         }
     }
 
-    init(_ games: [GameItem]) {
-        self.games = games
-        self.openings = games.mapToOpening()
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        sort(UserData.shared.preferredSorting)
         filterLabel.text = UserData.shared.preferredSorting.desc()
         setLabels()
-//        let most = games.mostCommonOpenings()
-//        for (k,v) in (Array(most).sorted {$0.1 > $1.1}) {
-//            print("\(k):\(v)")
-//        }
+        NotificationCenter.default.addObserver(self, selector: #selector(updateGames), name: .NewGames, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadingView.alpha = 0
+        if games != UserData.shared.games {
+            games = UserData.shared.games
+            reloadData()
+        }
+    }
+
+    private func reloadData() {
+//        sort(UserData.shared.preferredSorting)
+        dataSource.items = openings
+        tableView.reloadData()
+        (tableView.tableHeaderView as? ResultView)?.update(wins: games.wins(), loss: games.lost(), draw: games.draw())
+        setLabels()
     }
 
     private func setLabels() {
         titleLabel.text = UserData.shared.searchName
-        subtitleLabel.attributedText = UserData.shared.search.attrString
+        subtitleLabel.attributedText = NSMutableAttributedString()
+            .normal("using ")
+            .normal(" in ")
+            .bold(UserData.shared.search.gameType.rawValue)
+            .normal(" type games, ")
     }
 
     func sort(_ sorting: GamesSorting) {
@@ -76,20 +88,44 @@ class ResultVC: UIViewController {
         dataSource.items = sortedOpenings
     }
 
+    @objc func updateGames() {
+        self.games = UserData.shared.games
+        showLoading() {
+            if self.tableView != nil {
+                self.reloadData()
+                self.hideLoading()
+            }
+        }
+    }
+
+    func showLoading(_ completion: @escaping() -> ()) {
+        UIView.animate(withDuration: 0.3) {
+            self.loadingView.alpha = 1
+        } completion: { (_) in
+            completion()
+        }
+    }
+
+    func hideLoading() {
+        UIView.animate(withDuration: 0.5) {
+            self.loadingView.alpha = 0
+        }
+    }
+
     func hideMenu() {
         UIView.animate(withDuration: 0.2) {
-            self.filterView.alpha = 0
+//            self.filterView.alpha = 0
         }
     }
 
     func showMenu() {
         UIView.animate(withDuration: 0.3) {
-            self.filterView.alpha = 1
+//            self.filterView.alpha = 1
         }
     }
 
     @IBAction func filterTapped() {
-        filterView.alpha == 0 ? showMenu() : hideMenu()
+//        filterView.alpha == 0 ? showMenu() : hideMenu()
     }
 
     @IBAction func sortMostPlayed() {

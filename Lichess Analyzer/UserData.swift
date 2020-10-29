@@ -10,13 +10,7 @@ import Foundation
 class UserData: StoreProvider {
 
     static let shared = UserData()
-    var search: SearchItem {
-        get {
-            getSearch() }
-        set {
-            storeSearch(newValue)
-        }
-    }
+    var search: SearchItem = SearchItem(searchName: "", gameType: .all)
     var searchName: String {
         account?.username ?? ""
     }
@@ -30,7 +24,12 @@ class UserData: StoreProvider {
     var token = ""
     var openings = [OpeningObject]()
     var knownOpenings = [KnownOpening]()
-    var account: Account? 
+    var account: Account?
+    var games: [GameItem] = [] {
+        didSet {
+            NotificationCenter.default.post(Notification(name: .NewGames))
+        }
+    }
 
     func isLoggedIn() -> Bool {
         return account != nil
@@ -75,11 +74,5 @@ class UserData: StoreProvider {
                 }
             }
         }
-    }
-
-
-    func estimatedDownloadTime() -> Double? {
-        guard let max = search.max else { return nil }
-        return Double(max)/(UserData.shared.isLoggedIn() ? 60.0 : 20.0)
     }
 }

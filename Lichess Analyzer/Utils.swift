@@ -136,6 +136,20 @@ extension UIView {
                                 constant: constant).isActive = true
     }
 
+    func setSelfConstraint(constraint: NSLayoutConstraint.Attribute, constant: CGFloat) {
+        if translatesAutoresizingMaskIntoConstraints == true {
+            translatesAutoresizingMaskIntoConstraints = false
+        }
+        addConstraint(NSLayoutConstraint(item: self,
+                                         attribute: .height,
+                                         relatedBy: .equal,
+                                         toItem: nil,
+                                         attribute: .height,
+                                         multiplier: 1,
+                                         constant: constant))
+    }
+    
+
     func addContentView(_ contentView: UIView, _ atIndex: Int? = nil) {
         let containerView = self
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -222,8 +236,8 @@ extension Date {
         return Calendar.current.component(.year, from: self)
     }
 
-    var millisecondsSince1970:Int64 {
-        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    var millisecondsSince1970: Int {
+        return Int((self.timeIntervalSince1970 * 1000.0).rounded())
     }
 
     func toString(_ format: String = "dd-MM-yyyy") -> String? {
@@ -237,6 +251,7 @@ extension String {
 
     func toDate(_ format: String = "dd-MM-yyyy") -> Date? {
         let dateFormat = DateFormatter()
+        dateFormat.timeZone = TimeZone.init(identifier: "UTC")
         dateFormat.dateFormat = format
         return dateFormat.date(from: self)
     }
