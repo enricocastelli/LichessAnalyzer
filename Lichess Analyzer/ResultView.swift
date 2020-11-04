@@ -43,8 +43,8 @@ class ResultView: NibView {
             self.animateLabels()
         }
         drawLabel.text = draw.description + " DRAWS"
-        winLabel.text = wins.description + " WIN"
-        lossLabel.text = loss.description + " LOSS"
+        winLabel.text = wins.description + " WINS"
+        lossLabel.text = loss.description + " LOSSES"
         winPercentageLabel.text = wins.percentage(of: totalGames).description + "% WINS"
     }
 

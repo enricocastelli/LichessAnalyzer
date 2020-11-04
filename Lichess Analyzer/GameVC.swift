@@ -7,16 +7,22 @@
 
 import UIKit
 import SwiftChess
+import SafariServices
 
 class GameVC: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var thumbImageview: UIImageView!
 
-    let opening: OpeningObject
+    var storedMoves = [(piece: Piece, from: BoardLocation, to: BoardLocation)]()
+
+    let opening: (OpeningObject, [GameItem])
     var boardView: BoardView!
 
+    var isBlack = U.shared.filters.color == .black
     var pieceViews = [PieceView]()
     var game: Game!
     var selectedIndex: Int? {
@@ -27,7 +33,7 @@ class GameVC: UIViewController {
 
     var hasMadeInitialAppearance = false
 
-    init(_ opening: OpeningObject) {
+    init(_ opening: (OpeningObject, [GameItem])) {
         self.opening = opening
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,10 +44,11 @@ class GameVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = opening.name
+        titleLabel.text = opening.0.name
         game = Game(firstPlayer: Human(color: .white), secondPlayer: Human(color: .black))
         game.delegate = self
         setupBoard()
+        configure()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -49,10 +56,21 @@ class GameVC: UIViewController {
         openPGN(true)
     }
 
+    func configure() {
+        let games = opening.1
+        let results = games.map({$0.resultForPlayer()})
+        let winPercentage = results.filter({$0 == .win }).count.percentageInt(of: results.count)
+        countLabel.text = "You played this variant \(games.count) times.\n\(games.wins()) wins, \(games.lost()) losses, \(games.draw()) draws."
+        thumbImageview.tintColor = UIColor.percentageColor(Double(winPercentage))
+    }
+
     func setupBoard() {
         resetButton.isHidden = true
         boardView = BoardView(frame: containerView.frame)
         containerView.addContentView(boardView)
+        if isBlack {
+            boardView.transform = CGAffineTransform(scaleX: -1, y: -1)
+        }
         boardView.delegate = self
         for location in BoardLocation.all {
             guard let piece = game.board.getPiece(at: location) else {
@@ -65,7 +83,7 @@ class GameVC: UIViewController {
 
     private func openPGN(_ delay: Bool) {
         do {
-            let moves = try PGN(parse: opening.pgn).moves
+            let moves = try PGN(parse: opening.0.pgn).moves
             moves.isModernPNG() ? applyMoves(moves, delay) : adapt(moves, delay)
         } catch (let error) {
             print(error)
@@ -133,6 +151,11 @@ class GameVC: UIViewController {
         let location = BoardLocation(x: x, y: y)
 
         let pieceView = PieceView(piece: piece, location: location)
+        if isBlack {
+            for pieceView in pieceViews {
+                pieceView.transform = CGAffineTransform(scaleX: -1, y: -1)
+            }
+        }
         boardView.addSubview(pieceView)
         pieceViews.append(pieceView)
     }
@@ -267,6 +290,7 @@ extension GameVC: GameDelegate {
             return
         }
 
+        storedMoves.append((piece, from: pieceView.location, to: toLocation))
         pieceView.location = toLocation
 
         // Animate
@@ -315,6 +339,21 @@ extension GameVC: GameDelegate {
         navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func flip() {
+        if isBlack {
+            boardView.transform = CGAffineTransform.identity
+            for pieceView in pieceViews {
+                pieceView.transform = CGAffineTransform.identity
+            }
+        } else {
+            boardView.transform = CGAffineTransform(scaleX: -1, y: -1)
+            for pieceView in pieceViews {
+                pieceView.transform = CGAffineTransform(scaleX: -1, y: -1)
+            }
+        }
+        isBlack = !isBlack
+    }
+
     @IBAction func reset() {
         game = Game(firstPlayer: Human(color: .white), secondPlayer: Human(color: .black))
         game.delegate = self
@@ -324,5 +363,24 @@ extension GameVC: GameDelegate {
         openPGN(false)
     }
 
+    @IBAction func openYoutube() {
+        let openingString = opening.0.name.replacingOccurrences(of: " ", with: "+").replacingOccurrences(of: ":", with: "")
+        if let url = URL(string: "https://www.youtube.com/results?search_query=\(openingString)") {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            let vc = SFSafariViewController(url: url, configuration: config)
+            present(vc, animated: true)
+        }
+    }
+
+    @IBAction func openLichess() {
+        let openingString = opening.0.name.replacingOccurrences(of: " ", with: "+").replacingOccurrences(of: ":", with: "")
+        if let url = URL(string: "https://lichess.org/study/search?q=\(openingString)") {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            let vc = SFSafariViewController(url: url, configuration: config)
+            present(vc, animated: true)
+        }
+    }
 
 }

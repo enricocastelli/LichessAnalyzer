@@ -125,6 +125,7 @@ public struct Board: Equatable {
     }
     
     public func getPiece(at location: BoardLocation) -> Piece? {
+        guard squares.count > location.index, location.index >= 0 else { return nil }
         return squares[location.index].piece
     }
     
@@ -646,17 +647,41 @@ public struct Board: Equatable {
                 case .rook:
                     character = piece.color == .white ? "R" : "r"
                 case .knight:
-                    character = piece.color == .white ? "K" : "k"
+                    character = piece.color == .white ? "N" : "n"
                 case .bishop:
                     character = piece.color == .white ? "B" : "b"
                 case .queen:
                     character = piece.color == .white ? "Q" : "q"
                 case .king:
-                    character = piece.color == .white ? "G" : "g"
+                    character = piece.color == .white ? "K" : "K"
                 case .pawn:
                     character = piece.color == .white ? "P" : "p"
                 }
                 
+            }
+            return character
+        }
+    }
+
+
+    public func getFEN() -> String {
+        return boardPosition { (square: Square) -> Character? in
+            var character: Character?
+            if let piece = square.piece {
+                switch piece.type {
+                case .rook:
+                    character = piece.color == .white ? "R" : "r"
+                case .knight:
+                    character = piece.color == .white ? "N" : "n"
+                case .bishop:
+                    character = piece.color == .white ? "B" : "b"
+                case .queen:
+                    character = piece.color == .white ? "Q" : "q"
+                case .king:
+                    character = piece.color == .white ? "K" : "k"
+                case .pawn:
+                    character = piece.color == .white ? "P" : "p"
+                }
             }
             return character
         }
@@ -678,6 +703,32 @@ public struct Board: Equatable {
         }
         
         print(printString)
+    }
+
+    func boardPosition( _ square: (Square) -> Character? ) -> String {
+        var string = ""
+        var empty = 0
+        for y in  (0...7).reversed() {
+            for x in 0...7 {
+                let index = y*8 + x
+                if let character = square(squares[index]) {
+                    if empty > 0 {
+                        string.append(empty.description)
+                    }
+                    string.append(character)
+                    empty = 0
+                } else {
+                    empty = empty == 8 ? 0 : empty + 1
+                }
+            }
+            if empty > 0 {
+                string.append(empty.description)
+            }
+            empty = 0
+            string.append("/")
+        }
+        string.removeLast()
+        return string
     }
 }
 

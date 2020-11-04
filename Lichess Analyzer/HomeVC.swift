@@ -17,8 +17,11 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     @IBOutlet weak var controlContainerView: UIView!
     @IBOutlet weak var allLabel: UILabel!
 
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     var gameTypeControl: UISegmentedControl!
     var gameTypes: [GameType] = [.bullet, .blitz, .rapid, .all]
+    var callInProgress = false
+    var isExample = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadingView.alpha = 0
+        loadingView.alpha = callInProgress ? 1 : 0
     }
 
     private func setGameTypeControl() {
@@ -52,18 +55,24 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     }
 
     @objc func selectedType() {
-        if gameTypeControl.selectedSegmentIndex == 2 {
-            deleteGames {
-                print("🐴 deleted")
-            } failure: { (_) in}
-        }
         UserData.shared.search.gameType = gameTypes[gameTypeControl.selectedSegmentIndex]
         updateLabel()
     }
 
-    @IBAction func analyze() {
+
+    func dataCheck() -> Bool {
+        if U.shared.account?.numberOfGamesForType(U.shared.search.gameType) ?? 0 > 1000 {
+            self.showAlert()
+            return true
+        } else {
+            return false
+        }
+    }
+
+    @IBAction func analyze(_ bypassDataCheck: Bool = false) {
+        guard !callInProgress else { return }
         showLoading()
-        getStoredGames { (games) in
+        getStoredGames(gameType: U.shared.search.gameType) { (games) in
             print("🐴 got \(games.count) stored games")
             UserData.shared.games = games
             self.storeLastDate(games.last?.date ?? "")
@@ -71,30 +80,56 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
                 self.openResult()
             }
         } failure: { (error) in
+            if !bypassDataCheck {
+                if self.dataCheck() {
+                    return
+                }
+            }
             print("🐴 no stored games found")
             self.showLoading()
             self.getExample {}
         }
     }
 
+    @IBAction func openFeedback() {
+        self.present(FeedbackVC(), animated: true, completion: nil)
+    }
+
     private func getAll(since: Date?, until: Date?, completion: @escaping () -> ()) {
         print("🐴 getting games from \(since) to \(until)")
+        callInProgress = true
+        registerBackgroundTask()
         self.getGames(nil, sinceDate: since?.millisecondsSince1970, untilDate: until?.millisecondsSince1970) { (games) in
+            self.callInProgress = false
+            if self.backgroundTask != .invalid {
+                self.endBackgroundTask()
+            }
             guard let games = games, !games.isEmpty else {
                 print("🐴 no new games")
                 completion()
                 return }
             print("🐴 received \(games.count) games")
-            UserData.shared.games.append(contentsOf: games)
+            if !self.isExample {
+                U.shared.games.append(contentsOf: games)
+            } else {
+                U.shared.games = games
+            }
             print("🐴 now userdata has \(UserData.shared.games.count) games")
-            self.storeGames(games) {
+            self.storeGames(games, gameType: U.shared.search.gameType) {
                 NotificationCenter.default.post(Notification(name: .CallFinished))
                 completion()
-            } failure: { (err) in }
-        } failure: { (error) in }
+            } failure: { (err) in
+                self.callInProgress = false
+                NotificationCenter.default.post(Notification(name: .CallFinished))
+            }
+        } failure: { (error) in
+            self.callInProgress = false
+            NotificationCenter.default.post(Notification(name: .CallFinished))
+        }
     }
 
     private func getExample(_ completion: @escaping () -> ()) {
+        isExample = true
         let _ = FloatingButtonController()
         self.getGames(100) { (games) in
             guard let games = games else { return }
@@ -108,6 +143,18 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
         }
     }
 
+    func registerBackgroundTask() {
+      backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+        self?.endBackgroundTask()
+      }
+      assert(backgroundTask != .invalid)
+    }
+
+    func endBackgroundTask() {
+      UIApplication.shared.endBackgroundTask(backgroundTask)
+      backgroundTask = .invalid
+    }
+
     private func openResult() {
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(ResultVC(), animated: true)
@@ -118,6 +165,21 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
         UIView.animate(withDuration: 0.3) {
             self.loadingView.alpha = 1
         }
+    }
+
+    private func showAlert() {
+        let alert = UIAlertController(title: "Hi!",
+                                      message: "This amount of games requires some time to download the first time, so in the mean time we will show you the last 100 you played, to get familiar with the app 🤓", preferredStyle: .alert)
+        let firstAction = UIAlertAction(title: "Ok", style: .default) { (_) in
+            self.analyze(true)
+        }
+        alert.addAction(firstAction)
+
+        let secondAction = UIAlertAction(title: "Cancel", style: .default) { (_) in
+            self.loadingView.alpha = 0
+        }
+        alert.addAction(secondAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

@@ -37,7 +37,7 @@ class WelcomeVC: UIViewController, ServiceProvider, StoreProvider {
     }
 
     private func showButtons() {
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.4) {
             self.lichessButton.alpha = 1
             self.anonimousButton.alpha = 1
         }
@@ -60,11 +60,17 @@ class WelcomeVC: UIViewController, ServiceProvider, StoreProvider {
     }
 
     @IBAction func lichessTapped() {
+        lichessButton.isUserInteractionEnabled = false
         Auth().authenticate(self) {
             self.getAccount { (account) in
+                self.lichessButton.isUserInteractionEnabled = true
                 self.onAccountRetrieved(account)
-            } failure: { (error) in }
-        } failure: { (error) in  }
+            } failure: { (error) in
+                self.lichessButton.isUserInteractionEnabled = true
+            }
+        } failure: { (error) in
+            self.lichessButton.isUserInteractionEnabled = true
+        }
     }
 
     @IBAction func anonimousTapped() {

@@ -275,6 +275,8 @@
     {
         "id" : "C41","name" : "Philidor Defense","pgn" : "e2e4 e7e5 g1f3 d7d6"
     },
+    { "id" : "C42","name" : "Petrov's Defense","pgn" : "e2e4 e7e5 g1f3 g8f6" } ,
+    { "id" : "C42","name" : "Russian Game","pgn" : "e2e4 e7e5 g1f3 g8f6" } ,
     { "id" : "C44","name" : "Scotch Game","pgn" : "e2e4 e7e5 g1f3 b8c6 d2d4" } ,
     { "id" : "C46","name" : "Four Knights Game","pgn" : "e2e4 e7e5 g1f3 b8c6 b1c3 g8f6" }
     , {

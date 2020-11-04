@@ -285,16 +285,23 @@ extension Dictionary {
     }
 }
 
+extension UILayoutPriority {
+
+    static let low = UILayoutPriority(1)
+    static let high = UILayoutPriority(999)
+}
+
 class Clock {
 
     private static var startO = CFAbsoluteTimeGetCurrent()
+    private static var desc: String = ""
 
-
-    static func start() {
+    static func start(_ desc: String? = nil) {
+        Clock.desc = desc ?? ""
         startO = CFAbsoluteTimeGetCurrent()
     }
 
     static func stop() {
-        print("🍏 total time \(CFAbsoluteTimeGetCurrent() - startO)")
+        print("🍏 total time \(Clock.desc) \(CFAbsoluteTimeGetCurrent() - startO)")
     }
 }

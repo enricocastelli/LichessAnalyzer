@@ -37,7 +37,7 @@ public final class Game {
     }
 
     // MARK: Properties
-    public internal(set) var board: Board
+    public var board: Board
     public let whitePlayer: Player!
     public let blackPlayer: Player!
     public internal(set) var currentPlayer: Player!

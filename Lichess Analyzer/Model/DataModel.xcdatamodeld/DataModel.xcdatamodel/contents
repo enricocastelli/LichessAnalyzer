@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="SavedGame_all" representedClassName="SavedGame_all" syncable="YES">
+        <attribute name="black" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="eco" optional="YES" attributeType="String"/>
+        <attribute name="event" optional="YES" attributeType="String"/>
+        <attribute name="openingString" optional="YES" attributeType="String"/>
+        <attribute name="pgn" optional="YES" attributeType="String"/>
+        <attribute name="result" optional="YES" attributeType="String"/>
+        <attribute name="termination" optional="YES" attributeType="String"/>
+        <attribute name="white" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="date"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="SavedGame_blitz" representedClassName="SavedGame_blitz" syncable="YES">
+        <attribute name="black" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="eco" optional="YES" attributeType="String"/>
+        <attribute name="event" optional="YES" attributeType="String"/>
+        <attribute name="openingString" optional="YES" attributeType="String"/>
+        <attribute name="pgn" optional="YES" attributeType="String"/>
+        <attribute name="result" optional="YES" attributeType="String"/>
+        <attribute name="termination" optional="YES" attributeType="String"/>
+        <attribute name="white" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="date"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="SavedGame_bullet" representedClassName=".SavedGame_bullet" syncable="YES">
+        <attribute name="black" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="eco" optional="YES" attributeType="String"/>
+        <attribute name="event" optional="YES" attributeType="String"/>
+        <attribute name="openingString" optional="YES" attributeType="String"/>
+        <attribute name="pgn" optional="YES" attributeType="String"/>
+        <attribute name="result" optional="YES" attributeType="String"/>
+        <attribute name="termination" optional="YES" attributeType="String"/>
+        <attribute name="white" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="date"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="SavedGame_rapid" representedClassName="SavedGame_rapid" syncable="YES">
+        <attribute name="black" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="eco" optional="YES" attributeType="String"/>
+        <attribute name="event" optional="YES" attributeType="String"/>
+        <attribute name="openingString" optional="YES" attributeType="String"/>
+        <attribute name="pgn" optional="YES" attributeType="String"/>
+        <attribute name="result" optional="YES" attributeType="String"/>
+        <attribute name="termination" optional="YES" attributeType="String"/>
+        <attribute name="white" optional="YES" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="date"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="SavedGame_all" positionX="225" positionY="261" width="128" height="178"/>
+        <element name="SavedGame_blitz" positionX="-26.953125" positionY="147.82421875" width="128" height="178"/>
+        <element name="SavedGame_bullet" positionX="-208.3203125" positionY="100.41796875" width="128" height="178"/>
+        <element name="SavedGame_rapid" positionX="128.40625" positionY="43.34375" width="128" height="178"/>
+    </elements>
+</model>
