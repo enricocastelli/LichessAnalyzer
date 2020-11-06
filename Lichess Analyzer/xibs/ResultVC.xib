@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -26,6 +27,9 @@
                 <outlet property="sortingStack" destination="px9-b1-COb" id="4YF-Te-HA3"/>
                 <outlet property="subtitleLabel" destination="nSF-Su-oIo" id="qLq-06-doW"/>
                 <outlet property="tableView" destination="Fh4-dI-eKG" id="d6m-yz-JaL"/>
+                <outlet property="timingButton" destination="AdZ-jR-N2V" id="bfg-an-2Zl"/>
+                <outlet property="timingLabel" destination="X8N-xx-MJ7" id="Tlm-Xd-jqz"/>
+                <outlet property="timingSlider" destination="JHu-Ss-ad9" id="0dX-0c-tN0"/>
                 <outlet property="titleLabel" destination="QFO-e8-wGP" id="gEA-g3-AjZ"/>
                 <outlet property="trashButton" destination="3Lb-Nj-E9e" id="IFa-FK-lqa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -36,11 +40,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="1193"/>
+            <rect key="frame" x="0.0" y="0.0" width="466" height="1193"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Lb-Nj-E9e">
-                    <rect key="frame" x="358" y="52" width="40" height="40"/>
+                    <rect key="frame" x="410" y="52" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="FOS-kX-yc3"/>
                         <constraint firstAttribute="height" constant="40" id="y7L-LH-kmP"/>
@@ -67,51 +71,49 @@
                         <action selector="back" destination="-1" eventType="touchUpInside" id="El6-cs-bd5"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSF-Su-oIo" userLabel="subtitl">
-                    <rect key="frame" x="16" y="105" width="382" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSF-Su-oIo" userLabel="subtitl">
+                    <rect key="frame" x="16" y="105" width="434" height="19.5"/>
                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFO-e8-wGP" userLabel="Title">
-                    <rect key="frame" x="68" y="64" width="282" height="24"/>
-                    <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="20"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6E-UB-H0Z" userLabel="filterButton">
-                    <rect key="frame" x="358" y="144.5" width="40" height="40"/>
-                    <color key="backgroundColor" red="0.25997966610000001" green="0.4452857449" blue="0.61745505140000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="iCP-EM-7dU"/>
-                        <constraint firstAttribute="height" constant="40" id="nr5-x9-wZS"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="tray.fill" catalog="system"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="16"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="filterTapped" destination="-1" eventType="touchUpInside" id="gd5-eV-pdd"/>
-                    </connections>
-                </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CW3-eD-607">
-                    <rect key="frame" x="120" y="144.5" width="230" height="40"/>
+                    <rect key="frame" x="8" y="132.5" width="450" height="40"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RrS-fY-Mdx">
-                            <rect key="frame" x="0.0" y="0.0" width="230" height="124"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="RrS-fY-Mdx">
+                            <rect key="frame" x="64" y="0.0" width="322" height="124"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdZ-jR-N2V" userLabel="timing" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="HBJ-sN-Ejb"/>
+                                        <constraint firstAttribute="width" constant="40" id="adn-0g-7gI"/>
+                                    </constraints>
+                                    <color key="tintColor" red="0.32549019607843138" green="0.52156862745098043" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <state key="normal" image="clock.fill" catalog="system">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="timing"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="filterTapped" destination="-1" eventType="touchUpInside" id="Ox4-5a-iNV"/>
+                                    </connections>
+                                </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="92w-U8-Kkz" customClass="FilterStackView" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="88" height="124"/>
+                                    <rect key="frame" x="44" y="0.0" width="110" height="124"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJQ-8v-pLG" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="88" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="110" height="40"/>
                                             <color key="backgroundColor" red="0.25882352939999997" green="0.44705882349999998" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="L0f-Kn-Fgn"/>
                                                 <constraint firstAttribute="height" constant="40" id="eOE-ZN-iRm"/>
+                                                <constraint firstAttribute="width" secondItem="vJQ-8v-pLG" secondAttribute="height" multiplier="11:4" id="oEY-cg-j04"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -125,11 +127,11 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="time"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="AQ2-Ru-w4z"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="7DK-aT-wbB"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTb-VB-icX" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="42" width="88" height="40"/>
+                                            <rect key="frame" x="0.0" y="42" width="110" height="40"/>
                                             <color key="backgroundColor" red="0.25882352939999997" green="0.44705882349999998" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="UYV-gs-Rr0"/>
@@ -147,11 +149,11 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="normal"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="CZR-qs-vlG"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="iBM-4n-9wK"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqE-5P-RqH" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="84" width="88" height="40"/>
+                                            <rect key="frame" x="0.0" y="84" width="110" height="40"/>
                                             <color key="backgroundColor" red="0.25882352939999997" green="0.44705882349999998" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="FIc-qB-KPN"/>
@@ -169,13 +171,13 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="allTermination"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="XGb-Fp-TVg"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="qpb-Sq-uC9"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="05k-FK-ext" customClass="FilterStackView" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                    <rect key="frame" x="96" y="0.0" width="40" height="124"/>
+                                    <rect key="frame" x="158" y="0.0" width="40" height="124"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1VL-cq-cBL" userLabel="White" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -196,7 +198,7 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="white"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="lYZ-GU-HZx"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="343-3O-1mw"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDI-kt-YMo" userLabel="White" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
@@ -218,7 +220,7 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="black"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="4oa-kZ-aQ6"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="M73-wB-qIF"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obc-mq-Bd3" userLabel="White" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
@@ -240,18 +242,19 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="blackAndWhite"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="j43-yh-UAy"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="nCG-wT-Fmc"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="px9-b1-COb" customClass="FilterStackView" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                    <rect key="frame" x="144" y="0.0" width="86" height="124"/>
+                                    <rect key="frame" x="202" y="0.0" width="120" height="124"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-w6-8cR" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="86" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
                                             <color key="backgroundColor" red="0.25882352941176467" green="0.44705882352941173" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" secondItem="tOL-w6-8cR" secondAttribute="height" multiplier="3:1" id="apY-zo-8Bv"/>
                                                 <constraint firstAttribute="height" constant="40" id="bk3-n2-awV"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
@@ -266,11 +269,11 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="mostPlayed"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="zIn-o9-9de"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="FVc-Bu-5K7"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iR-8T-LTR" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="42" width="86" height="40"/>
+                                            <rect key="frame" x="0.0" y="42" width="120" height="40"/>
                                             <color key="backgroundColor" red="0.25997966610000001" green="0.4452857449" blue="0.61745505140000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
                                             <color key="tintColor" systemColor="labelColor"/>
@@ -284,11 +287,11 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="strongest"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="rEk-Hc-9VO"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="Wck-cm-pwA"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3S-Bt-SYQ" customClass="FilterButton" customModule="Lichess_Analyzer" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="84" width="86" height="40"/>
+                                            <rect key="frame" x="0.0" y="84" width="120" height="40"/>
                                             <color key="backgroundColor" red="0.25997966610000001" green="0.4452857449" blue="0.61745505140000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
                                             <color key="tintColor" systemColor="labelColor"/>
@@ -302,25 +305,51 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="sorting" value="weakest"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="sortWithSender:" destination="-1" eventType="touchUpInside" id="7Om-vb-V4e"/>
+                                                <action selector="sortTappedWithSender:" destination="-1" eventType="touchUpInside" id="MMz-Fe-8hk"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
                             </subviews>
                         </stackView>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JHu-Ss-ad9" customClass="TimeSlider" customModule="Lichess_Analyzer" customModuleProvider="target">
+                            <rect key="frame" x="62" y="155.5" width="374" height="31"/>
+                            <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="sliderChanged:" destination="-1" eventType="valueChanged" id="giq-lA-9qQ"/>
+                            </connections>
+                        </slider>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account creation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8N-xx-MJ7" userLabel="subtitl">
+                            <rect key="frame" x="64" y="132" width="370" height="19.5"/>
+                            <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="RrS-fY-Mdx" secondAttribute="trailing" id="3x4-Px-qSQ"/>
-                        <constraint firstItem="RrS-fY-Mdx" firstAttribute="leading" secondItem="CW3-eD-607" secondAttribute="leading" id="4ti-az-g8b"/>
+                        <constraint firstItem="X8N-xx-MJ7" firstAttribute="top" secondItem="RrS-fY-Mdx" secondAttribute="bottom" constant="8" id="0ZT-lB-0tH"/>
+                        <constraint firstAttribute="trailing" secondItem="JHu-Ss-ad9" secondAttribute="trailing" constant="16" id="3Ye-gv-O5u"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RrS-fY-Mdx" secondAttribute="trailing" id="3x4-Px-qSQ"/>
+                        <constraint firstItem="RrS-fY-Mdx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CW3-eD-607" secondAttribute="leading" id="5ci-e8-PvD"/>
+                        <constraint firstItem="X8N-xx-MJ7" firstAttribute="leading" secondItem="JHu-Ss-ad9" secondAttribute="leading" id="6df-qd-JwI"/>
                         <constraint firstAttribute="height" priority="999" constant="40" id="74a-n5-ubm"/>
+                        <constraint firstItem="JHu-Ss-ad9" firstAttribute="leading" secondItem="RrS-fY-Mdx" secondAttribute="leading" id="9Oo-uo-7aW"/>
                         <constraint firstItem="RrS-fY-Mdx" firstAttribute="top" secondItem="CW3-eD-607" secondAttribute="top" id="WoD-0H-AcV"/>
-                        <constraint firstAttribute="bottom" secondItem="RrS-fY-Mdx" secondAttribute="bottom" priority="250" id="ccp-F7-AlK"/>
+                        <constraint firstAttribute="bottom" secondItem="JHu-Ss-ad9" secondAttribute="bottom" priority="500" constant="4" id="YiJ-u4-SEC"/>
+                        <constraint firstItem="X8N-xx-MJ7" firstAttribute="trailing" secondItem="JHu-Ss-ad9" secondAttribute="trailing" id="gAD-Wj-H33"/>
+                        <constraint firstItem="RrS-fY-Mdx" firstAttribute="centerX" secondItem="CW3-eD-607" secondAttribute="centerX" id="l1J-3u-5C4"/>
+                        <constraint firstItem="JHu-Ss-ad9" firstAttribute="top" secondItem="X8N-xx-MJ7" secondAttribute="bottom" constant="4" id="mNX-SK-cns"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFO-e8-wGP" userLabel="Title">
+                    <rect key="frame" x="68" y="64" width="334" height="24"/>
+                    <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fh4-dI-eKG">
-                    <rect key="frame" x="16" y="192.5" width="382" height="1000.5"/>
+                    <rect key="frame" x="16" y="188.5" width="434" height="1004.5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="ieN-pm-sHd"/>
@@ -328,7 +357,7 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r5n-mV-MCY" userLabel="separator">
-                    <rect key="frame" x="137" y="96" width="140" height="1"/>
+                    <rect key="frame" x="163" y="96" width="140" height="1"/>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="AV5-4f-rVb"/>
@@ -343,34 +372,33 @@
                 <constraint firstItem="QFO-e8-wGP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="3nI-6d-tJK"/>
                 <constraint firstItem="r5n-mV-MCY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="49w-4d-PV7"/>
                 <constraint firstItem="QFO-e8-wGP" firstAttribute="leading" secondItem="hZe-r3-or0" secondAttribute="trailing" constant="8" id="8Dh-Ak-TPi"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="F6E-UB-H0Z" secondAttribute="trailing" constant="16" id="8yg-yl-uqX"/>
-                <constraint firstItem="CW3-eD-607" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="JLu-qw-v0M"/>
-                <constraint firstItem="F6E-UB-H0Z" firstAttribute="top" secondItem="CW3-eD-607" secondAttribute="top" id="JVE-7n-Dyh"/>
+                <constraint firstItem="Fh4-dI-eKG" firstAttribute="top" secondItem="CW3-eD-607" secondAttribute="bottom" constant="16" id="Fug-bJ-qz3"/>
+                <constraint firstItem="CW3-eD-607" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-8" id="Ha6-Ea-jdB"/>
+                <constraint firstItem="CW3-eD-607" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="L3C-Dp-uN8"/>
                 <constraint firstItem="3Lb-Nj-E9e" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="Qve-rZ-gav"/>
                 <constraint firstItem="3Lb-Nj-E9e" firstAttribute="leading" secondItem="QFO-e8-wGP" secondAttribute="trailing" constant="8" id="Tmp-5e-IWI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fh4-dI-eKG" secondAttribute="trailing" constant="16" id="Tw0-LD-1We"/>
                 <constraint firstItem="nSF-Su-oIo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="UYp-Dh-xxm"/>
                 <constraint firstItem="hZe-r3-or0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="VW1-og-nTJ"/>
-                <constraint firstItem="F6E-UB-H0Z" firstAttribute="top" secondItem="nSF-Su-oIo" secondAttribute="bottom" constant="20" id="ZaH-sa-t5T"/>
+                <constraint firstItem="CW3-eD-607" firstAttribute="top" secondItem="nSF-Su-oIo" secondAttribute="bottom" constant="8" id="YWo-7k-P10"/>
                 <constraint firstItem="nSF-Su-oIo" firstAttribute="top" secondItem="r5n-mV-MCY" secondAttribute="bottom" constant="8" id="dXI-K2-HWP"/>
                 <constraint firstItem="hZe-r3-or0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="e0J-p4-HD1"/>
-                <constraint firstItem="F6E-UB-H0Z" firstAttribute="leading" secondItem="CW3-eD-607" secondAttribute="trailing" constant="8" id="fCx-RM-z8x"/>
+                <constraint firstItem="CW3-eD-607" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ix0-kc-n5D"/>
                 <constraint firstItem="r5n-mV-MCY" firstAttribute="top" secondItem="QFO-e8-wGP" secondAttribute="bottom" constant="8" id="k6k-rp-HqV"/>
-                <constraint firstItem="Fh4-dI-eKG" firstAttribute="top" secondItem="CW3-eD-607" secondAttribute="bottom" constant="8" id="nQu-ho-918"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3Lb-Nj-E9e" secondAttribute="trailing" constant="16" id="vTW-S2-iEd"/>
                 <constraint firstItem="Fh4-dI-eKG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="wCT-E6-q9g"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nSF-Su-oIo" secondAttribute="trailing" constant="16" id="z8K-vT-IUt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-197.10144927536234" y="183.14732142857142"/>
+            <point key="canvasLocation" x="-159.42028985507247" y="183.14732142857142"/>
         </view>
     </objects>
     <resources>
         <image name="all" width="250" height="248"/>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>
         <image name="bK" width="234" height="234"/>
+        <image name="clock.fill" catalog="system" width="128" height="121"/>
         <image name="trash.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="tray.fill" catalog="system" width="128" height="88"/>
         <image name="wK" width="234" height="234"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

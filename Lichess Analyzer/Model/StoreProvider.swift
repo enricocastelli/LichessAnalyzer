@@ -9,43 +9,16 @@ import UIKit
 import CoreData
 
 enum StoreKeys {
-    static let isFirstTime = "isFirstTime"
-    static let name = "name"
     static let refreshToken = "refreshToken"
     static let search = "search"
-    static let lastDateBullet = "lastDateBullet"
     static let filters = "filters"
     static let lastDateDownload = "lastDateDownload"
     static let untilDateDownload = "untilDateDownload"
-
 }
-
 
 protocol StoreProvider {}
 
 extension StoreProvider {
-
-    func storeFirstTime() {
-        UserDefaults.standard.set(false, forKey: StoreKeys.isFirstTime)
-    }
-
-    func isFirstTime() ->  Bool {
-//        if isSimulator() { return true }
-        if let _ = UserDefaults.standard.object(forKey: StoreKeys.isFirstTime) as? Bool {
-            return false
-        } else {
-            return true
-        }
-    }
-
-    func storeName(_ name: String) {
-        UserDefaults.standard.set(name, forKey: StoreKeys.name)
-    }
-
-    func getName() -> String? {
-        return UserDefaults.standard.object(forKey: StoreKeys.name) as? String
-    }
-
 
     func storeRefreshToken(_ token: String) {
         UserDefaults.standard.set(token, forKey: StoreKeys.refreshToken)
@@ -141,6 +114,18 @@ extension StoreProvider {
         } catch let error as NSError {
             Logger.error(error)
             failure(error)
+        }
+    }
+
+    func hasStoredGames(gameType: GameType) -> Int {
+        let context = getContext()
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "SavedGame_\(gameType)")
+        do {
+            let games = try context.fetch(fetchRequest)
+            return games.count
+        } catch {
+            return 0
         }
     }
 

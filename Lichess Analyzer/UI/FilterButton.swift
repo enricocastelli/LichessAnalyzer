@@ -66,3 +66,13 @@ class FilterStackView: UIStackView {
         }
     }
 }
+
+class TimeSlider: UISlider {
+
+    var onTouchEnded: (() -> ())?
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        onTouchEnded?()
+    }
+}

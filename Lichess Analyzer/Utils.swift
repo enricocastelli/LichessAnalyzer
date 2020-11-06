@@ -49,6 +49,18 @@ extension Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
+
+    func secondsToMinutesSecondsString() -> String {
+        let (m, s) = secondsToMinutesSeconds()
+        let secondString = s == 1 ? "1 Second" : "\(s) Seconds"
+        return self < 60 ?
+            secondString :
+            "\(m) Min: \(secondString)"
+    }
+
+    func secondsToMinutesSeconds() -> (Int, Int) {
+        return ((Int(self) % 3600) / 60, (Int(self) % 3600) % 60)
+    }
 }
 
 extension NSMutableAttributedString {
@@ -118,6 +130,10 @@ extension UIColor {
         default: return UIColor(hex: "15900A")
         }
     }
+
+    static var baseColor = UIColor(hex: "5385AD")
+    static var grayColor = UIColor(hex: "acadae")
+    static var greenColor = UIColor(hex: "56AB59")
 }
 
 extension UIView {
@@ -245,6 +261,11 @@ extension Date {
         dateFormat.dateFormat = format
         return dateFormat.string(from: self)
     }
+
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+
 }
 
 extension String {

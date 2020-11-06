@@ -34,6 +34,9 @@ class DetailVC: ResultVC {
         colorStack.isHidden = !hasBWColor()
         otherStack.isHidden = true
         trashButton.isHidden = true
+        timingSlider.isHidden = true
+        timingLabel.isHidden = true
+        timingButton.isHidden = true
     }
 
     override func addObserver() {}
@@ -64,15 +67,16 @@ class DetailVC: ResultVC {
         Clock.start()
         source = opening
         filteredSource = opening
-        filter(U.shared.filters.color, U.shared.filters.termination, false)
-        sort(U.shared.filters.sorting, false)
-        reloadTableView()
+        sortAndFilter {
+            self.reloadTableView()
+        }
         updateLabels()
         setFilters()
         Clock.stop()
     }
 
-    override func filter(_ color: Color, _ termination: Termination, _ shouldReload: Bool = true) {
+    override func filter() {
+        let color = U.shared.filters.color
         switch color {
         case .white:
             filteredGames = item.filteredGames.filter({$0.white == UserData.shared.searchName })
@@ -82,9 +86,6 @@ class DetailVC: ResultVC {
             filteredGames = item.filteredGames
         }
         filteredSource = Dictionary(grouping: filteredGames, by: { $0.completeOpening })
-        if shouldReload {
-            reloadTableView()
-        }
     }
 
     override func setTableView() {

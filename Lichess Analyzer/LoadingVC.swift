@@ -12,13 +12,25 @@ extension UIViewController {
     func showLoadingAnimation() {
         guard let window = UIApplication.shared.windows.first, window.subviews.filter({ $0.isKind(of: LoadingView.self)}).isEmpty else {
             return }
-        window.addContentView(LoadingView())
+        window.backgroundColor = .clear
+        let loadingView = LoadingView()
+        loadingView.alpha = 0
+        window.addContentView(loadingView)
+        UIView.animate(withDuration: 0.4) {
+            loadingView.alpha = 1
+        }
     }
 
     func hideLoadingAnimation() {
-        guard let window = UIApplication.shared.windows.first, let loadingView = window.subviews.filter({ $0.isKind(of: LoadingView.self)}).first else {
-            return }
-        loadingView.removeFromSuperview()
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.windows.first, let loadingView = window.subviews.filter({ $0.isKind(of: LoadingView.self)}).first else {
+                return }
+            UIView.animate(withDuration: 0.4) {
+                loadingView.alpha = 0
+            } completion: { (_) in
+                loadingView.removeFromSuperview()
+            }
+        }
     }
 }
 
@@ -36,7 +48,10 @@ class LoadingView: UIView {
 
     init() {
         super.init(frame: UIScreen.main.bounds)
-        backgroundColor = .white
+        backgroundColor = UIColor.white.withAlphaComponent(0)
+        let blur = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blur)
+        addContentView(blurView)
         let act = UIActivityIndicatorView(style: .large)
         act.tintColor = .darkGray
         act.startAnimating()

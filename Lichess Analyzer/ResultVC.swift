@@ -20,10 +20,13 @@ class ResultVC: UIViewController, StoreProvider {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var filterViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var timingButton: FilterButton!
     @IBOutlet var filterStacks: [FilterStackView]!
     @IBOutlet var colorStack: FilterStackView!
     @IBOutlet var sortingStack: FilterStackView!
     @IBOutlet var otherStack: FilterStackView!
+    @IBOutlet weak var timingLabel: UILabel!
+    @IBOutlet var timingSlider: TimeSlider!
     @IBOutlet var trashButton: UIButton!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -48,6 +51,7 @@ class ResultVC: UIViewController, StoreProvider {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setLoad()
+        setSlider()
     }
 
     private func setLoad(){
@@ -68,21 +72,40 @@ class ResultVC: UIViewController, StoreProvider {
     // all data is changed needs to reload everything (as view did load)
     func reloadData() {
         Clock.start()
+        showLoadingAnimation()
         games = UserData.shared.games
         source = Dictionary(grouping: games, by: { $0.opening })
         filteredSource = source
-        filter(UserData.shared.filters.color, UserData.shared.filters.termination, false)
-        sort(UserData.shared.filters.sorting, false)
-        reloadTableView()
+        sortAndFilter {
+            Clock.stop()
+            self.reloadTableView()
+            self.hideLoadingAnimation()
+        }
         setFilters()
-        Clock.stop()
+    }
+
+    private func setSlider() {
+        switch U.shared.filters.timing {
+        case .accountCreation: timingSlider.setValue(0, animated: false)
+        case .lastYear: timingSlider.setValue(0.15, animated: false)
+        case .last6Months: timingSlider.setValue(0.3, animated: false)
+        case .lastMonth: timingSlider.setValue(0.45, animated: false)
+        case ._15Days: timingSlider.setValue(0.7, animated: false)
+        case ._7Days: timingSlider.setValue(0.85, animated: false)
+        case .today: timingSlider.setValue(1, animated: false)
+        }
+        timingLabel.text = U.shared.filters.timing.desc()
+        U.shared.filters.timing == .accountCreation ? timingButton.unselected() : timingButton.selected()
+        timingSlider.onTouchEnded = sliderStopped
     }
 
     // reload UI, typically after sorting/filter
     func reloadTableView() {
-        updateLabels()
-        (tableView.tableHeaderView as? ResultView)?.update(wins: filteredGames.wins(), loss: filteredGames.lost(), draw: filteredGames.draw())
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.updateLabels()
+            (self.tableView.tableHeaderView as? ResultView)?.update(wins: self.filteredGames.wins(), loss: self.filteredGames.lost(), draw: self.filteredGames.draw())
+            self.tableView.reloadData()
+        }
     }
 
     func updateLabels() {
@@ -104,63 +127,65 @@ class ResultVC: UIViewController, StoreProvider {
         }
     }
 
-    func sort(_ sorting: GamesSorting, _ shouldReload: Bool = true) {
+    func sortAndFilter(_ shouldReload: Bool = true, completion: @escaping() -> ()) {
+        let sorting = U.shared.filters.sorting
         Clock.start("Filter")
-        switch sorting {
-        case .mostPlayed:
-            sections = filteredSource.sortedKeysByValue { $0.count > $1.count }
-        case .strongest:
-            sections = filteredSource.sortedKeysByValue { $0.points > $1.points }
-        case .weakest:
-            sections = filteredSource.sortedKeysByValue { $0.points < $1.points }
+        let sortGroup = DispatchGroup()
+        sortGroup.enter()
+        let dispatchQueue = DispatchQueue(label: "Sort", qos: .background)
+        dispatchQueue.async(group: sortGroup, qos: .background, flags: []) {
+            self.filter()
         }
-        if shouldReload {
-            reloadTableView()
+        sortGroup.leave()
+        sortGroup.notify(queue: .global(qos: .background)) {
+            switch sorting {
+            case .mostPlayed:
+                self.sections = self.filteredSource.sortedKeysByValue { $0.count > $1.count && $0.wins() > $1.wins() }
+            case .strongest:
+                self.sections = self.filteredSource.sortedKeysByValue { $0.points > $1.points && $0.wins() > $1.wins() }
+            case .weakest:
+                self.sections = self.filteredSource.sortedKeysByValue { $0.points < $1.points && $0.wins() > $1.wins() }
+            }
+            completion()
         }
+        Clock.stop()
     }
 
-    func filter(_ color: Color, _ termination: Termination, _ shouldReload: Bool = true) {
+    func filter() {
+        let filterDate = U.shared.filters.timing.date() ?? Date()
+        let color = U.shared.filters.color
+        let termination = U.shared.filters.termination
         let terminationString: String = {
             guard termination != .allTermination else { return "m" }
             return termination == .time ? "time" : "normal"
         }()
         switch color {
         case .white:
-            filteredGames = games.filter({$0.white == UserData.shared.searchName && $0.termination.lowercased().contains(terminationString)})
-            filteredSource = Dictionary(grouping: filteredGames, by: { $0.opening })
+            self.filteredGames = self.games.filter({
+                $0.white == UserData.shared.searchName &&
+                    $0.termination.lowercased().contains(terminationString) &&
+                    $0.validDate > filterDate
+            })
+            self.filteredSource = Dictionary(grouping: self.filteredGames, by: { $0.opening })
         case .black:
-            filteredGames = games.filter({$0.black == UserData.shared.searchName &&
-                                            $0.termination.lowercased().contains(terminationString)})
-            filteredSource = Dictionary(grouping: filteredGames, by: { $0.opening })
+            self.filteredGames = self.games.filter({
+                $0.black == UserData.shared.searchName &&
+                    $0.termination.lowercased().contains(terminationString) &&
+                    $0.validDate > filterDate
+            })
+            self.filteredSource = Dictionary(grouping: self.filteredGames, by: { $0.opening })
         case .blackAndWhite:
-            filteredGames = games.filter({ $0.termination.lowercased().contains(terminationString) })
-            filteredSource = Dictionary(grouping: filteredGames, by: { $0.opening })
-        }
-        if shouldReload {
-            reloadTableView()
+            self.filteredGames = self.games.filter({
+                $0.termination.lowercased().contains(terminationString) &&
+                    $0.validDate > filterDate
+            })
+            self.filteredSource = Dictionary(grouping: self.filteredGames, by: { $0.opening })
         }
     }
 
     @objc private func updateGames() {
-        showLoading() {
-            if self.tableView != nil {
-                self.reloadData()
-                self.hideLoading()
-            }
-        }
-    }
-
-    func showLoading(_ completion: @escaping() -> ()) {
-        UIView.animate(withDuration: 0.3) {
-//LOADING
-        } completion: { (_) in
-            completion()
-        }
-    }
-
-    func hideLoading() {
-        UIView.animate(withDuration: 0.5) {
-            //LOADING
+        if self.tableView != nil {
+            setLoad()
         }
     }
 
@@ -195,8 +220,8 @@ class ResultVC: UIViewController, StoreProvider {
         filterOpened ? hideMenu() : showMenu()
     }
 
-    @IBAction func sort(sender: FilterButton) {
-        guard !sender.isCurrent else {
+    @IBAction func sortTapped(sender: FilterButton) {
+        guard !sender.isCurrent && sender.sorting != "timing" else {
             filterTapped()
             return }
         showLoadingAnimation()
@@ -207,10 +232,37 @@ class ResultVC: UIViewController, StoreProvider {
         } else if let termination = Termination(rawValue: sender.sorting) {
             U.shared.filters.termination = termination
         }
-        filter(U.shared.filters.color, U.shared.filters.termination, false)
-        sort(U.shared.filters.sorting)
+        sortAndFilter {
+            self.reloadTableView()
+            self.hideLoadingAnimation()
+        }
         sender.didSelect()
-        hideLoadingAnimation()
+    }
+
+    var sliderValue: Timing = U.shared.filters.timing
+
+    @IBAction func sliderChanged(_ sender: Any) {
+        switch timingSlider.value {
+        case let x where x == 0: U.shared.filters.timing = .accountCreation
+        case let x where x < 0.15: U.shared.filters.timing = .lastYear
+        case let x where x < 0.3: U.shared.filters.timing = .last6Months
+        case let x where x < 0.45: U.shared.filters.timing = .lastMonth
+        case let x where x < 0.7: U.shared.filters.timing = ._15Days
+        case let x where x < 0.85: U.shared.filters.timing = ._7Days
+        default: U.shared.filters.timing = .today
+        }
+        timingLabel.text = U.shared.filters.timing.desc()
+        U.shared.filters.timing == .accountCreation ? timingButton.unselected() : timingButton.selected()
+    }
+
+    func sliderStopped() {
+        guard sliderValue != U.shared.filters.timing else { return }
+        sliderValue = U.shared.filters.timing
+        showLoadingAnimation()
+        sortAndFilter {
+            self.reloadTableView()
+            self.hideLoadingAnimation()
+        }
     }
 
     @IBAction func back() {
@@ -229,6 +281,7 @@ class ResultVC: UIViewController, StoreProvider {
                                       message: "Are you sure you want to delete all \(U.shared.search.gameType) games?", preferredStyle: .alert)
         let firstAction = UIAlertAction(title: "Yes", style: .default) { (_) in
             self.deleteGames(gameType: U.shared.search.gameType) {
+                UserData.shared.games = []
                 self.back()
             } failure: { (error) in }
         }

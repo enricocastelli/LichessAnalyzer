@@ -16,9 +16,9 @@ class ResultView: NibView {
     @IBOutlet weak var containerView: UIView!
     var circleView: CircleAnimatedView?
 
-    var wins: Int = 0
-    var loss: Int = 0
-    var draw: Int = 0
+    var wins: Int?
+    var loss: Int?
+    var draw: Int?
 
     func update(wins: Int, loss: Int, draw: Int) {
         self.wins = wins
@@ -34,6 +34,7 @@ class ResultView: NibView {
     }
 
     private func setView() {
+        guard let wins = wins, let loss = loss, let draw = draw else { return }
         let totalGames = wins + loss + draw
         circleView = CircleAnimatedView(wins: wins.percentage(of: totalGames)/100, loss: loss.percentage(of: totalGames)/100, draw: draw.percentage(of: totalGames)/100)
         self.containerView.addContentView(circleView!)

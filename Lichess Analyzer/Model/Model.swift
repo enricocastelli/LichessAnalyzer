@@ -37,14 +37,15 @@ enum Result {
 
 enum Timing: String, Decodable, Encodable {
 
-    case accountCreation, beginningYear, beginningMonth, _20Days, _7Days, today
+    case accountCreation, lastYear, last6Months, lastMonth, _15Days, _7Days, today
 
     func desc() -> String {
         switch self {
         case .accountCreation: return "since account creation"
-        case .beginningYear: return "since beginning of the year"
-        case .beginningMonth: return "since beginning of the month"
-        case ._20Days: return "last 20 days"
+        case .lastYear: return "last year"
+        case .last6Months: return "last 6 months"
+        case .lastMonth: return "last month"
+        case ._15Days: return "last 15 days"
         case ._7Days: return "last 7 days"
         case .today: return "today"
         }
@@ -53,9 +54,10 @@ enum Timing: String, Decodable, Encodable {
     func date() -> Date? {
         switch self {
         case .accountCreation: return Date(timeIntervalSince1970: 0)
-        case .beginningYear: return "01-01-\(Date().year.description)".toDate()
-        case .beginningMonth: return "01-\(Date().month.description)-\(Date().year.description)".toDate()
-        case ._20Days: return Calendar.current.date(byAdding: .day, value: -20, to: Date())
+        case .lastYear: return Calendar.current.date(byAdding: .year, value: -1, to: Date())
+        case .last6Months: return Calendar.current.date(byAdding: .month, value: -6, to: Date())
+        case .lastMonth: return Calendar.current.date(byAdding: .month, value: -1, to: Date())
+        case ._15Days: return Calendar.current.date(byAdding: .day, value: -15, to: Date())
         case ._7Days: return Calendar.current.date(byAdding: .day, value: -7, to: Date())
         case .today: return Calendar.current.startOfDay(for: Date())
         }
@@ -72,10 +74,12 @@ struct Filter: Encodable, Decodable {
     var sorting: GamesSorting
     var color: Color
     var termination: Termination
+    var timing: Timing
 
     static var empty: Filter = Filter(sorting: .mostPlayed,
                                       color: .blackAndWhite,
-                                      termination: .allTermination)
+                                      termination: .allTermination,
+                                      timing: .accountCreation)
 
 }
 

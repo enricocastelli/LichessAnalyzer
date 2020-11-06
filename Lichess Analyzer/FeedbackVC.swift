@@ -22,7 +22,6 @@ class FeedbackVC: UIViewController {
         emailTextView.delegate = self
         textView.delegate = self
         label.text = "Everything you see was made with 🦕 by Enrico Castelli.\n(Lichess account polistirolo99)\n\nFeedbacks are always appreciated! (as well as good reviews 🤓)"
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func send() {
@@ -34,7 +33,7 @@ class FeedbackVC: UIViewController {
     }
 
     private func sendFeedback(success: @escaping() ->(), failure: @escaping(Error) ->()) {
-        Firestore.firestore().collection("reviews").addDocument(data: [emailTextView.text ?? "No email" : textView.text ?? "No text"])
+        Firestore.firestore().collection("reviews").addDocument(data: [emailTextView.text ?? "No email" : textView.text ?? "No text", "date": Date().toString() ?? "No date"])
         DispatchQueue.main.async {
             success()
         }

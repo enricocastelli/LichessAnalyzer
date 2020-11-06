@@ -149,6 +149,7 @@ class FloatingButtonController: UIViewController {
     }
 
     var secondsElapsed = 0
+    var estimatedDownloadDate: Date?
 
     private func updateLabel() {
         secondsElapsed += 1
@@ -158,8 +159,11 @@ class FloatingButtonController: UIViewController {
 
     func estimatedDownloadTime() -> String {
         guard let gamesNuber = UserData.shared.account?.numberOfGamesForType(UserData.shared.search.gameType) else { return "Loading.."}
-        let timeRemaining = ((gamesNuber)/45) - secondsElapsed
-        guard timeRemaining > 0 else { return "Loading..." }
+        let downloadTime = ((gamesNuber)/45)
+        if estimatedDownloadDate == nil {
+            estimatedDownloadDate = Calendar.current.date(byAdding: .second, value: downloadTime, to: Date())
+        }
+        let timeRemaining = (estimatedDownloadDate ?? Date()) - Date()
         return timeRemaining.secondsToMinutesSecondsString()
     }
 

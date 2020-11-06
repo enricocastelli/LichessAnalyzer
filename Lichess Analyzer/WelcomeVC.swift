@@ -45,7 +45,6 @@ class WelcomeVC: UIViewController, ServiceProvider, StoreProvider {
 
     private func onAccountRetrieved(_ account: Account) {
         UserData.shared.account = account
-        storeName(account.username)
         openHome()
     }
 

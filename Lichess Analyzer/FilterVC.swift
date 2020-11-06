@@ -30,7 +30,7 @@ class FilterVC: UIViewController {
 
     var maxNums = [100, 500]
     var gameTypes: [GameType] = [.bullet, .blitz, .rapid, .all]
-    var timings: [Timing] = [.accountCreation, .beginningYear, .beginningMonth, ._20Days, ._7Days, .today]
+//    var timings: [Timing] = [.accountCreation, .las, .beginningMonth, ._20Days, ._7Days, .today]
 
     var onSelect: (() -> ())?
 

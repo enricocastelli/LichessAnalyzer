@@ -13,9 +13,11 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
 
     @IBOutlet weak var visibleView: UIView!
     @IBOutlet weak var textContainerView: UIView!
-    @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var controlContainerView: UIView!
     @IBOutlet weak var allLabel: UILabel!
+    @IBOutlet weak var newLabel: UILabel!
+    @IBOutlet weak var statusImageView: UIImageView!
+
 
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     var gameTypeControl: UISegmentedControl!
@@ -25,18 +27,19 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingView.isHidden = false
         addText("Hello \(UserData.shared.account?.username ?? "Stranger")", delay: 0.4, duration: 0.8, position: CGPoint(x: 40, y: 16), lineWidth: 1, font: Font.with(.hairline, 32), color: UIColor.darkGray.withAlphaComponent(0.8), inView: textContainerView)
-        setGameTypeControl()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadingView.alpha = callInProgress ? 1 : 0
+        setGameTypeControl()
     }
 
     private func setGameTypeControl() {
         guard let account = UserData.shared.account else { return }
+        if gameTypeControl != nil && controlContainerView.contains(gameTypeControl) {
+            gameTypeControl.removeFromSuperview()
+        }
         gameTypes = account.perfsAvailable()
         gameTypeControl = UISegmentedControl(items: gameTypes.map({$0.rawValue.uppercased()}))
         controlContainerView.addContentView(gameTypeControl)
@@ -45,13 +48,36 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
         gameTypeControl.selectedSegmentIndex = index
         UserData.shared.search.gameType = gameTypes[gameTypeControl.selectedSegmentIndex]
         updateLabel()
-        let font = [NSAttributedString.Key.font : Font.with(Style.light, 18)]
+        let font = [NSAttributedString.Key.font : Font.with(Style.light, 14)]
         gameTypeControl.setTitleTextAttributes(font, for: .normal)
+        UILabel.appearance(whenContainedInInstancesOf: ([UISegmentedControl.self])).numberOfLines = 0
     }
 
     func updateLabel() {
         guard let gamesNuber = UserData.shared.account?.numberOfGamesForType(UserData.shared.search.gameType) else { return }
         allLabel.changeText("\(gamesNuber.description) GAMES")
+        updateStatus()
+    }
+
+    func updateStatus() {
+        guard let account = UserData.shared.account else { return }
+        let nStoredGames = self.hasStoredGames(gameType: U.shared.search.gameType)
+        guard nStoredGames != 0 else {
+            statusImageView.image = UIImage(systemName: "xmark.icloud.fill")
+            statusImageView.tintColor = UIColor.grayColor
+            newLabel.text = ""
+            return
+        }
+        let nAccountGames = account.numberOfGamesForType(U.shared.search.gameType)
+        if nStoredGames == nAccountGames {
+            statusImageView.image = UIImage(systemName: "checkmark.icloud.fill")
+            statusImageView.tintColor = UIColor.greenColor
+            newLabel.text = ""
+        } else {
+            statusImageView.image = UIImage(systemName: "arrow.counterclockwise.icloud.fill")
+            statusImageView.tintColor = UIColor.baseColor
+            newLabel.text = "+\(((nAccountGames ?? 0) - nStoredGames).description)"
+        }
     }
 
     @objc func selectedType() {
@@ -71,23 +97,30 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
 
     @IBAction func analyze(_ bypassDataCheck: Bool = false) {
         guard !callInProgress else { return }
-        showLoading()
+        showLoadingAnimation()
         getStoredGames(gameType: U.shared.search.gameType) { (games) in
             print("🐴 got \(games.count) stored games")
             UserData.shared.games = games
             self.storeLastDate(games.last?.date ?? "")
             self.getAll(since: games.last?.date.toDate("yyyy-MM-dd'H'HH-mmm-ss")?.addingTimeInterval(1), until: nil) {
+                // result will call hideLoading
                 self.openResult()
             }
         } failure: { (error) in
+            print("🐴 no stored games found")
             if !bypassDataCheck {
                 if self.dataCheck() {
+                    self.hideLoadingAnimation()
                     return
                 }
             }
-            print("🐴 no stored games found")
-            self.showLoading()
-            self.getExample {}
+            if UserData.shared.account?.numberOfGamesForType(U.shared.search.gameType) ?? 0 > 100 {
+                self.getExample {}
+            } else {
+                self.getAll(since: nil, until: nil) {
+                    self.openResult()
+                }
+            }
         }
     }
 
@@ -119,10 +152,12 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
                 NotificationCenter.default.post(Notification(name: .CallFinished))
                 completion()
             } failure: { (err) in
+                self.hideLoadingAnimation()
                 self.callInProgress = false
                 NotificationCenter.default.post(Notification(name: .CallFinished))
             }
         } failure: { (error) in
+            self.hideLoadingAnimation()
             self.callInProgress = false
             NotificationCenter.default.post(Notification(name: .CallFinished))
         }
@@ -132,6 +167,7 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
         isExample = true
         let _ = FloatingButtonController()
         self.getGames(100) { (games) in
+            self.hideLoadingAnimation()
             guard let games = games else { return }
             UserData.shared.games = games
             print("🐴 now userdata has \(games.count) games")
@@ -139,7 +175,7 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
             self.getAll(since: nil, until: nil) {}
             completion()
         } failure: { (error) in
-            self.loadingView.alpha = 0
+            self.hideLoadingAnimation()
         }
     }
 
@@ -160,12 +196,6 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
             self.navigationController?.pushViewController(ResultVC(), animated: true)
         }
     }
-    
-    private func showLoading() {
-        UIView.animate(withDuration: 0.3) {
-            self.loadingView.alpha = 1
-        }
-    }
 
     private func showAlert() {
         let alert = UIAlertController(title: "Hi!",
@@ -176,7 +206,7 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
         alert.addAction(firstAction)
 
         let secondAction = UIAlertAction(title: "Cancel", style: .default) { (_) in
-            self.loadingView.alpha = 0
+            self.hideLoadingAnimation()
         }
         alert.addAction(secondAction)
         self.present(alert, animated: true, completion: nil)
