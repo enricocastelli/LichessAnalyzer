@@ -88,6 +88,21 @@ extension NSMutableAttributedString {
         return self
     }
 
+    func link(_ value:String) -> NSMutableAttributedString {
+        let first = value.split(separator: ":").map({String($0)}).first!
+        if let url = URL(string: "www.\(first.replacingOccurrences(of: " ", with: "_")).com"){
+            let attributes:[NSAttributedString.Key : Any] = [
+                .font :  normalFont,
+                .foregroundColor : UIColor.baseColor,
+                .link: url
+            ]
+            self.append(NSAttributedString(string: value, attributes:attributes))
+            return self
+        } else {
+            return self.bold(value)
+        }
+    }
+
     func colorText(_ value:String, _ color: UIColor) -> NSMutableAttributedString {
 
         let attributes:[NSAttributedString.Key : Any] = [
@@ -303,6 +318,42 @@ extension Dictionary {
                 let (k, _) = $0
                 return k
             }
+    }
+}
+
+extension Array where Element == GameItem {
+
+    func findMost(sort: GamesSorting, using: Color) -> OpeningObject? {
+        guard using != .blackAndWhite else { return nil }
+        let filtered = self.filter({
+        switch using {
+        case .white: return $0.white.lowercased() == UserData.shared.searchName.lowercased()
+        case .black: return $0.black.lowercased() == UserData.shared.searchName.lowercased()
+        default: return false
+        }
+        })
+        var source = Dictionary(grouping: filtered, by: { $0.opening })
+        var result: KnownOpening?
+        if sort == .weakest {
+            result = source.sortedKeysByValue { $0.points < $1.points }.first
+            if result?.name == "Other" {
+                source = Dictionary(grouping: filtered, by: { $0.completeOpening })
+                result = source.sortedKeysByValue { $0.points < $1.points }.first
+            }
+        } else if sort == .strongest {
+            result = source.sortedKeysByValue { $0.points > $1.points }.first
+            if result?.name == "Other" {
+                source = Dictionary(grouping: filtered, by: { $0.completeOpening })
+                result = source.sortedKeysByValue { $0.points > $1.points }.first
+            }
+        } else {
+            result = source.sortedKeysByValue { $0.count > $1.count }.first
+            if result?.name == "Other" {
+                source = Dictionary(grouping: filtered, by: { $0.completeOpening })
+                result = source.sortedKeysByValue { $0.count > $1.count }.first
+            }
+        }
+        if result?.name == "Other" { return nil } else { return result }
     }
 }
 

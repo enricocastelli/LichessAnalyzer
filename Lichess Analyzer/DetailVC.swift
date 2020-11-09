@@ -79,9 +79,9 @@ class DetailVC: ResultVC {
         let color = U.shared.filters.color
         switch color {
         case .white:
-            filteredGames = item.filteredGames.filter({$0.white == UserData.shared.searchName })
+            filteredGames = item.filteredGames.filter({$0.white.lowercased() == UserData.shared.searchName.lowercased() })
         case .black:
-            filteredGames = item.filteredGames.filter({$0.black == UserData.shared.searchName })
+            filteredGames = item.filteredGames.filter({$0.black.lowercased() == UserData.shared.searchName.lowercased() })
         case .blackAndWhite:
             filteredGames = item.filteredGames
         }

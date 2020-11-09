@@ -12,13 +12,18 @@
         <array key="Lato-Light.ttf">
             <string>Lato-Light</string>
         </array>
+        <array key="Lato-Thin.ttf">
+            <string>Lato-Thin</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC" customModule="Lichess_Analyzer" customModuleProvider="target">
             <connections>
+                <outlet property="SearchButton" destination="eBm-Ws-mbD" id="f6z-TQ-JJy"/>
                 <outlet property="allLabel" destination="nDL-Wa-3Uh" id="C1u-5U-JcZ"/>
                 <outlet property="controlContainerView" destination="uLD-em-QwV" id="X6j-fP-GWq"/>
                 <outlet property="newLabel" destination="Dd3-Mb-4Gh" id="IvV-a5-M5b"/>
+                <outlet property="playerField" destination="ZbF-F1-Nc1" id="CFd-lD-fvb"/>
                 <outlet property="statusImageView" destination="Y6v-u3-M55" id="uOk-bN-eUb"/>
                 <outlet property="textContainerView" destination="00v-fY-6b9" id="lep-ZW-bhw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -52,7 +57,7 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-WW-RBU">
-                            <rect key="frame" x="16" y="375" width="382" height="146"/>
+                            <rect key="frame" x="16" y="304.5" width="382" height="319"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLD-em-QwV" userLabel="controlContainer">
                                     <rect key="frame" x="0.0" y="0.0" width="382" height="40"/>
@@ -100,10 +105,11 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1R6-Sf-526">
-                                    <rect key="frame" x="71.5" y="112" width="239" height="34"/>
+                                    <rect key="frame" x="65.5" y="112" width="251" height="50"/>
                                     <color key="backgroundColor" red="0.24451519690000001" green="0.42733304789999998" blue="0.67184824489999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="1R6-Sf-526" secondAttribute="height" multiplier="7:1" constant="1" id="KUn-d6-gSS"/>
+                                        <constraint firstAttribute="width" secondItem="1R6-Sf-526" secondAttribute="height" multiplier="5:1" constant="1" id="KUn-d6-gSS"/>
+                                        <constraint firstAttribute="height" constant="50" id="ceg-js-JTo"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="18"/>
                                     <color key="tintColor" systemColor="labelColor"/>
@@ -119,6 +125,59 @@
                                         <action selector="analyze:" destination="-1" eventType="touchUpInside" id="Ega-Oz-TTg"/>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uow-Kk-sCw">
+                                    <rect key="frame" x="0.0" y="182" width="382" height="137"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a player to find out how to beat him/her" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOY-Hw-x9z">
+                                            <rect key="frame" x="16" y="32" width="350" height="61"/>
+                                            <fontDescription key="fontDescription" name="Lato-Thin" family="Lato" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-iZ-FoH">
+                                            <rect key="frame" x="20" y="97" width="342" height="40"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DrNykterstein" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZbF-F1-Nc1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="281" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Dn7-CJ-MNq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBm-Ws-mbD">
+                                                    <rect key="frame" x="301" y="0.0" width="41" height="40"/>
+                                                    <color key="backgroundColor" red="0.24451519690000001" green="0.42733304789999998" blue="0.67184824489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="eBm-Ws-mbD" secondAttribute="height" multiplier="1:1" constant="1" id="9Pt-JT-RV5"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" image="magnifyingglass" catalog="system">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="searchTapped" destination="-1" eventType="touchUpInside" id="TgM-7U-Wfh"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Edi-iZ-FoH" firstAttribute="top" secondItem="qOY-Hw-x9z" secondAttribute="bottom" constant="4" id="7CW-ts-h7T"/>
+                                        <constraint firstItem="Edi-iZ-FoH" firstAttribute="leading" secondItem="Uow-Kk-sCw" secondAttribute="leading" constant="20" id="8MP-yi-DAK"/>
+                                        <constraint firstItem="qOY-Hw-x9z" firstAttribute="top" secondItem="Uow-Kk-sCw" secondAttribute="top" constant="32" id="BEa-I5-pHh"/>
+                                        <constraint firstAttribute="trailing" secondItem="Edi-iZ-FoH" secondAttribute="trailing" constant="20" id="PyB-I4-3P8"/>
+                                        <constraint firstAttribute="trailing" secondItem="qOY-Hw-x9z" secondAttribute="trailing" constant="16" id="eQb-hc-LOn"/>
+                                        <constraint firstItem="qOY-Hw-x9z" firstAttribute="leading" secondItem="Uow-Kk-sCw" secondAttribute="leading" constant="16" id="it6-mF-wTh"/>
+                                        <constraint firstAttribute="bottom" secondItem="Edi-iZ-FoH" secondAttribute="bottom" id="xMr-x7-wEZ"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -130,7 +189,7 @@
                         <constraint firstItem="4ng-WW-RBU" firstAttribute="centerX" secondItem="Auj-Yd-D3D" secondAttribute="centerX" id="GlH-qE-zsY"/>
                         <constraint firstItem="4ng-WW-RBU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Auj-Yd-D3D" secondAttribute="leading" constant="16" id="McF-t5-pmk"/>
                         <constraint firstAttribute="trailing" secondItem="roH-sf-dxn" secondAttribute="trailing" id="OfD-8k-OHn"/>
-                        <constraint firstItem="4ng-WW-RBU" firstAttribute="centerY" secondItem="Auj-Yd-D3D" secondAttribute="centerY" id="S1j-2m-TNi"/>
+                        <constraint firstItem="4ng-WW-RBU" firstAttribute="centerY" secondItem="Auj-Yd-D3D" secondAttribute="centerY" constant="16" id="S1j-2m-TNi"/>
                         <constraint firstAttribute="bottom" secondItem="REs-qm-d8J" secondAttribute="bottom" constant="16" id="SZv-zg-FwH"/>
                         <constraint firstAttribute="trailing" secondItem="REs-qm-d8J" secondAttribute="trailing" constant="16" id="Sx3-hv-8y2"/>
                         <constraint firstItem="roH-sf-dxn" firstAttribute="top" secondItem="Auj-Yd-D3D" secondAttribute="top" id="XXE-BT-ckX"/>
@@ -155,6 +214,7 @@
         <image name="background" width="1920" height="1286"/>
         <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
         <image name="icloud.and.arrow.down.fill" catalog="system" width="128" height="112"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

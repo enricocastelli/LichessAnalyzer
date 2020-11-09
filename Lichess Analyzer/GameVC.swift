@@ -14,6 +14,7 @@ class GameVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var resultStackView: UIStackView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var thumbImageview: UIImageView!
 
@@ -58,6 +59,9 @@ class GameVC: UIViewController {
 
     func configure() {
         let games = opening.1
+        guard !games.isEmpty else {
+            resultStackView.isHidden = true
+            return }
         let results = games.map({$0.resultForPlayer()})
         let winPercentage = results.filter({$0 == .win }).count.percentageInt(of: results.count)
         countLabel.text = "You played this variant \(games.count) times.\n\(games.wins()) wins, \(games.lost()) losses, \(games.draw()) draws."

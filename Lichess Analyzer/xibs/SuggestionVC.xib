@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Bold.ttf">
+            <string>Lato-Semibold</string>
+        </array>
+        <array key="Lato-Light.ttf">
+            <string>Lato-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuggestionVC" customModule="Lichess_Analyzer" customModuleProvider="target">
+            <connections>
+                <outlet property="explanationTextView" destination="scx-9Y-dlf" id="zzQ-4o-oWR"/>
+                <outlet property="historyLabel" destination="jcY-HG-eGV" id="eZQ-uU-D6g"/>
+                <outlet property="nameLabel" destination="ToZ-DC-OMZ" id="XU7-jF-Nzp"/>
+                <outlet property="resultView" destination="p2F-VC-ItI" id="mm6-97-Ih8"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xas-yM-jaA">
+                    <rect key="frame" x="16" y="64" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="AV5-Lv-U4r"/>
+                        <constraint firstAttribute="height" constant="40" id="VpG-th-5ON"/>
+                    </constraints>
+                    <color key="tintColor" red="0.25997966610000001" green="0.4452857449" blue="0.61745505140000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <imageReference key="image" image="arrow.left.circle.fill" catalog="system" symbolScale="large"/>
+                    </state>
+                    <connections>
+                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="ebQ-Za-SnC"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToZ-DC-OMZ" userLabel="Title">
+                    <rect key="frame" x="64" y="76" width="286" height="24"/>
+                    <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your history against name is:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcY-HG-eGV" userLabel="Title">
+                    <rect key="frame" x="16" y="125" width="382" height="22"/>
+                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag6-Yy-ILj" userLabel="separator">
+                    <rect key="frame" x="137" y="108" width="140" height="1"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Ag6-Yy-ILj" secondAttribute="height" multiplier="140:1" id="a8x-ez-z2K"/>
+                        <constraint firstAttribute="height" constant="1" id="xQr-td-8ir"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scx-9Y-dlf">
+                    <rect key="frame" x="16" y="441.5" width="382" height="404.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <attributedString key="attributedText">
+                        <fragment content="How to beat him">
+                            <attributes>
+                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <font key="NSFont" size="15" name=".SFNS-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2F-VC-ItI" customClass="ResultView" customModule="Lichess_Analyzer" customModuleProvider="target">
+                    <rect key="frame" x="32" y="163" width="350" height="262.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="p2F-VC-ItI" secondAttribute="height" multiplier="4:3" id="pQT-EA-I7c"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="ToZ-DC-OMZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1sh-8D-Ibd"/>
+                <constraint firstItem="p2F-VC-ItI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="6A8-js-bKi"/>
+                <constraint firstItem="jcY-HG-eGV" firstAttribute="top" secondItem="Ag6-Yy-ILj" secondAttribute="bottom" constant="16" id="ACt-s7-xqF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="p2F-VC-ItI" secondAttribute="trailing" constant="32" id="B7q-3M-awL"/>
+                <constraint firstItem="scx-9Y-dlf" firstAttribute="top" secondItem="p2F-VC-ItI" secondAttribute="bottom" constant="16" id="BI8-4e-sRA"/>
+                <constraint firstItem="scx-9Y-dlf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Mia-JE-kC6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="scx-9Y-dlf" secondAttribute="trailing" constant="16" id="Oex-vq-3zF"/>
+                <constraint firstItem="ToZ-DC-OMZ" firstAttribute="leading" secondItem="xas-yM-jaA" secondAttribute="trailing" constant="8" id="TX3-9E-Fdb"/>
+                <constraint firstItem="xas-yM-jaA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="YTI-LM-Wcc"/>
+                <constraint firstItem="Ag6-Yy-ILj" firstAttribute="top" secondItem="ToZ-DC-OMZ" secondAttribute="bottom" constant="8" id="ZRm-DT-IHH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ToZ-DC-OMZ" secondAttribute="trailing" constant="16" id="d2H-j7-a0V"/>
+                <constraint firstItem="ToZ-DC-OMZ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="dYd-er-Heo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jcY-HG-eGV" secondAttribute="trailing" constant="16" id="dza-YZ-9Dp"/>
+                <constraint firstItem="Ag6-Yy-ILj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jbh-qc-4Zf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="scx-9Y-dlf" secondAttribute="bottom" constant="16" id="n17-sA-oED"/>
+                <constraint firstItem="jcY-HG-eGV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="oCN-Vg-Xds"/>
+                <constraint firstItem="xas-yM-jaA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="rqh-eC-ZLT"/>
+                <constraint firstItem="p2F-VC-ItI" firstAttribute="top" secondItem="jcY-HG-eGV" secondAttribute="bottom" constant="16" id="yf7-qw-3sG"/>
+            </constraints>
+            <point key="canvasLocation" x="79.710144927536234" y="78.348214285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

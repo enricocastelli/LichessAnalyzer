@@ -48,7 +48,7 @@ struct GameItem: Encodable, Decodable, StructDecoder, Equatable {
 
     func resultForPlayer() -> Result {
         if winner == nil { return .draw }
-        return winner == UserData.shared.searchName ? .win : .lose
+        return winner?.lowercased() == UserData.shared.searchName.lowercased() ? .win : .lose
     }
 
     static func ==(lhs: GameItem, rhs: GameItem) -> Bool {
@@ -72,7 +72,8 @@ extension Array where Element == GameItem {
     }
 
     var points: Int {
-        return map({$0.resultForPlayer().points}).reduce(0, +)
+        let wins = self.filter({$0.resultForPlayer() == .win}).count
+        return (wins*2) - (count)
     }
 
     func mostCommonOpenings() -> [String: Int] {
@@ -108,6 +109,10 @@ extension KnownOpening {
         let unknown = KnownOpening(id: "", name: "Other", pgn: "")
         let names = UserData.shared.knownOpenings.filter({item.openingString.contains($0.name)})
         return names.first ?? unknown
+    }
+
+    static func fromString(_ string: String) -> KnownOpening? {
+        return UserData.shared.knownOpenings.filter({$0.name == string}).first
     }
 }
 

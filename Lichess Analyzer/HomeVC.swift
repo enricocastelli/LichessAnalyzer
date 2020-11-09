@@ -9,7 +9,7 @@ import UIKit
 import SafariServices
 import WebKit
 
-class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvider, TextPresenter {
+class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, KeyboardProvider {
 
     @IBOutlet weak var visibleView: UIView!
     @IBOutlet weak var textContainerView: UIView!
@@ -17,7 +17,8 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     @IBOutlet weak var allLabel: UILabel!
     @IBOutlet weak var newLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
-
+    @IBOutlet weak var playerField: UITextField!
+    @IBOutlet weak var SearchButton: UIButton!
 
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     var gameTypeControl: UISegmentedControl!
@@ -28,6 +29,12 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
     override func viewDidLoad() {
         super.viewDidLoad()
         addText("Hello \(UserData.shared.account?.username ?? "Stranger")", delay: 0.4, duration: 0.8, position: CGPoint(x: 40, y: 16), lineWidth: 1, font: Font.with(.hairline, 32), color: UIColor.darkGray.withAlphaComponent(0.8), inView: textContainerView)
+        playerField.delegate = self
+        addKeyboardObserver()
+    }
+
+    deinit {
+        removeKeyboardObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -97,6 +104,7 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
 
     @IBAction func analyze(_ bypassDataCheck: Bool = false) {
         guard !callInProgress else { return }
+        U.shared.searchName = U.shared.account?.username ?? ""
         showLoadingAnimation()
         getStoredGames(gameType: U.shared.search.gameType) { (games) in
             print("🐴 got \(games.count) stored games")
@@ -126,6 +134,33 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
 
     @IBAction func openFeedback() {
         self.present(FeedbackVC(), animated: true, completion: nil)
+    }
+
+    func openSuggestion() {
+        self.navigationController?.pushViewController(SuggestionVC(), animated: true)
+    }
+
+    @IBAction func searchTapped() {
+        guard let text = playerField.text, !text.isEmpty else { return }
+        guard text != U.shared.account?.username else {
+            showMeAlert()
+            return
+        }
+        playerField.resignFirstResponder()
+        showLoadingAnimation()
+        U.shared.searchName = text
+        U.shared.search.gameType = .all
+        U.shared.filters = Filter(sorting: .weakest, color: .blackAndWhite, termination: .allTermination, timing: .accountCreation)
+        self.getGames(500) { games in
+            guard let games = games, !games.isEmpty else {
+                self.hideLoadingAnimation()
+                return }
+            U.shared.games = games
+            self.openSuggestion()
+        } failure: { (error) in
+            self.showErrorAlert()
+            self.hideLoadingAnimation()
+        }
     }
 
     private func getAll(since: Date?, until: Date?, completion: @escaping () -> ()) {
@@ -211,5 +246,44 @@ class HomeVC: UIViewController, ServiceProvider, UITextFieldDelegate, StoreProvi
         alert.addAction(secondAction)
         self.present(alert, animated: true, completion: nil)
     }
+
+    private func showMeAlert() {
+        let alert = UIAlertController(title: "Hey!",
+                                      message: "Are you searching yourself? 🤔", preferredStyle: .alert)
+        let firstAction = UIAlertAction(title: "Ops", style: .default) { (_) in }
+        alert.addAction(firstAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func showErrorAlert() {
+        let alert = UIAlertController(title: "Ops",
+                                      message: "We couldn't find anyone with this username.", preferredStyle: .alert)
+        let firstAction = UIAlertAction(title: "Ok", style: .default) { (_) in }
+        alert.addAction(firstAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func keyboardWillShow(_ notification:Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.3) {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height/2)
+            }
+        }
+    }
+
+    func keyboardWillHide(_ notification:Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.transform = CGAffineTransform.identity
+        }
+    }
+
+
 }
 
+extension HomeVC: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}

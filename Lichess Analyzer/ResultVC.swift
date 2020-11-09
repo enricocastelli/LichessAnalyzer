@@ -62,6 +62,7 @@ class ResultVC: UIViewController, StoreProvider {
         }
     }
 
+
     func setTableView() {
         let rView = ResultView()
         rView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.5)
@@ -85,6 +86,9 @@ class ResultVC: UIViewController, StoreProvider {
     }
 
     private func setSlider() {
+        timingSlider.setThumbImage(UIImage(named: "sliderThumb"), for: .normal)
+        timingSlider.setThumbImage(UIImage(named: "sliderThumb"), for: .selected)
+        timingSlider.setThumbImage(UIImage(named: "sliderThumb"), for: .highlighted)
         switch U.shared.filters.timing {
         case .accountCreation: timingSlider.setValue(0, animated: false)
         case .lastYear: timingSlider.setValue(0.15, animated: false)
@@ -140,11 +144,11 @@ class ResultVC: UIViewController, StoreProvider {
         sortGroup.notify(queue: .global(qos: .background)) {
             switch sorting {
             case .mostPlayed:
-                self.sections = self.filteredSource.sortedKeysByValue { $0.count > $1.count && $0.wins() > $1.wins() }
+                self.sections = self.filteredSource.sortedKeysByValue { $0.count > $1.count }
             case .strongest:
-                self.sections = self.filteredSource.sortedKeysByValue { $0.points > $1.points && $0.wins() > $1.wins() }
+                self.sections = self.filteredSource.sortedKeysByValue { $0.points > $1.points }
             case .weakest:
-                self.sections = self.filteredSource.sortedKeysByValue { $0.points < $1.points && $0.wins() > $1.wins() }
+                self.sections = self.filteredSource.sortedKeysByValue { $0.points < $1.points }
             }
             completion()
         }
@@ -162,14 +166,14 @@ class ResultVC: UIViewController, StoreProvider {
         switch color {
         case .white:
             self.filteredGames = self.games.filter({
-                $0.white == UserData.shared.searchName &&
+                $0.white.lowercased() == UserData.shared.searchName.lowercased() &&
                     $0.termination.lowercased().contains(terminationString) &&
                     $0.validDate > filterDate
             })
             self.filteredSource = Dictionary(grouping: self.filteredGames, by: { $0.opening })
         case .black:
             self.filteredGames = self.games.filter({
-                $0.black == UserData.shared.searchName &&
+                $0.black.lowercased() == UserData.shared.searchName.lowercased() &&
                     $0.termination.lowercased().contains(terminationString) &&
                     $0.validDate > filterDate
             })
@@ -192,6 +196,10 @@ class ResultVC: UIViewController, StoreProvider {
     var filterOpened = false
 
     func hideMenu() {
+        filterView.transform = CGAffineTransform(translationX: 0, y: -2)
+        UIView.animate(withDuration: 0.1) {
+            self.filterView.transform = CGAffineTransform.identity
+        }
         filterViewHeight.priority = .high
         filterOpened = false
         for stack in filterStacks {
@@ -203,10 +211,10 @@ class ResultVC: UIViewController, StoreProvider {
     }
 
     func showMenu() {
-        filterView.transform = CGAffineTransform(translationX: 0, y: -4)
+        filterView.transform = CGAffineTransform(translationX: 0, y: -2)
         filterViewHeight.priority = .low
         filterViewHeight.constant = 40
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.1) {
             self.filterView.transform = CGAffineTransform.identity
         }
         UIView.animate(withDuration: 0.3) {

@@ -55,7 +55,8 @@ class FloatingButtonController: UIViewController {
         progressView.setConstraint(constraint: .top, constant: 8)
         progressView.setConstraint(constraint: .trailing, constant: -16)
         progressView.setSelfConstraint(constraint: .height, constant: 8)
-        progressView.progress = 0.1
+        progressView.progress = 0
+        progressView.progressTintColor = UIColor.baseColor
         progressView.isUserInteractionEnabled = false
         loadingLabel = UILabel()
         containerView.addSubview(loadingLabel)
@@ -131,18 +132,13 @@ class FloatingButtonController: UIViewController {
     }
 
     private func startTimer() {
-        var updateLabelCount = 0.0
+        let totalTime = estimatedDownloadTime()
+        print(totalTime)
         timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (timer) in
-            updateLabelCount += 0.2
             DispatchQueue.main.async {
-                if updateLabelCount == 1 {
-                    updateLabelCount = 0
-                    self.updateLabel()
-                }
-                if self.progressView.progress > 0.95 {
-                    self.progressView.progress = 0
-                } else {
-                    self.progressView.progress += 0.05
+                self.updateLabel()
+                if self.progressView.progress < 0.99 {
+                    self.progressView.progress += (1.0/Float(totalTime/0.2))
                 }
             }
         }
@@ -153,16 +149,20 @@ class FloatingButtonController: UIViewController {
 
     private func updateLabel() {
         secondsElapsed += 1
-        loadingLabel.text = estimatedDownloadTime()
+        loadingLabel.text = estimatedString()
     }
 
-
-    func estimatedDownloadTime() -> String {
-        guard let gamesNuber = UserData.shared.account?.numberOfGamesForType(UserData.shared.search.gameType) else { return "Loading.."}
+    func estimatedDownloadTime() -> Double {
+        guard let gamesNuber = UserData.shared.account?.numberOfGamesForType(UserData.shared.search.gameType) else { return 0 }
         let downloadTime = ((gamesNuber)/45)
         if estimatedDownloadDate == nil {
             estimatedDownloadDate = Calendar.current.date(byAdding: .second, value: downloadTime, to: Date())
         }
+        return (estimatedDownloadDate ?? Date()) - Date()
+    }
+
+
+    func estimatedString() -> String {
         let timeRemaining = (estimatedDownloadDate ?? Date()) - Date()
         return timeRemaining.secondsToMinutesSecondsString()
     }

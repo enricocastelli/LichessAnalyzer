@@ -19,9 +19,7 @@ class UserData: StoreProvider {
             storeSearch(newValue)
         }
     }
-    var searchName: String {
-        account?.username ?? ""
-    }
+    var searchName: String = ""
     var filters: Filter {
         get {
             getfilters() }
@@ -32,11 +30,18 @@ class UserData: StoreProvider {
     var token = ""
     var openings = [String: [OpeningObject]]()
     var knownOpenings = [OpeningObject]()
-    var account: Account?
+    var account: Account? {
+        didSet {
+            searchName = account?.username ?? ""
+        }
+    }
     var games: [GameItem] = [] {
         didSet {
             NotificationCenter.default.post(Notification(name: .NewGames))
         }
+    }
+    func isPlayer() -> Bool {
+        return account?.username == searchName
     }
 
     func isLoggedIn() -> Bool {

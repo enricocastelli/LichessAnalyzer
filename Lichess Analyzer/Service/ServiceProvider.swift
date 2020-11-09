@@ -50,6 +50,20 @@ extension ServiceProvider {
         }
     }
 
+    func getVCGames(success: @escaping ([GameItem]?) -> (),
+                  failure: @escaping (Error) -> ()) {
+        let urlString = baseURL + (UserData.shared.account?.username ?? "")
+        let params = ["rated": "true",
+                      "vs": U.shared.searchName,
+                      "opening": "true"]
+        let request = createRequest(.get, urlString, params)
+        basicCall(request) { (data) in
+            success(self.mapGames(data.stringUTF8()))
+        } failure: { (error) in
+            failure(error)
+        }
+    }
+
     func mapGames(_ string: String?) -> [GameItem]? {
         guard let string = string else { return nil }
         var arr = string.components(separatedBy: "[Ev")

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,9 +22,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ResultView" customModule="Lichess_Analyzer" customModuleProvider="target">
             <connections>
+                <outlet property="columnStackView" destination="Rqb-cv-g61" id="0dN-cP-cbw"/>
                 <outlet property="containerView" destination="bUv-9l-Pgp" id="11J-2T-4Ju"/>
                 <outlet property="drawLabel" destination="kX3-tl-zvZ" id="vMv-b7-K75"/>
                 <outlet property="lossLabel" destination="WQd-t5-qoM" id="EJ0-Bl-acb"/>
+                <outlet property="noResultLabel" destination="6Hv-sM-Rrz" id="X5f-wY-Xyf"/>
                 <outlet property="winLabel" destination="sJO-R8-f7S" id="dpd-ib-t8P"/>
                 <outlet property="winPercentageLabel" destination="HVo-eZ-6jy" id="G54-HH-BJs"/>
             </connections>
@@ -61,6 +64,12 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Won" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJO-R8-f7S">
                     <rect key="frame" x="564.5" y="251" width="146.5" height="19.5"/>
                     <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO GAMES FOUND" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hv-sM-Rrz">
+                    <rect key="frame" x="16" y="248.5" width="679" height="24"/>
+                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -109,6 +118,8 @@
                 <constraint firstItem="kX3-tl-zvZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2Ns-fX-4Rt"/>
                 <constraint firstItem="HVo-eZ-6jy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9S7-vK-ZjL"/>
                 <constraint firstItem="HVo-eZ-6jy" firstAttribute="top" secondItem="bUv-9l-Pgp" secondAttribute="bottom" constant="20" id="AdD-Ja-hoM"/>
+                <constraint firstAttribute="trailing" secondItem="6Hv-sM-Rrz" secondAttribute="trailing" constant="16" id="BHP-OV-wIj"/>
+                <constraint firstItem="6Hv-sM-Rrz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Bim-jR-mUg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sJO-R8-f7S" secondAttribute="trailing" id="FBV-bc-Mne"/>
                 <constraint firstItem="Rqb-cv-g61" firstAttribute="top" secondItem="HVo-eZ-6jy" secondAttribute="bottom" constant="16" id="KP0-7G-Yom"/>
                 <constraint firstItem="kX3-tl-zvZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Kc6-r5-O8B"/>
@@ -119,7 +130,9 @@
                 <constraint firstItem="WQd-t5-qoM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RzW-VT-Tal"/>
                 <constraint firstItem="sJO-R8-f7S" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ta8-tU-qR6"/>
                 <constraint firstAttribute="trailing" secondItem="Rqb-cv-g61" secondAttribute="trailing" constant="8" id="ZqM-K2-Ifa"/>
+                <constraint firstItem="6Hv-sM-Rrz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="coy-cD-dJw"/>
                 <constraint firstItem="sJO-R8-f7S" firstAttribute="leading" secondItem="bUv-9l-Pgp" secondAttribute="trailing" constant="20" id="iWZ-Hk-pe8"/>
+                <constraint firstItem="6Hv-sM-Rrz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="mbq-Ew-J3H"/>
                 <constraint firstItem="bUv-9l-Pgp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="v9m-GX-RHY"/>
                 <constraint firstItem="WQd-t5-qoM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xgD-mc-rlK"/>
                 <constraint firstItem="Rqb-cv-g61" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="yBp-Jk-4hM"/>

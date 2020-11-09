@@ -312,9 +312,10 @@
                                 </stackView>
                             </subviews>
                         </stackView>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JHu-Ss-ad9" customClass="TimeSlider" customModule="Lichess_Analyzer" customModuleProvider="target">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JHu-Ss-ad9" customClass="TimeSlider" customModule="Lichess_Analyzer" customModuleProvider="target">
                             <rect key="frame" x="62" y="155.5" width="374" height="31"/>
-                            <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="minimumTrackTintColor" red="0.32549019607843138" green="0.52156862745098043" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="thumbTintColor" red="0.32549019607843138" green="0.52156862745098043" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="sliderChanged:" destination="-1" eventType="valueChanged" id="giq-lA-9qQ"/>
                             </connections>
@@ -349,7 +350,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fh4-dI-eKG">
-                    <rect key="frame" x="16" y="188.5" width="434" height="1004.5"/>
+                    <rect key="frame" x="16" y="180.5" width="434" height="1012.5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="ieN-pm-sHd"/>
@@ -372,7 +373,6 @@
                 <constraint firstItem="QFO-e8-wGP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="3nI-6d-tJK"/>
                 <constraint firstItem="r5n-mV-MCY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="49w-4d-PV7"/>
                 <constraint firstItem="QFO-e8-wGP" firstAttribute="leading" secondItem="hZe-r3-or0" secondAttribute="trailing" constant="8" id="8Dh-Ak-TPi"/>
-                <constraint firstItem="Fh4-dI-eKG" firstAttribute="top" secondItem="CW3-eD-607" secondAttribute="bottom" constant="16" id="Fug-bJ-qz3"/>
                 <constraint firstItem="CW3-eD-607" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-8" id="Ha6-Ea-jdB"/>
                 <constraint firstItem="CW3-eD-607" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="L3C-Dp-uN8"/>
                 <constraint firstItem="3Lb-Nj-E9e" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="Qve-rZ-gav"/>
@@ -383,6 +383,7 @@
                 <constraint firstItem="CW3-eD-607" firstAttribute="top" secondItem="nSF-Su-oIo" secondAttribute="bottom" constant="8" id="YWo-7k-P10"/>
                 <constraint firstItem="nSF-Su-oIo" firstAttribute="top" secondItem="r5n-mV-MCY" secondAttribute="bottom" constant="8" id="dXI-K2-HWP"/>
                 <constraint firstItem="hZe-r3-or0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="e0J-p4-HD1"/>
+                <constraint firstItem="Fh4-dI-eKG" firstAttribute="top" secondItem="CW3-eD-607" secondAttribute="bottom" constant="8" id="iJg-Hx-kqD"/>
                 <constraint firstItem="CW3-eD-607" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ix0-kc-n5D"/>
                 <constraint firstItem="r5n-mV-MCY" firstAttribute="top" secondItem="QFO-e8-wGP" secondAttribute="bottom" constant="8" id="k6k-rp-HqV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3Lb-Nj-E9e" secondAttribute="trailing" constant="16" id="vTW-S2-iEd"/>
