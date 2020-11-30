@@ -232,7 +232,7 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="fhs-Qm-RhS"/>
                                             </constraints>
                                             <color key="tintColor" systemColor="labelColor"/>
-                                            <state key="normal" image="all">
+                                            <state key="normal" image="allColors">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <userDefinedRuntimeAttributes>
@@ -395,7 +395,7 @@
         </view>
     </objects>
     <resources>
-        <image name="all" width="250" height="248"/>
+        <image name="allColors" width="250" height="248"/>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>
         <image name="bK" width="234" height="234"/>
         <image name="clock.fill" catalog="system" width="128" height="121"/>

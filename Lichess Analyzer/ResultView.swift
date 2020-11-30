@@ -69,7 +69,7 @@ class ResultView: NibView {
         winPercentageLabel.isHidden = true
         if columnStackView.isHidden {
             // suggestionVC
-            noResultLabel.text = "YOU NEVER PLAYED AGAINST THIS PLAYER"
+            noResultLabel.text = "You never played against this player"
         }
     }
 

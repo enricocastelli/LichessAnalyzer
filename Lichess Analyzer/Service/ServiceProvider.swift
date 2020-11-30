@@ -18,13 +18,14 @@ extension ServiceProvider {
     func getGames(_ max: Int?,
                     sinceDate: Int? = nil,
                     untilDate: Int? = nil,
+                    type: GameType? = nil,
                   success: @escaping ([GameItem]?) -> (),
                   failure: @escaping (Error) -> ()) {
         let urlString = baseURL + UserData.shared.searchName
         let params = ["max": max?.description ?? "",
                       "until": untilDate?.description ?? "",
                       "since": sinceDate?.description ?? "",
-                      "perfType": UserData.shared.search.gameType.rawValue,
+                      "perfType": type?.rawValue ?? UserData.shared.search.gameType.rawValue,
                       "rated": "true",
                       "opening": "true"]
         let request = createRequest(.get, urlString, params)
@@ -90,7 +91,7 @@ extension ServiceProvider {
                     result: result,
 //                    whiteElo: Int(string.slice(from: "[WhiteElo ", to: "]") ?? ""),
 //                    blackElo: Int(string.slice(from: "[BlackElo ", to: "]") ?? ""),
-                    termination: termination,
+                    site: string.slice(from: "[Site ", to: "]") ?? "", termination: termination,
                     openingString: openingString,
                     pgn: string.slice(from: "1. ", to: string.last!.description) ?? "",
                     eco: string.slice(from: "[ECO ", to: "]") ?? "")

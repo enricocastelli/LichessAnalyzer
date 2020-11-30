@@ -6,107 +6,151 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class SuggestionVC: UIViewController, ServiceProvider {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var historyLabel: UILabel!
     @IBOutlet weak var resultView: ResultView!
-    @IBOutlet weak var explanationTextView: UITextView!
+    @IBOutlet weak var compressConstraint: NSLayoutConstraint!
+    @IBOutlet weak var expandedConstraint: NSLayoutConstraint!
+    @IBOutlet weak var whiteButton: UIButton!
+    @IBOutlet weak var blackButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var mostLabel: OpeningLabel!
+    @IBOutlet weak var weakLabel: OpeningLabel!
+    @IBOutlet weak var strongLabel: OpeningLabel!
+    @IBOutlet weak var mostView: UIView!
+    @IBOutlet weak var weakView: UIView!
+    @IBOutlet weak var strongView: UIView!
+    @IBOutlet var images: [AnimatingImage]!
+
+    var color = Color.white
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Analytics.logEvent("Suggestion", parameters: ["name": U.shared.searchName])
         showLoadingAnimation()
         nameLabel.text = U.shared.searchName
         historyLabel.text = "\(U.shared.account?.username ?? "") against \(U.shared.searchName):"
+        titleLabel.text = "\(U.shared.searchName) plays mostly"
         getData()
-        setSuggestionLabel()
-        explanationTextView.delegate = self
         resultView.hideColumn()
+        whiteTapped()
+        mostView.layer.borderColor = mostView.backgroundColor?.withAlphaComponent(0.5).cgColor
+        weakView.layer.borderColor = weakView.backgroundColor?.withAlphaComponent(0.5).cgColor
+        strongView.layer.borderColor = strongView.backgroundColor?.withAlphaComponent(0.5).cgColor
     }
 
     func getData() {
         getVCGames { (games) in
             self.hideLoadingAnimation()
             guard let games = games else { return }
+            games.isEmpty ? self.hideResultView() : self.showResultView()
             self.resultView.update(wins: games.lost(), loss: games.wins(), draw: games.draw())
         } failure: { (error) in
             self.hideLoadingAnimation()
         }
     }
 
-    private func setSuggestionLabel() {
-        explanationTextView.text = ""
-        let total = NSMutableAttributedString(string: "")
-        var whiteString = NSMutableAttributedString()
-        if let blackS = U.shared.games.findMost(sort: .strongest, using: .black),
-           let blackW = U.shared.games.findMost(sort: .weakest, using: .black), blackS != blackW {
-            whiteString = NSMutableAttributedString()
-                .normal("\n If you use ")
-                .bold("white")
-                .normal(" pieces, you should start with ")
-                .link("\(blackW.name).")
-                .normal(" Try to avoid ")
-                .link("\(blackS.name).")
+    private func reload() {
+        let most = U.shared.games.findMost(sort: .mostPlayed, using: color)
+        let strong = U.shared.games.findMost(sort: .strongest, using: color)
+        let weak = U.shared.games.findMost(sort: .weakest, using: color)
+        mostView.isHidden = most == nil
+        weakView.isHidden = weak == nil
+        strongView.isHidden = strong == nil
+        if strong == weak {
+            strongView.isHidden = true
         }
-        var blackString = NSMutableAttributedString()
-        if let whiteS = U.shared.games.findMost(sort: .strongest, using: .white),
-           let whiteW = U.shared.games.findMost(sort: .weakest, using: .white), whiteS != whiteW {
-            blackString = NSMutableAttributedString()
-                .normal("\n If playing ")
-                .bold("black")
-                .normal(" pieces, you better go with ")
-                .link("\(whiteW.name)")
-                .normal(" and stay away from ")
-                .link("\(whiteS.name).")
-        }
+        strongLabel.opening = strong
+        weakLabel.opening = weak
+        mostLabel.opening = most
+    }
 
-        var mostString = NSMutableAttributedString()
-        if let whiteM = U.shared.games.findMost(sort: .mostPlayed, using: .white),
-           let blackM = U.shared.games.findMost(sort: .mostPlayed, using: .black) {
-            mostString = NSMutableAttributedString()
-                .bold(U.shared.searchName)
-                .normal(" usually plays ")
-                .link("\(whiteM.name)")
-                .normal(" using ")
-                .bold("white")
-                .normal(" and ")
-                .link("\(blackM.name)")
-                .normal(" with ")
-                .bold("black.")
+    private func animateTransition() {
+        let option: UIView.AnimationOptions = color == .white ? .transitionFlipFromRight : .transitionFlipFromLeft
+        UIView.transition(with: mostView, duration: 0.25, options: option, animations: nil, completion: nil)
+        UIView.transition(with: weakView, duration: 0.3, options: option, animations: nil, completion: nil)
+        UIView.transition(with: strongView, duration: 0.35, options: option, animations: nil, completion: nil)
+        let pieceImages = color == .white ? [UIImage(named: "knightB"), UIImage(named: "queenB"), UIImage(named: "pawnB")] : [UIImage(named: "knightW"), UIImage(named: "queenW"), UIImage(named: "pawnW")]
+        images.forEach { (im) in
+            let index = images.firstIndex(of: im)!
+            UIView.transition(with: im, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                im.image = pieceImages[index]
+            }, completion: nil)
         }
+    }
 
-        total.append(mostString)
-        total.append(whiteString)
-        total.append(blackString)
-        let paragraphStyle = NSMutableParagraphStyle()
-              paragraphStyle.lineSpacing = 8
-        let attributes: [NSAttributedString.Key: Any] = [.paragraphStyle: paragraphStyle]
-        let range = NSMakeRange(0, total.string.count)
-        total.addAttributes(attributes, range: range)
-        explanationTextView.attributedText = total
-        explanationTextView.textAlignment = .center
+    private func showResultView() {
+        compressConstraint.priority = .low
+        expandedConstraint.priority = .high
+        view.layoutIfNeeded()
+    }
+
+    private func hideResultView() {
+        compressConstraint.priority = .high
+        expandedConstraint.priority = .low
+        view.layoutIfNeeded()
     }
 
     @IBAction func closeTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        (self.navigationController as? Navigation)?.pop()
+    }
+
+    @IBAction func whiteTapped() {
+        guard color == .white else { return }
+        whiteButton.layer.borderColor = UIColor.black.withAlphaComponent(0.8).cgColor
+        blackButton.layer.borderColor = UIColor.clear.cgColor
+        color = .black
+        reload()
+        animateTransition()
+    }
+
+    @IBAction func blackTapped() {
+        guard color == .black else { return }
+        blackButton.layer.borderColor = UIColor.black.withAlphaComponent(0.8).cgColor
+        whiteButton.layer.borderColor = UIColor.clear.cgColor
+        color = .white
+        reload()
+        animateTransition()
+    }
+
+    @IBAction func mostTapped() {
+        goToGame(mostLabel.opening)
+    }
+
+    @IBAction func weakTapped() {
+        goToGame(weakLabel.opening)
+    }
+
+    @IBAction func strongTapped() {
+        goToGame(strongLabel.opening)
+    }
+
+    private func goToGame(_ opening: OpeningObject?) {
+        guard let opening = opening else { return }
+        let gameVC = GameVC((opening, []))
+        gameVC.isBlack = color == .white
+        (self.navigationController as? Navigation)?.push(gameVC)
+    }
+
+    @IBAction func openPlayer() {
+        if let playerURL = URL.init(string: "https://lichess.org/@/\(U.shared.searchName)") {
+            UIApplication.shared.open(playerURL, options: [:], completionHandler: nil)
+        }
     }
 
 }
 
-extension SuggestionVC: UITextViewDelegate {
 
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        let trimmedUrl = URL.string
-            .replacingOccurrences(of: "www.", with: "")
-            .replacingOccurrences(of: ".com", with: "")
-            .replacingOccurrences(of: "_", with: " ")
-            .replacingOccurrences(of:  "\"", with: "")
-            .replacingOccurrences(of:  ".", with: "")
-        if let opening = OpeningObject.fromString(trimmedUrl) {
-            let gameVC = GameVC((opening, []))
-            self.navigationController?.pushViewController(gameVC, animated: true)
+class OpeningLabel: UILabel {
+
+
+    var opening: OpeningObject? {
+        didSet {
+            self.text = opening?.name
         }
-        return false
     }
 }

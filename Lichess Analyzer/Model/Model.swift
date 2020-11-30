@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 enum GameType: String, Codable {
 
-    case bullet, blitz, rapid, all
+    case bullet, blitz, rapid, classical, all
 
     static func extract(_ string: String) -> GameType {
         if string.contains("Blitz") {
@@ -18,8 +19,30 @@ enum GameType: String, Codable {
             return .bullet
         } else if string.contains("Rapid") {
             return .rapid
+        } else if string.contains("Classical") {
+            return .classical
         }
         return .all
+    }
+
+    static func extract(_ int: Int) -> GameType {
+        switch int {
+        case 0: return .bullet
+        case 1: return .blitz
+        case 2: return .rapid
+        case 3: return .classical
+        default: return .all
+        }
+    }
+
+    func intValue() -> Int {
+        switch self {
+        case .bullet: return 0
+        case .blitz: return 1
+        case .rapid: return 2
+        case .classical: return 3
+        case .all: return 4
+        }
     }
 }
 

@@ -63,15 +63,6 @@ class UserData: StoreProvider {
                         return o1.id < o2.id
                     }
                     self.openings = Dictionary(grouping: openings, by: { $0.id })
-
-//                    var duplicate = [String: String]()
-//                    for open in openings {
-//                        if duplicate[open.name] == open.id {
-//                            print(open.name)
-//                        } else {
-//                            duplicate[open.name] = open.id
-//                        }
-//                    }
                     Clock.stop()
                 } catch(let error) {
                     print(error, "nope")

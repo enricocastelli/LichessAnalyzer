@@ -26,9 +26,9 @@ class CircleAnimatedView: UIView {
     }
 
     private func addCircleViews() {
-        winCircle = SingleCircle(from: 0, to: wins, color: UIColor(hex: "56AB59"))
-        lossCircle = SingleCircle(from: wins, to: wins + loss, color: UIColor(hex: "DA2418"))
-        drawCircle = SingleCircle(from: wins + loss, to: 1, color: UIColor(hex: "F3C419"))
+        winCircle = SingleCircle(from: 0, to: wins, color: UIColor.greenColor)
+        lossCircle = SingleCircle(from: wins, to: wins + loss, color: UIColor.redColor)
+        drawCircle = SingleCircle(from: wins + loss, to: 1, color: UIColor.yellowColor)
         addContentView(drawCircle)
         addContentView(lossCircle)
         addContentView(winCircle)

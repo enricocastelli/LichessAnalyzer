@@ -161,6 +161,7 @@ extension NSManagedObject {
                         white: value(forKey: "white") as? String ?? "",
                         black: value(forKey: "black") as? String ?? "",
                         result: value(forKey: "result") as? String ?? "",
+                        site: value(forKey: "site") as? String ?? "",
                         termination: value(forKey: "termination")  as? String ?? "",
                         openingString: value(forKey: "openingString") as? String ?? "",
                         pgn: value(forKey: "pgn") as? String ?? "",

@@ -67,34 +67,36 @@ extension NSMutableAttributedString {
     var fontSize:CGFloat { return 14 }
     var boldFont:UIFont { return Font.with(.medium, Int(fontSize)) }
     var normalFont:UIFont { return Font.with(.light, Int(fontSize)) }
+    var bigBoldFont:UIFont { return Font.with(.medium, 18) }
+    var bigNormalFont:UIFont { return Font.with(.light, 18) }
 
-    func bold(_ value:String) -> NSMutableAttributedString {
 
+    func bold(_ value:String, _ small: Bool = false) -> NSMutableAttributedString {
         let attributes:[NSAttributedString.Key : Any] = [
-            .font : boldFont
+            .font : small ? boldFont : bigBoldFont,
         ]
 
         self.append(NSAttributedString(string: value, attributes:attributes))
         return self
     }
 
-    func normal(_ value:String) -> NSMutableAttributedString {
+    func normal(_ value:String, _ small: Bool = false) -> NSMutableAttributedString {
 
         let attributes:[NSAttributedString.Key : Any] = [
-            .font : normalFont,
+            .font : small ? normalFont : bigNormalFont,
         ]
 
         self.append(NSAttributedString(string: value, attributes:attributes))
         return self
     }
 
-    func link(_ value:String) -> NSMutableAttributedString {
+    func link(_ value:String, _ small: Bool = false) -> NSMutableAttributedString {
         let first = value.split(separator: ":").map({String($0)}).first!
         if let url = URL(string: "www.\(first.replacingOccurrences(of: " ", with: "_")).com"){
             let attributes:[NSAttributedString.Key : Any] = [
-                .font :  normalFont,
-                .foregroundColor : UIColor.baseColor,
-                .link: url
+                .font : small ? normalFont : bigNormalFont,
+                .link: url,
+                .foregroundColor : UIColor.baseColor
             ]
             self.append(NSAttributedString(string: value, attributes:attributes))
             return self
@@ -148,7 +150,9 @@ extension UIColor {
 
     static var baseColor = UIColor(hex: "5385AD")
     static var grayColor = UIColor(hex: "acadae")
+    static var redColor = UIColor(hex: "DA2418")
     static var greenColor = UIColor(hex: "56AB59")
+    static var yellowColor = UIColor(hex: "F3C419")
 }
 
 extension UIView {
@@ -179,7 +183,19 @@ extension UIView {
                                          multiplier: 1,
                                          constant: constant))
     }
-    
+
+    func setRatioConstraint() {
+        if translatesAutoresizingMaskIntoConstraints == true {
+            translatesAutoresizingMaskIntoConstraints = false
+        }
+        addConstraint(NSLayoutConstraint(item: self,
+                                         attribute: .height,
+                                         relatedBy: .equal,
+                                         toItem: self,
+                                         attribute: .width,
+                                         multiplier: CGFloat(1/1),
+                                         constant: 0))
+    }
 
     func addContentView(_ contentView: UIView, _ atIndex: Int? = nil) {
         let containerView = self
@@ -271,10 +287,35 @@ extension Date {
         return Int((self.timeIntervalSince1970 * 1000.0).rounded())
     }
 
+    var monthString: String {
+        return Calendar.getLocalizedMonths()[Calendar.current.component(.month, from: self) - 1]
+    }
+
+    var dayWeekString: String {
+        return Calendar.getLocalizedDaysWeek()[Calendar.current.component(.weekday, from: self) - 1]
+    }
+
     func toString(_ format: String = "dd-MM-yyyy") -> String? {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = format
         return dateFormat.string(from: self)
+    }
+
+    func readableString() -> String {
+        if isToday() {
+            return "Today"
+        } else if isYesterday() {
+            return "Yesterday"
+        }
+        return "\(dayWeekString) \(day) - \(monthString) - \(year.description)"
+    }
+
+    func isToday() -> Bool {
+        Calendar.current.isDateInToday(self)
+    }
+
+    func isYesterday() -> Bool {
+        return Calendar.current.isDateInYesterday(self)
     }
 
     static func - (lhs: Date, rhs: Date) -> TimeInterval {
@@ -282,6 +323,22 @@ extension Date {
     }
 
 }
+
+extension Calendar {
+
+    static func getLocalizedDaysWeek() -> [String] {
+        var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        calendar.locale = Locale.current
+        return calendar.shortWeekdaySymbols
+    }
+
+    static func getLocalizedMonths() -> [String] {
+        var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        calendar.locale = Locale.current
+        return calendar.shortMonthSymbols
+    }
+}
+
 
 extension String {
 
@@ -333,27 +390,30 @@ extension Array where Element == GameItem {
         }
         })
         var source = Dictionary(grouping: filtered, by: { $0.opening })
-        var result: KnownOpening?
+        var result: [KnownOpening]?
         if sort == .weakest {
-            result = source.sortedKeysByValue { $0.points < $1.points }.first
-            if result?.name == "Other" {
+            result = source.sortedKeysByValue { $0.points < $1.points }
+            if result?.first?.name == "Other" {
                 source = Dictionary(grouping: filtered, by: { $0.completeOpening })
-                result = source.sortedKeysByValue { $0.points < $1.points }.first
+                result = source.sortedKeysByValue { $0.points < $1.points }
             }
         } else if sort == .strongest {
-            result = source.sortedKeysByValue { $0.points > $1.points }.first
-            if result?.name == "Other" {
+            result = source.sortedKeysByValue { $0.points > $1.points }
+            if result?.first?.name == "Other" {
                 source = Dictionary(grouping: filtered, by: { $0.completeOpening })
-                result = source.sortedKeysByValue { $0.points > $1.points }.first
+                result = source.sortedKeysByValue { $0.points > $1.points }
             }
         } else {
-            result = source.sortedKeysByValue { $0.count > $1.count }.first
-            if result?.name == "Other" {
+            result = source.sortedKeysByValue { $0.count > $1.count }
+            if result?.first?.name == "Other" {
                 source = Dictionary(grouping: filtered, by: { $0.completeOpening })
-                result = source.sortedKeysByValue { $0.count > $1.count }.first
+                result = source.sortedKeysByValue { $0.count > $1.count }
             }
         }
-        if result?.name == "Other" { return nil } else { return result }
+        if using == .white && sort != .mostPlayed {
+            result = result?.filter({$0.pgn.count > 4})
+        }
+        if result?.first?.name == "Other" { return nil } else { return result?.first }
     }
 }
 

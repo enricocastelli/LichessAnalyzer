@@ -115,10 +115,10 @@ class ResultVC: UIViewController, StoreProvider {
     func updateLabels() {
         titleLabel.text = UserData.shared.searchName
         subtitleLabel.attributedText = NSMutableAttributedString()
-            .bold(filteredGames.count.description)
-            .normal(" ")
-            .bold(U.shared.search.gameType.rawValue)
-            .normal(" games")
+            .bold(filteredGames.count.description, true)
+            .normal(" ", true)
+            .bold(U.shared.search.gameType.rawValue, true)
+            .normal(" games", true)
     }
 
     func setFilters() {
@@ -136,12 +136,14 @@ class ResultVC: UIViewController, StoreProvider {
         Clock.start("Filter")
         let sortGroup = DispatchGroup()
         sortGroup.enter()
-        let dispatchQueue = DispatchQueue(label: "Sort", qos: .background)
-        dispatchQueue.async(group: sortGroup, qos: .background, flags: []) {
+        let dispatchQueue = DispatchQueue(label: "Sort", qos: .default)
+        dispatchQueue.async(group: sortGroup, qos: .default, flags: []) {
             self.filter()
         }
         sortGroup.leave()
-        sortGroup.notify(queue: .global(qos: .background)) {
+        sortGroup.notify(queue: .global(qos: .default)) {
+            Clock.stop()
+            Clock.start("Sorting")
             switch sorting {
             case .mostPlayed:
                 self.sections = self.filteredSource.sortedKeysByValue { $0.count > $1.count }
@@ -151,8 +153,8 @@ class ResultVC: UIViewController, StoreProvider {
                 self.sections = self.filteredSource.sortedKeysByValue { $0.points < $1.points }
             }
             completion()
+            Clock.stop()
         }
-        Clock.stop()
     }
 
     func filter() {
@@ -277,10 +279,10 @@ class ResultVC: UIViewController, StoreProvider {
         guard let homeVC = navigationController?.viewControllers[1] as? HomeVC else { return }
         if homeVC.callInProgress {
             if self.isKind(of: DetailVC.self) {
-                navigationController?.popViewController(animated: true)
+                (self.navigationController as? Navigation)?.pop()
             }
         } else {
-            navigationController?.popViewController(animated: true)
+            (self.navigationController as? Navigation)?.pop()
         }
     }
 
@@ -321,7 +323,7 @@ extension ResultVC: UITableViewDataSource, UITableViewDelegate {
         let detailItem = DetailItem(opening: section,
                                     filteredGames: games)
         let source = Dictionary(grouping: games, by: { $0.completeOpening })
-        self.navigationController?.pushViewController(DetailVC(source, item: detailItem), animated: true)
+        (self.navigationController as? Navigation)?.push(DetailVC(source, item: detailItem))
     }
 }
 

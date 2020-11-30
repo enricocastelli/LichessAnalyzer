@@ -35,6 +35,7 @@ struct Account: Codable {
         case .bullet: return perfs.bullet?.games
         case .blitz: return perfs.blitz?.games
         case .rapid: return perfs.rapid?.games
+        case .classical: return perfs.classical?.games
         case .all: return all
         }
     }
@@ -44,6 +45,7 @@ struct Account: Codable {
         if numberOfGamesForType(.bullet) ?? 0 > 0 { array.append(.bullet) }
         if numberOfGamesForType(.blitz) ?? 0 > 0 { array.append(.blitz) }
         if numberOfGamesForType(.rapid) ?? 0 > 0 { array.append(.rapid) }
+        if numberOfGamesForType(.classical) ?? 0 > 0 { array.append(.classical) }
         if numberOfGamesForType(.all) ?? 0 > 0 { array.append(.all) }
         return array
     }

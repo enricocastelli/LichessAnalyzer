@@ -13,7 +13,8 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
 
     @IBOutlet weak var visibleView: UIView!
     @IBOutlet weak var textContainerView: UIView!
-    @IBOutlet weak var controlContainerView: UIView!
+    @IBOutlet weak var typeStackView: UIStackView!
+    @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var allLabel: UILabel!
     @IBOutlet weak var newLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
@@ -21,8 +22,7 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
     @IBOutlet weak var SearchButton: UIButton!
 
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
-    var gameTypeControl: UISegmentedControl!
-    var gameTypes: [GameType] = [.bullet, .blitz, .rapid, .all]
+    var gameTypes: [GameType] = [.bullet, .blitz, .rapid, .classical, .all]
     var callInProgress = false
     var isExample = false
 
@@ -40,30 +40,31 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setGameTypeControl()
+        (navigationController as? Navigation)?.canSwipe = false
     }
 
     private func setGameTypeControl() {
         guard let account = UserData.shared.account else { return }
-        if gameTypeControl != nil && controlContainerView.contains(gameTypeControl) {
-            gameTypeControl.removeFromSuperview()
-        }
         gameTypes = account.perfsAvailable()
-        gameTypeControl = UISegmentedControl(items: gameTypes.map({$0.rawValue.uppercased()}))
-        controlContainerView.addContentView(gameTypeControl)
-        gameTypeControl.addTarget(self, action: #selector(selectedType), for: .valueChanged)
-        guard let index = gameTypes.firstIndex(of: UserData.shared.search.gameType) else { return }
-        gameTypeControl.selectedSegmentIndex = index
-        UserData.shared.search.gameType = gameTypes[gameTypeControl.selectedSegmentIndex]
         updateLabel()
-        let font = [NSAttributedString.Key.font : Font.with(Style.light, 14)]
-        gameTypeControl.setTitleTextAttributes(font, for: .normal)
-        UILabel.appearance(whenContainedInInstancesOf: ([UISegmentedControl.self])).numberOfLines = 0
+        guard typeStackView.subviews.isEmpty else { return }
+        for type in gameTypes {
+            let button = UIButton()
+            button.setSelfConstraint(constraint: .width, constant: 40)
+            button.setRatioConstraint()
+            button.setImage(UIImage(named: type.rawValue), for: .normal)
+            button.tag = type.intValue()
+            button.tintColor = type == U.shared.search.gameType ? .baseColor : .grayColor
+            button.addTarget(self, action: #selector(selectedType(_:)), for: .touchUpInside)
+            typeStackView.addArrangedSubview(button)
+        }
     }
 
     func updateLabel() {
         guard let gamesNuber = UserData.shared.account?.numberOfGamesForType(UserData.shared.search.gameType) else { return }
         allLabel.changeText("\(gamesNuber.description) GAMES")
         updateStatus()
+        typeLabel.changeText(UserData.shared.search.gameType.rawValue.uppercased())
     }
 
     func updateStatus() {
@@ -75,21 +76,25 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
             newLabel.text = ""
             return
         }
-        let nAccountGames = account.numberOfGamesForType(U.shared.search.gameType)
-        if nStoredGames == nAccountGames {
+        let nAccountGames = account.numberOfGamesForType(U.shared.search.gameType) ?? 0
+        if nStoredGames < nAccountGames {
+            statusImageView.image = UIImage(systemName: "arrow.counterclockwise.icloud.fill")
+            statusImageView.tintColor = UIColor.baseColor
+            newLabel.text = "+\(((nAccountGames) - nStoredGames).description)"
+        } else {
             statusImageView.image = UIImage(systemName: "checkmark.icloud.fill")
             statusImageView.tintColor = UIColor.greenColor
             newLabel.text = ""
-        } else {
-            statusImageView.image = UIImage(systemName: "arrow.counterclockwise.icloud.fill")
-            statusImageView.tintColor = UIColor.baseColor
-            newLabel.text = "+\(((nAccountGames ?? 0) - nStoredGames).description)"
         }
     }
 
-    @objc func selectedType() {
-        UserData.shared.search.gameType = gameTypes[gameTypeControl.selectedSegmentIndex]
+    @objc func selectedType(_ button: UIButton) {
+        UserData.shared.search.gameType = GameType.extract(button.tag)
         updateLabel()
+        for button in typeStackView.subviews {
+            button.tintColor = UIColor.grayColor
+        }
+        button.tintColor = UIColor.baseColor
     }
 
 
@@ -104,6 +109,7 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
 
     @IBAction func analyze(_ bypassDataCheck: Bool = false) {
         guard !callInProgress else { return }
+        playerField.resignFirstResponder()
         U.shared.searchName = U.shared.account?.username ?? ""
         showLoadingAnimation()
         getStoredGames(gameType: U.shared.search.gameType) { (games) in
@@ -133,11 +139,12 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
     }
 
     @IBAction func openFeedback() {
+        playerField.resignFirstResponder()
         self.present(FeedbackVC(), animated: true, completion: nil)
     }
 
     func openSuggestion() {
-        self.navigationController?.pushViewController(SuggestionVC(), animated: true)
+        (self.navigationController as? Navigation)?.push(SuggestionVC())
     }
 
     @IBAction func searchTapped() {
@@ -149,10 +156,10 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
         playerField.resignFirstResponder()
         showLoadingAnimation()
         U.shared.searchName = text
-        U.shared.search.gameType = .all
         U.shared.filters = Filter(sorting: .weakest, color: .blackAndWhite, termination: .allTermination, timing: .accountCreation)
-        self.getGames(500) { games in
+        self.getGames(500, type: .all) { games in
             guard let games = games, !games.isEmpty else {
+                self.showErrorAlert()
                 self.hideLoadingAnimation()
                 return }
             U.shared.games = games
@@ -228,7 +235,7 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
 
     private func openResult() {
         DispatchQueue.main.async {
-            self.navigationController?.pushViewController(ResultVC(), animated: true)
+            (self.navigationController as? Navigation)?.push(ResultVC())
         }
     }
 
@@ -257,7 +264,7 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
 
     private func showErrorAlert() {
         let alert = UIAlertController(title: "Ops",
-                                      message: "We couldn't find anyone with this username.", preferredStyle: .alert)
+                                      message: "We couldn't find anyone with this username. Or perhaps this player doesn't have enough games played.", preferredStyle: .alert)
         let firstAction = UIAlertAction(title: "Ok", style: .default) { (_) in }
         alert.addAction(firstAction)
         self.present(alert, animated: true, completion: nil)

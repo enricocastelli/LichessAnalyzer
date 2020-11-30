@@ -20,6 +20,7 @@ class FeedbackVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextView.delegate = self
+        emailTextView.text = U.shared.account?.username ?? "your@email.com"
         textView.delegate = self
         label.text = "Everything you see was made with 🦕 by Enrico Castelli.\n(Lichess account polistirolo99)\n\nFeedbacks are always appreciated! (as well as good reviews 🤓)"
     }

@@ -38,3 +38,10 @@ class NibView: UIView {
     }
 
 }
+
+class NoSwipeSegmentedControl: UISegmentedControl {
+
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}

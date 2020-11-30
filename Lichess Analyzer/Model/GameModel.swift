@@ -12,13 +12,13 @@ struct GameItem: Encodable, Decodable, StructDecoder, Equatable {
     static var EntityName = "SavedGame"
 
     let event: String
-//    let site: String
     let date: String
     let white: String
     let black: String
     let result: String
 //    let whiteElo: Int?
 //    let blackElo: Int?
+    let site: String
     let termination: String
     let openingString: String
     let pgn: String
@@ -111,8 +111,9 @@ extension KnownOpening {
         return names.first ?? unknown
     }
 
-    static func fromString(_ string: String) -> KnownOpening? {
+    static func fromString(_ string: String, eco: String = "") -> KnownOpening? {
         return UserData.shared.knownOpenings.filter({$0.name == string}).first
+            ?? U.shared.openings[eco]?.filter({$0.name == string}).first
     }
 }
 
@@ -128,7 +129,7 @@ extension CompleteOpening {
         if let open = openings.filter({$0.name.lowercased() == item.openingString.lowercased()}).first {
             return open
         }
-        Logger.warning(item.openingString)
+        Logger.warning("\(item.eco), \(item.openingString)")
         return unknown
     }
 }

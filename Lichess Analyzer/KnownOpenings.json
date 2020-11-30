@@ -83,9 +83,9 @@
         "name": "Réti Opening",
         "pgn": "g1f3"
     }, {
-        "id": "A04",
+        "id": "A05",
         "name": "Zukertort Opening",
-        "pgn": "g1f3"
+        "pgn": "g1f3 g8f6 b1c3 b8c6"
     }, {
         "id": "A07",
         "name": "King's Indian Attack",

@@ -8,12 +8,14 @@
 import UIKit
 import SwiftChess
 import SafariServices
+import FirebaseAnalytics
 
 class GameVC: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var seeGamesView: UIView!
     @IBOutlet weak var resultStackView: UIStackView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var thumbImageview: UIImageView!
@@ -50,6 +52,7 @@ class GameVC: UIViewController {
         game.delegate = self
         setupBoard()
         configure()
+        seeGamesView.isHidden = opening.1.isEmpty
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -235,7 +238,7 @@ class GameVC: UIViewController {
 extension GameVC: BoardViewDelegate {
 
     func touchedSquareAtIndex(_ boardView: BoardView, index: Int) {
-        print(index)
+        Analytics.logEvent("Game Move", parameters: nil)
         // Get the player (must be human)
         guard let player = game.currentPlayer as? Human else {
             return
@@ -340,7 +343,7 @@ extension GameVC: GameDelegate {
     }
 
     @IBAction func back() {
-        navigationController?.popViewController(animated: true)
+        (self.navigationController as? Navigation)?.pop()
     }
 
     @IBAction func flip() {
@@ -367,9 +370,13 @@ extension GameVC: GameDelegate {
         openPGN(false)
     }
 
+    @IBAction func seeGames() {
+        self.navigationController?.present(GamesListVC(games: opening.1), animated: true, completion: nil)
+    }
+
     @IBAction func openYoutube() {
         let openingString = opening.0.name.replacingOccurrences(of: " ", with: "+").replacingOccurrences(of: ":", with: "")
-        if let url = URL(string: "https://www.youtube.com/results?search_query=\(openingString)") {
+        if let url = URL(string: "https://www.youtube.comtry/results?search_query=\(openingString)") {
             let config = SFSafariViewController.Configuration()
             config.entersReaderIfAvailable = true
             let vc = SFSafariViewController(url: url, configuration: config)

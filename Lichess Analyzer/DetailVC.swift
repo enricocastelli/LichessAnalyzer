@@ -57,10 +57,10 @@ class DetailVC: ResultVC {
     override func updateLabels() {
         titleLabel.text = item.opening.name
         subtitleLabel.attributedText = NSMutableAttributedString()
-            .bold(filteredGames.count.description)
-            .normal(" ")
-            .bold(U.shared.search.gameType.rawValue)
-            .normal(" games")
+            .bold(filteredGames.count.description, true)
+            .normal(" ", true)
+            .bold(U.shared.search.gameType.rawValue, true)
+            .normal(" games", true)
     }
 
     override func reloadData() {
@@ -105,6 +105,6 @@ class DetailVC: ResultVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = sections[indexPath.row]
         let games = filteredSource[section] ?? []
-        self.navigationController?.pushViewController(GameVC((section, games)), animated: true)
+        (self.navigationController as? Navigation)?.push(GameVC((section, games)))
     }
 }
