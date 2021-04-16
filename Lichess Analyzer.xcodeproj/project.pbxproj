@@ -57,7 +57,6 @@
 		1CD6A88D2546AE0C00AE3722 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A8872546AE0C00AE3722 /* Lato-Medium.ttf */; };
 		1CD6A8912546AE2500AE3722 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6A8902546AE2500AE3722 /* Fonts.swift */; };
 		1CD6A8952546AE6F00AE3722 /* TextPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6A8942546AE6F00AE3722 /* TextPresenter.swift */; };
-		1CD90EF325449E6E00956AB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CD90EF225449E6E00956AB5 /* GoogleService-Info.plist */; };
 		1CD90EFF2544A8A500956AB5 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD90EFE2544A8A500956AB5 /* Auth.swift */; };
 		1CD90F042546051000956AB5 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD90F032546051000956AB5 /* AccountModel.swift */; };
 		1CD90F082546080200956AB5 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD90F072546080200956AB5 /* UserData.swift */; };
@@ -66,6 +65,7 @@
 		1CDA09CE255971150073CBD6 /* SuggestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA09CC255971150073CBD6 /* SuggestionVC.swift */; };
 		1CDA09CF255971150073CBD6 /* SuggestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CDA09CD255971150073CBD6 /* SuggestionVC.xib */; };
 		1CDA09D525599C6C0073CBD6 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDA09D425599C6C0073CBD6 /* Navigation.swift */; };
+		1CDBCB28262A078F00A3F55D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CDBCB27262A078F00A3F55D /* GoogleService-Info.plist */; };
 		1CE8A0D8256836DB0047DEF6 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE8A0D6256836DB0047DEF6 /* GameCell.swift */; };
 		1CE8A0D9256836DB0047DEF6 /* GameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CE8A0D7256836DB0047DEF6 /* GameCell.xib */; };
 		1CFF730E25683406004A9AC3 /* GamesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFF730C25683406004A9AC3 /* GamesListVC.swift */; };
@@ -178,7 +178,6 @@
 		1CD6A8902546AE2500AE3722 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		1CD6A8942546AE6F00AE3722 /* TextPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPresenter.swift; sourceTree = "<group>"; };
 		1CD90EC52544636F00956AB5 /* Lichess Analyzer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lichess Analyzer.entitlements"; sourceTree = "<group>"; };
-		1CD90EF225449E6E00956AB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CD90EFE2544A8A500956AB5 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		1CD90F032546051000956AB5 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		1CD90F072546080200956AB5 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -187,6 +186,7 @@
 		1CDA09CC255971150073CBD6 /* SuggestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionVC.swift; sourceTree = "<group>"; };
 		1CDA09CD255971150073CBD6 /* SuggestionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionVC.xib; sourceTree = "<group>"; };
 		1CDA09D425599C6C0073CBD6 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		1CDBCB27262A078F00A3F55D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CE8A0D6256836DB0047DEF6 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		1CE8A0D7256836DB0047DEF6 /* GameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCell.xib; sourceTree = "<group>"; };
 		1CFF730C25683406004A9AC3 /* GamesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesListVC.swift; sourceTree = "<group>"; };
@@ -363,9 +363,9 @@
 				1C35F3F62551A42200575F31 /* FeedbackVC.swift */,
 				1CBD145725406C4400C3E8FE /* Assets.xcassets */,
 				1CBD145C25406C4500C3E8FE /* Info.plist */,
-				1CD90EF225449E6E00956AB5 /* GoogleService-Info.plist */,
 				1CB3A1E72543050000C35D00 /* Openings.json */,
 				1CA7832D25489E3D0024ED46 /* KnownOpenings.json */,
+				1CDBCB27262A078F00A3F55D /* GoogleService-Info.plist */,
 			);
 			path = "Lichess Analyzer";
 			sourceTree = "<group>";
@@ -566,7 +566,6 @@
 				1CBD149225406D0800C3E8FE /* HomeVC.xib in Resources */,
 				1CD6A88A2546AE0C00AE3722 /* Lato-Bold.ttf in Resources */,
 				1C40FDE925471C2100D51585 /* ResultView.xib in Resources */,
-				1CD90EF325449E6E00956AB5 /* GoogleService-Info.plist in Resources */,
 				1CBD145825406C4400C3E8FE /* Assets.xcassets in Resources */,
 				1CD6A88B2546AE0C00AE3722 /* Lato-Hairline.ttf in Resources */,
 				1CD6A88D2546AE0C00AE3722 /* Lato-Medium.ttf in Resources */,
@@ -577,6 +576,7 @@
 				1CD6A8892546AE0C00AE3722 /* Lato-Thin.ttf in Resources */,
 				1CA7832E25489E3D0024ED46 /* KnownOpenings.json in Resources */,
 				1CD6A88C2546AE0C00AE3722 /* Lato-Light.ttf in Resources */,
+				1CDBCB28262A078F00A3F55D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
