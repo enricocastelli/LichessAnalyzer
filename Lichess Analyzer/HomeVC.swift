@@ -30,6 +30,7 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
         super.viewDidLoad()
         addText("Hello \(UserData.shared.account?.username ?? "Stranger")", delay: 0.4, duration: 0.8, position: CGPoint(x: 40, y: 16), lineWidth: 1, font: Font.with(.hairline, 32), color: UIColor.darkGray.withAlphaComponent(0.8), inView: textContainerView)
         playerField.delegate = self
+        emptyGamesCheck()
         addKeyboardObserver()
     }
 
@@ -41,6 +42,17 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
         super.viewWillAppear(animated)
         setGameTypeControl()
         (navigationController as? Navigation)?.canSwipe = false
+    }
+
+    private func emptyGamesCheck() {
+        guard let account = UserData.shared.account else { return }
+        var totalGames = 0
+        for type in gameTypes {
+            totalGames += account.numberOfGamesForType(type) ?? 0
+        }
+        if totalGames == 0 {
+            showNoGamesAlert()
+        }
     }
 
     private func setGameTypeControl() {
@@ -269,6 +281,15 @@ class HomeVC: UIViewController, ServiceProvider, StoreProvider, TextPresenter, K
         alert.addAction(firstAction)
         self.present(alert, animated: true, completion: nil)
     }
+
+    private func showNoGamesAlert() {
+        let alert = UIAlertController(title: "Ops",
+                                      message: "Seems like you don't have games played on lichess. First play some games, then come back for the analysis.", preferredStyle: .alert)
+        let firstAction = UIAlertAction(title: "Ok", style: .default) { (_) in }
+        alert.addAction(firstAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
 
     func keyboardWillShow(_ notification:Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
