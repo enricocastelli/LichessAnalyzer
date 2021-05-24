@@ -16,6 +16,7 @@
 		1C40FDE925471C2100D51585 /* ResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C40FDE825471C2100D51585 /* ResultView.xib */; };
 		1C508B80254C0FCC00D35FBD /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C508B7F254C0FCC00D35FBD /* FilterButton.swift */; };
 		1C5CC5B225507262009F7561 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CC5B125507262009F7561 /* LoadingVC.swift */; };
+		1C654FFF265BFB5A00E82262 /* ChessComGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C654FFE265BFB5A00E82262 /* ChessComGame.swift */; };
 		1C66A044256672B500580610 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66A041256672B400580610 /* PieceView.swift */; };
 		1C66A0482566735C00580610 /* Parserr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66A0472566735C00580610 /* Parserr.swift */; };
 		1C66A04C2566736700580610 /* PGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66A04B2566736700580610 /* PGN.swift */; };
@@ -131,6 +132,7 @@
 		1C40FDE825471C2100D51585 /* ResultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultView.xib; sourceTree = "<group>"; };
 		1C508B7F254C0FCC00D35FBD /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		1C5CC5B125507262009F7561 /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
+		1C654FFE265BFB5A00E82262 /* ChessComGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessComGame.swift; sourceTree = "<group>"; };
 		1C66A041256672B400580610 /* PieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
 		1C66A0472566735C00580610 /* Parserr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parserr.swift; sourceTree = "<group>"; };
 		1C66A04B2566736700580610 /* PGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGN.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				1CD90F072546080200956AB5 /* UserData.swift */,
 				1CD90F0B2546082200956AB5 /* StoreProvider.swift */,
 				1CBD14AB25407E2B00C3E8FE /* Model.swift */,
+				1C654FFE265BFB5A00E82262 /* ChessComGame.swift */,
 				1CD90F032546051000956AB5 /* AccountModel.swift */,
 				1CBD15062541B6BA00C3E8FE /* GameModel.swift */,
 			);
@@ -708,6 +711,7 @@
 				1CBD14AC25407E2B00C3E8FE /* Model.swift in Sources */,
 				1C5CC5B225507262009F7561 /* LoadingVC.swift in Sources */,
 				1C40FDDE25471A8B00D51585 /* ResultView.swift in Sources */,
+				1C654FFF265BFB5A00E82262 /* ChessComGame.swift in Sources */,
 				1CBD14B22540965500C3E8FE /* ResultVC.swift in Sources */,
 				1C508B80254C0FCC00D35FBD /* FilterButton.swift in Sources */,
 				1C40FDD72546FB5500D51585 /* CircleAnimatedView.swift in Sources */,
@@ -918,7 +922,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = EC.LichessAnalyzer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -941,7 +945,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = EC.LichessAnalyzer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

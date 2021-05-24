@@ -43,7 +43,8 @@ struct GameItem: Encodable, Decodable, StructDecoder, Equatable {
     }
 
     var validDate: Date {
-        return date.toDate("yyyy-MM-dd'H'HH-mmm-ss") ?? Date()
+        return date.toDate("yyyy-MM-dd'H'HH-mmm-ss") ??
+            date.toDate("dd-MM-yyyy") ?? Date()
     }
 
     func resultForPlayer() -> Result {

@@ -13,13 +13,15 @@ enum GameType: String, Codable {
     case bullet, blitz, rapid, classical, all
 
     static func extract(_ string: String) -> GameType {
-        if string.contains("Blitz") {
+        if string.lowercased().contains("blitz") {
             return .blitz
-        } else if string.contains("Bullet") {
+        } else if string.contains("bullet") {
             return .bullet
-        } else if string.contains("Rapid") {
+        } else if string.contains("rapid") {
             return .rapid
-        } else if string.contains("Classical") {
+        } else if string.contains("classical") {
+            return .classical
+        } else if string.contains("daily") {
             return .classical
         }
         return .all

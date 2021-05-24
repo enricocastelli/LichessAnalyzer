@@ -28,9 +28,18 @@ extension ServiceProvider {
                       "perfType": type?.rawValue ?? UserData.shared.search.gameType.rawValue,
                       "rated": "true",
                       "opening": "true"]
-        let request = createRequest(.get, urlString, params)
+//        let request = createRequest(.get, urlString, params)
+        let request = createRequest(.get, "https://api.chess.com/pub/player/gigaone/games/2021/04")
         basicCall(request) { (data) in
-            success(self.mapGames(data.stringUTF8()))
+//            success(self.mapGames(data.stringUTF8()))
+            do {
+                let tot = try JSONDecoder().decode(ChesscomGames.self, from: data)
+                let gameIt = tot.games.first?.toGameItem()
+                let total = tot.games.map { $0.toGameItem() }
+                success(tot.games.map { $0.toGameItem() } )
+            } catch {
+                print(error)
+            }
         } failure: { (error) in
             failure(error)
         }
